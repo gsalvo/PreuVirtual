@@ -7,26 +7,25 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
 
-public class MainActivity extends Activity {
+public class TimeAttack extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_time_attack);
     }
 
-    public void goTimeAttack(View view){
-        Intent i = new Intent(this, TimeAttack.class);
+    public void goTiempo(View view){
+        Intent i = new Intent(this, Tiempo.class);
         startActivity(i);
     }
 
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_time_attack, menu);
         return true;
     }
 

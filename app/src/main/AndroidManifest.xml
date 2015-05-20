@@ -16,6 +16,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".TimeAttack"
+            android:label="@string/title_activity_time_attack" >
+        </activity>
+        <activity
+            android:name=".Tiempo"
+            android:label="@string/title_activity_tiempo" >
+        </activity>
+        <activity
+            android:name=".PlayTimeAttack"
+            android:label="@string/title_activity_play_time_attack" >
+        </activity>
     </application>
 
 </manifest>
