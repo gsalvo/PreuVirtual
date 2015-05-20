@@ -9,7 +9,9 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.NoTitleBar" >
+        >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,16 +20,18 @@
         </activity>
         <activity
             android:name=".TimeAttack"
-            android:label="@string/title_activity_time_attack" >
+            android:label="@string/title_activity_time_attack"
+            android:parentActivityName="com.novus.preuvirtual.MainActivity" >
         </activity>
         <activity
             android:name=".Tiempo"
-            android:label="@string/title_activity_tiempo" >
+            android:label="@string/title_activity_tiempo"
+            android:parentActivityName="com.novus.preuvirtual.TimeAttack" >
         </activity>
         <activity
             android:name=".PlayTimeAttack"
-            android:label="@string/title_activity_play_time_attack" >
+            android:label="@string/title_activity_play_time_attack"
+            android:parentActivityName="com.novus.preuvirtual.Tiempo" >
         </activity>
     </application>
-
 </manifest>
