@@ -26,14 +26,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/contentTime"
+        android:layout_above="@+id/contentBntNavegación"
         android:orientation="vertical" >
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hola acá va la pregunta"/>
-
-
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"

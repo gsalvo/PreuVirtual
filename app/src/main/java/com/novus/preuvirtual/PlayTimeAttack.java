@@ -1,5 +1,7 @@
 package com.novus.preuvirtual;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -20,6 +22,13 @@ public class PlayTimeAttack extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
+
+        final PreguntaFragment preguntaFragment = new PreguntaFragment();
+        final FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
+        fragmentTransaction.commit();
 
         textTiempo = (TextView)findViewById(R.id.textTiempo);
         Bundle bundle = getIntent().getExtras();

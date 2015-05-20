@@ -7,66 +7,71 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:id="@+id/contentPreguntaFragment">
+        android:layout_height="wrap_content">
 
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imagenPregunta"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/Captura"
-            android:visibility="visible"/>
-
-        <TextView
-            android:id="@+id/textPregunta"
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="1.- Donec quam felis, ultrices nec, pellen teque eu, pretium quis, sem."
-            />
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:id="@+id/contentPreguntaFragment">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imagenAlter"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/Captura"
-            android:visibility="visible"/>
 
-        <RadioGroup
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/contenidoRadioButton"
-            android:layout_marginTop="10dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagenPregunta"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/captura"
+                android:visibility="visible"/>
 
-            <RadioButton
+            <TextView
+                android:id="@+id/textPregunta"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="a.- Opción 1"/>
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="b.- Opción 2"/>
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="c.- Opción 3"/>
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="d.- Opción 4"/>
-            <RadioButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="e.- Opción 5"/>
+                android:text="1.- Donec quam felis, ultrices nec, pellen teque eu, pretium quis, sem."
+                />
 
-        </RadioGroup>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imagenAlter"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/captura"
+                android:visibility="visible"/>
 
-    </LinearLayout>
+            <RadioGroup
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/contenidoRadioButton"
+                android:layout_marginTop="10dp">
+
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="a.- Opción 1"/>
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="b.- Opción 2"/>
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="c.- Opción 3"/>
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="d.- Opción 4"/>
+                <RadioButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="e.- Opción 5"/>
+
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 
