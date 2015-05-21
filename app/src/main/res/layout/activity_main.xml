@@ -42,7 +42,8 @@
             android:text="Goals"
             android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_menu_cut_mtrl_alpha"
-            android:enabled="false"/>
+
+            android:onClick="goResultados" />
         <Button
             android:id="@+id/btnEndlees"
             android:layout_marginTop="5dp"

@@ -21,7 +21,11 @@ public class MainActivity extends Activity {
     public void goTimeAttack(View view){
         Intent i = new Intent(this, TimeAttack.class);
         startActivity(i);
-        /*El tavo*/
+    }
+
+    public void goResultados(View view){
+        Intent i = new Intent(this, Resultados.class);
+        startActivity(i);
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

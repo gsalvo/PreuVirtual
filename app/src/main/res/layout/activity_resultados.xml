@@ -129,7 +129,8 @@
             android:layout_height="wrap_content"
             android:text="Revisar"
             android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012" />
+            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:onClick="goRevision" />
         <Button
             android:id="@+id/btnNuevoEnsayo"
             android:layout_width="300dp"

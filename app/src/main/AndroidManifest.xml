@@ -37,6 +37,10 @@
             android:name=".Resultados"
             android:label="@string/title_activity_resultados" >
         </activity>
+        <activity
+            android:name=".Revision"
+            android:label="@string/title_activity_revision" >
+        </activity>
     </application>
 
 </manifest>
