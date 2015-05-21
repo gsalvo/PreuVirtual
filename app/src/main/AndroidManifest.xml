@@ -21,17 +21,22 @@
         <activity
             android:name=".TimeAttack"
             android:label="@string/title_activity_time_attack"
-            android:parentActivityName="com.novus.preuvirtual.MainActivity" >
+            android:parentActivityName=".MainActivity" >
         </activity>
         <activity
             android:name=".Tiempo"
             android:label="@string/title_activity_tiempo"
-            android:parentActivityName="com.novus.preuvirtual.TimeAttack" >
+            android:parentActivityName=".TimeAttack" >
         </activity>
         <activity
             android:name=".PlayTimeAttack"
             android:label="@string/title_activity_play_time_attack"
-            android:parentActivityName="com.novus.preuvirtual.Tiempo" >
+            android:parentActivityName=".Tiempo" >
+        </activity>
+        <activity
+            android:name=".Resultados"
+            android:label="@string/title_activity_resultados" >
         </activity>
     </application>
+
 </manifest>
