@@ -8,7 +8,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_time_attack">TimeAttack</string>
     <string name="title_activity_tiempo">Tiempo</string>
-    <string name="title_activity_play_time_attack">Ensayo !</string>
+    <string name="title_activity_play_time_attack">Ensayo</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revision</string>
 </resources>

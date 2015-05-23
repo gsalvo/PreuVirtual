@@ -43,7 +43,8 @@
             android:id="@+id/btnBackPregunta"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Back"/>
+            android:text="Back"
+            android:onClick="backPregunta"/>
         <Button
             android:id="@+id/btnOmitirPregunta"
             android:layout_width="100dp"
@@ -53,7 +54,8 @@
             android:id="@+id/btnNextPregunta"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Next"/>
+            android:text="Next"
+            android:onClick="nextPregunta"/>
 
     </LinearLayout>
 

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 
 public class PreguntaFragment extends Fragment {
-
     private TextView textPregunta;
 
     @Override
@@ -20,6 +19,12 @@ public class PreguntaFragment extends Fragment {
         // Inflate the layout for this fragment
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
         textPregunta = (TextView)RootView.findViewById(R.id.textPregunta);
+
+        int Pregunta = getArguments().getInt("pregunta");
+
+        if(Pregunta == 2){
+            textPregunta.setText("2.- Alea iacta est.");
+        }
 
 
         return RootView;

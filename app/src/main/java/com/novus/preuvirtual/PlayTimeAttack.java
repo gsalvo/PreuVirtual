@@ -1,5 +1,6 @@
 package com.novus.preuvirtual;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.CountDownTimer;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import static java.lang.Math.floor;
@@ -23,16 +25,21 @@ public class PlayTimeAttack extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
 
-        final PreguntaFragment preguntaFragment = new PreguntaFragment();
-        final FragmentManager fragmentManager = getFragmentManager();
+        Bundle bundlePregunta = new Bundle();
+        bundlePregunta.putInt("pregunta", 1);
+
+        PreguntaFragment preguntaFragment = new PreguntaFragment();
+        preguntaFragment.setArguments(bundlePregunta);
+
+        FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
         fragmentTransaction.commit();
 
         textTiempo = (TextView)findViewById(R.id.textTiempo);
-        Bundle bundle = getIntent().getExtras();
-        setTimer(Integer.parseInt(bundle.getString("varTiempo")));
+        Bundle bundleTiempo = getIntent().getExtras();
+        setTimer(Integer.parseInt(bundleTiempo.getString("varTiempo")));
     }
 
     @Override
@@ -84,6 +91,28 @@ public class PlayTimeAttack extends ActionBarActivity {
             }
 
         }.start();
+    }
+
+    public void nextPregunta(View view){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        Bundle bundlePregunta = new Bundle();
+        bundlePregunta.putInt("pregunta", 2);
+        PreguntaFragment newFragment = new PreguntaFragment();
+        newFragment.setArguments(bundlePregunta);
+        fragmentTransaction.replace(R.id.contentPregunta, newFragment);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.addToBackStack("previous");
+        fragmentTransaction.commit();
+    }
+
+    public void backPregunta(View view){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentManager.popBackStack("previous", 1);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        fragmentTransaction.addToBackStack("next");
+        fragmentTransaction.commit();
     }
 
 }
