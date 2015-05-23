@@ -43,7 +43,7 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     @Override
-    public void onStop(){
+    public void onDestroy(){
         backCount.cancel();
         backCount = null;
         super.onStop();
