@@ -39,6 +39,7 @@
                 android:id="@+id/imagenAlter"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/captura"
+                android:adjustViewBounds="true"
                 android:visibility="visible"/>
 
             <RadioGroup
