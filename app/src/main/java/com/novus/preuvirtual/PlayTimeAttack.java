@@ -3,6 +3,7 @@ package com.novus.preuvirtual;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,13 +13,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.Math.floor;
 
 
-public class PlayTimeAttack extends ActionBarActivity {
+public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
 
     TextView textTiempo;
     CountDownTimer backCount;
+    List<Bundle> nextStack;
+    int fragmentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,9 @@ public class PlayTimeAttack extends ActionBarActivity {
         textTiempo = (TextView)findViewById(R.id.textTiempo);
         Bundle bundleTiempo = getIntent().getExtras();
         setTimer(Integer.parseInt(bundleTiempo.getString("varTiempo")));
+
+        nextStack = new ArrayList<Bundle>();
+
     }
 
     @Override
@@ -86,8 +95,9 @@ public class PlayTimeAttack extends ActionBarActivity {
                 }
             }
 
-            public void onFinish() {
-                timer.setText("00:00");
+            public void onFinish(){
+                Intent i = new Intent(getBaseContext(), Resultados.class);
+                startActivity(i);
             }
 
         }.start();
@@ -97,22 +107,40 @@ public class PlayTimeAttack extends ActionBarActivity {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundlePregunta = new Bundle();
-        bundlePregunta.putInt("pregunta", 2);
         PreguntaFragment newFragment = new PreguntaFragment();
-        newFragment.setArguments(bundlePregunta);
+        if(nextStack.isEmpty()){
+            //TO-DO: Elegir siguiente pregunta al azar
+            //TO-DO: Obtener pregunta de la BD
+            bundlePregunta.putInt("pregunta", fragmentID+1);
+            newFragment.setArguments(bundlePregunta);
+        }else{
+            //TO-DO: Especificar que es una pregunta que ya fue vista en el ensayo
+            Bundle nextFragment = nextStack.get(nextStack.size()-1);
+            bundlePregunta.putInt("pregunta", nextFragment.getInt("pregunta"));
+            newFragment.setArguments(bundlePregunta);
+
+        }
         fragmentTransaction.replace(R.id.contentPregunta, newFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.addToBackStack("previous");
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
     }
 
     public void backPregunta(View view){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentManager.popBackStack("previous", 1);
+        Bundle nextFragment = new Bundle();
+        nextFragment.putInt("pregunta", fragmentID);
+        nextStack.add(nextFragment);
+        fragmentManager.popBackStack();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.addToBackStack("next");
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void setPreguntaNumber(int number){
+        fragmentID = number;
     }
 
 }

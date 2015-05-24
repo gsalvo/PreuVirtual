@@ -16,11 +16,6 @@ public class Resultados extends ActionBarActivity {
         setContentView(R.layout.activity_resultados);
     }
 
-    public void goRevision(View view){
-        Intent i = new Intent(this, Revision.class);
-        startActivity(i);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -36,5 +31,10 @@ public class Resultados extends ActionBarActivity {
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void goRevision(View view){
+        Intent i = new Intent(this, Revision.class);
+        startActivity(i);
     }
 }
