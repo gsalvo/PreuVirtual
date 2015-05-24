@@ -18,6 +18,24 @@ import java.util.List;
 
 import static java.lang.Math.floor;
 
+/*
+TO-DO: Transicion entre preguntas
+Solución 1: Trabajar con una lista ordenada de fragments que vaya guardando el número de la pregunta y esté asociada al ensayo en
+la base de datos. De esta manera siempre se sabe la posición en la que se encuentra y la navegación se realiza obteniendo
+la posición y consultando la BD. Para esta solución es necesario hacer override de onBackButtonPressed()
+
+Solución 2: Trabajar con el BackStack y un Stack de identificador de las siguientes preguntas que esté asociado a la base de datos.
+Esta solución quita complejidad al tema de volver a una pregunta anterior, pero agrega complejidad a la hora de elegir la siguiente,
+ya que implica manejar los comportamientos del BackStack manualmente a la hora de apretar siguiente.
+
+Para cualquiera de las dos soluciones:
+- Generar un ID que se guarde en el Stack creado de manera de poder buscar en la BD esta pregunta asociada al ID de la instancia del
+ensayo.
+o
+- Guardar la instancia de la pregunta en un Bundle que a su vez se guarda en una lista, quitando la complejidad de acceder a la base
+de datos. Dado que la pregunta en algún momento se tiene que guardar (por motivos de revisión y estadísticas) hacerlo de este modo
+implica guardar el estado de la pregunta de dos maneras.
+ */
 
 public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
 
