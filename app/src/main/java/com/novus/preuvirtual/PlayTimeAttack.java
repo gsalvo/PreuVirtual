@@ -86,7 +86,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
                 long remainingSeconds = (remaining / 1000) % 60;
                 if (remainingSeconds < 10 && remainingMinutes < 10) {
                     timer.setText("0" + remainingMinutes + ":0" + remainingSeconds);
-                } else if (remainingSeconds > 10 && remainingMinutes < 10) {
+                } else if (remainingSeconds >= 10 && remainingMinutes < 10) {
                     timer.setText("0" + remainingMinutes + ":" + remainingSeconds);
                 } else if (remainingSeconds < 10 && remainingMinutes > 10) {
                     timer.setText("" + remainingMinutes + ":0" + remainingSeconds);
