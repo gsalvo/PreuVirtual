@@ -3,7 +3,9 @@ package com.novus.preuvirtual;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -13,7 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static java.lang.Math.floor;
@@ -38,6 +45,25 @@ implica guardar el estado de la pregunta de dos maneras.
  */
 
 public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
+
+    //---------------------Inicio conexion BD----------------------------------------------
+    private ProgressDialog pDialog;
+    JSONParser jParser = new JSONParser();
+    //datos a capturar del JSON
+    private static final String urlCargarPreguntas = "http://www.botis.cl/cargarPreguntas.php";
+    private static final String TAG_P = "preguntas";
+    private static final String TAG_P_ID_PREGUNTA = "idPregunta";
+    private static final String TAG_P_ID_MATERIA = "idMateria";
+    private static final String TAG_P_PREGUNTA = "pregunta";
+    private static final String TAG_P_IMAGEN = "imagen";
+    private static final String TAG_A = "alternativas";
+    private static final String TAG_A_ALTERNATIVA = "alternativa";
+    private static final String TAG_A_CORRECTA = "correcta";
+    private static final String TAG_A_IMAGEN = "imagen";
+    private static final String TAG_SUCCESS = "success";
+    JSONArray preguntas = null;
+    JSONArray alternativas = null;
+    //---------------------FIN----------------------------------------------
 
     TextView textTiempo;
     CountDownTimer backCount;
@@ -66,6 +92,8 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         setTimer(Integer.parseInt(bundleTiempo.getString("varTiempo")));
 
         nextStack = new ArrayList<Bundle>();
+
+        new CargarPreguntas().execute();
 
     }
 
@@ -159,6 +187,74 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     @Override
     public void setPreguntaNumber(int number){
         fragmentID = number;
+    }
+
+    //---------------------Inicio conexion BD----------------------------------------------
+    class CargarPreguntas extends AsyncTask<String, String, String>{
+
+        @Override
+        protected void onPreExecute(){
+            super.onPreExecute();
+            pDialog = new ProgressDialog(PlayTimeAttack.this);
+            pDialog.setMessage("Preparate para empezar :)");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... args) {
+            List params = new ArrayList();
+            JSONObject json = jParser.makeHttpRequest(urlCargarPreguntas, "GET", params);
+
+            //muestra las preguntas por consola
+            Log.d("todas las preguntas", json.toString());
+
+            try{
+                int success = json.getInt(TAG_SUCCESS);
+                if(success==1){
+                    preguntas = json.getJSONArray(TAG_P);
+
+
+                    for(int i = 0; i<preguntas.length();i++){
+                        Log.d("cant", preguntas.length() +"");
+                        JSONObject c = preguntas.getJSONObject(i);
+                        String idPregunta = c.getString(TAG_P_ID_PREGUNTA);
+                        String idMateria = c.getString(TAG_P_ID_MATERIA);
+                        String pregunta = c.getString(TAG_P_PREGUNTA);
+                        String imagen = c.getString(TAG_P_IMAGEN);
+                        Log.d("tavororoidpregunta "+ i, idPregunta );
+                        Log.d("tavororoidMateria "+ i, idMateria );
+                        Log.d("tavororopregunta "+ i, pregunta );
+                        Log.d("tavororoimagenPregunta "+ i, imagen );
+
+                        alternativas = c.getJSONArray(TAG_A);
+                        for (int j = 0; j < alternativas.length(); j++){
+                            JSONObject a = alternativas.getJSONObject(j);
+                            String alternativa = a.getString(TAG_A_ALTERNATIVA);
+                            int correcta = a.getInt(TAG_A_CORRECTA);
+                            int imagenAlternativa = a.getInt(TAG_A_IMAGEN);
+                            Log.d("tavororoalternativa "+ j, alternativa );
+                            Log.d("tavororocorrecta "+ j, correcta +"" );
+                            Log.d("tavororotieneImagen "+ j, imagenAlternativa +"" );
+                        }
+                    }
+                }
+            }catch(JSONException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        protected void onPostExecute(String file_url){
+            pDialog.dismiss();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
+        }
     }
 
 }
