@@ -4,14 +4,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class Revision extends ActionBarActivity {
 
+    TextView densidad;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revision);
+        DensityScreen d = new DensityScreen(this);
+        densidad = (TextView) findViewById(R.id.densidad);
+        densidad.setText(d.getDensidad()+"");
     }
 
     @Override
