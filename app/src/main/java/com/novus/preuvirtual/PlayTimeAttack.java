@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
@@ -84,8 +85,31 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
 
+        new CargarPreguntas().execute();
+        SQLiteDatabase bd = admin.getReadableDatabase();
+        String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE"};
+        Cursor cursor = bd.query(
+                "pregunta", // a. table
+                COLUMNS, // b. column names
+                null, // c. selections
+                null, // d. selections args
+                null, // e. group by
+                null, // f. having
+                null, // g. order by
+                "1"
+        );
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
         Bundle bundlePregunta = new Bundle();
-        bundlePregunta.putInt("pregunta", 1);
+        bundlePregunta.putString("pregunta", cursor.getString(0));
+        bundlePregunta.putString("imagen", cursor.getString(1));
+        bundlePregunta.putString("altA", cursor.getString(2));
+        bundlePregunta.putString("altB", cursor.getString(3));
+        bundlePregunta.putString("altC", cursor.getString(4));
+        bundlePregunta.putString("altD", cursor.getString(5));
+        bundlePregunta.putString("altE", cursor.getString(6));
 
         PreguntaFragment preguntaFragment = new PreguntaFragment();
         preguntaFragment.setArguments(bundlePregunta);
@@ -102,8 +126,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
         nextStack = new ArrayList<Bundle>();
 
-        new CargarPreguntas().execute();
-
+        Log.d("BD", cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
     }
 
     @Override
@@ -203,6 +226,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     }
 
     //---------------------Inicio conexion BD----------------------------------------------
+
     class CargarPreguntas extends AsyncTask<String, String, String>{
 
         @Override

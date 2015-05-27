@@ -24,7 +24,7 @@
                 android:id="@+id/imagenPregunta"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/captura"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/textPregunta"
@@ -49,22 +49,27 @@
                 android:layout_marginTop="10dp">
 
                 <RadioButton
+                    android:id="@+id/altA"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="a.- Opción 1"/>
                 <RadioButton
+                    android:id="@+id/altB"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="b.- Opción 2"/>
                 <RadioButton
+                    android:id="@+id/altC"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="c.- Opción 3"/>
                 <RadioButton
+                    android:id="@+id/altD"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="d.- Opción 4"/>
                 <RadioButton
+                    android:id="@+id/altE"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="e.- Opción 5"/>
