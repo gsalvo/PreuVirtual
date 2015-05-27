@@ -4,7 +4,9 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
@@ -14,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -63,6 +66,12 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     private static final String TAG_SUCCESS = "success";
     JSONArray preguntas = null;
     JSONArray alternativas = null;
+
+    //Base de datos SQLite
+    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
+
+
+
     //---------------------FIN----------------------------------------------
 
     TextView textTiempo;
@@ -106,6 +115,10 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
     @Override
     public void onDestroy(){
+        SQLiteDatabase bd = admin.getWritableDatabase();
+        bd.execSQL("delete from pregunta");
+        bd.execSQL("delete from resEnsayo");
+
         backCount.cancel();
         backCount = null;
         super.onStop();
@@ -206,8 +219,11 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         protected String doInBackground(String... args) {
             List params = new ArrayList();
             JSONObject json = jParser.makeHttpRequest(urlCargarPreguntas, "GET", params);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            bd.execSQL("delete from pregunta");
+            bd.execSQL("delete from resEnsayo");
 
-            //muestra las preguntas por consola
+
             Log.d("todas las preguntas", json.toString());
 
             try{
@@ -223,6 +239,14 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
                         String idMateria = c.getString(TAG_P_ID_MATERIA);
                         String pregunta = c.getString(TAG_P_PREGUNTA);
                         String imagen = c.getString(TAG_P_IMAGEN);
+
+                        ContentValues registro = new ContentValues();
+                        registro.put("idPregunta",Integer.parseInt(idPregunta));
+                        //registro.put("idMateria", idMateria);
+                        registro.put("pregunta", pregunta);
+                        registro.put("imagen", imagen);
+
+
                         Log.d("tavororoidpregunta "+ i, idPregunta );
                         Log.d("tavororoidMateria "+ i, idMateria );
                         Log.d("tavororopregunta "+ i, pregunta );
@@ -230,15 +254,31 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
                         alternativas = c.getJSONArray(TAG_A);
                         for (int j = 0; j < alternativas.length(); j++){
+
+                            String altTipo[] = {"A", "B", "C", "D", "E"};
+
                             JSONObject a = alternativas.getJSONObject(j);
                             String alternativa = a.getString(TAG_A_ALTERNATIVA);
                             int correcta = a.getInt(TAG_A_CORRECTA);
                             int imagenAlternativa = a.getInt(TAG_A_IMAGEN);
+
+                            registro.put("alt"+altTipo[j] , alternativa);
+                            if(correcta == 1){
+                                registro.put("altCorrecta", altTipo[j]);
+                            }
+                            if(imagenAlternativa == 1){
+                                registro.put("altImagen", 1);
+                            }
+
                             Log.d("tavororoalternativa "+ j, alternativa );
                             Log.d("tavororocorrecta "+ j, correcta +"" );
                             Log.d("tavororotieneImagen "+ j, imagenAlternativa +"" );
                         }
+                        bd.insert("pregunta", null, registro);
+
                     }
+                    bd.close();
+
                 }
             }catch(JSONException e){
                 e.printStackTrace();
