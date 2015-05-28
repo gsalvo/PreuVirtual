@@ -17,66 +17,45 @@
 
         <Button
             android:id="@+id/btnMatematicas"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Matemáticas"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
             android:onClick="goTiempo"
             />
         <Button
             android:id="@+id/btnLenguaje"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Lenguaje"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_menu_cut_mtrl_alpha"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnHistoria"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Historia"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnCiencias"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Ciencias"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnBiologia"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Biología"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnQuimica"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Química"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnFisica"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Física"
-            android:gravity="center_vertical"
             android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
             android:enabled="false"/>
 

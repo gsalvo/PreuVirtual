@@ -1,8 +1,55 @@
 <resources>
 
+
+    <!-- BackgroundColor -->
+    <color name="background_app">#FFFFFF</color>
+    <color name="background_button">#FF5722</color>
+    <color name="background_action_bar">#FF5722</color>
+
+    <color name="background__start_button">#FF5722</color>
+    <color name="background__end_button">#F4511E</color>
+    <color name="textButton">#FFFFFF</color>
+
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <!--Background App-->
+        <item name="android:windowBackground">@color/background_app</item>
+        <item name="android:colorBackground">@color/background_app</item>
+        <!--Button-->
+        <item name="colorButtonNormal">@color/background_button</item>
+        <!--ActionBar-->
+        <!--<item name="android:actionBarStyle">@style/CustomActionBar</item> -->
+        <!--<item name="actionBarStyle">@style/CustomActionBar</item>-->
     </style>
+
+    <!--CustomActionBar-->
+    <style name="CustomActionBar">
+        <item name="android:background">@color/background_action_bar</item>
+        <item name="background">@color/background_action_bar</item>
+    </style>
+
+
+    <!--MainActivity style-->
+    <style name="CustomThemeMA" parent="Theme.AppCompat.Light">
+        <!--ActionBar-->
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--Background App-->
+        <item name="android:windowBackground">@color/background_app</item>
+        <item name="android:colorBackground">@color/background_app</item>
+        <!--Button-->
+        <item name="colorButtonNormal">@color/background_button</item>
+    </style>
+
+    <style name="CustomButton">
+        <item name="android:textColor">@color/textButton</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+
 
 </resources>

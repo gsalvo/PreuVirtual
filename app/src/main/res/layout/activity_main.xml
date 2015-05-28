@@ -16,9 +16,13 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="PreuVirtual"
+            android:textSize="50dp"
+            android:textColor="#1E88E5"
+            android:textStyle="bold"
+            android:typeface="sans"
             />
         <TextView
             android:layout_width="wrap_content"
@@ -27,32 +31,22 @@
             />
         <Button
             android:id="@+id/btnTimeAttack"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="TimeAttack"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            style="@style/CustomButton"
+            android:text="Time Attack"
+            android:drawableLeft="@drawable/ic_alarm_white_24dp"
             android:onClick="goTimeAttack" />
         <Button
             android:id="@+id/btnGoals"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Goals"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_ic_menu_cut_mtrl_alpha"
-
+            android:drawableLeft="@drawable/ic_alarm_white_24dp"
             android:onClick="goResultados" />
         <Button
             android:id="@+id/btnEndlees"
-            android:layout_marginTop="5dp"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
+            style="@style/CustomButton"
             android:text="Endless"
-            android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
-            android:enabled="false"/>
+            android:drawableLeft="@drawable/ic_alarm_white_24dp"
+            android:enabled="false" />
 
     </LinearLayout>
 
