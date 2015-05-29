@@ -52,6 +52,7 @@ implica guardar el estado de la pregunta de dos maneras.
 
 public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
 
+    Bundle bundleTiempo;
     SQLiteDatabase bd;
     Cursor cursor;
     private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
@@ -129,7 +130,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         fragmentTransaction.commit();
 
         textTiempo = (TextView)findViewById(R.id.textTiempo);
-        Bundle bundleTiempo = getIntent().getExtras();
+        bundleTiempo = getIntent().getExtras();
         setTimer(Integer.parseInt(bundleTiempo.getString("varTiempo")));
 
         nextStack = new ArrayList<Bundle>();
@@ -183,6 +184,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
             public void onFinish(){
                 Intent i = new Intent(getBaseContext(), Resultados.class);
+                i.putExtra("varTiempo", bundleTiempo.get("varTiempo").toString());
                 startActivity(i);
             }
 
@@ -231,10 +233,6 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         Log.d("Respuesta", ""+registro.get("idPregunta"));
         Log.d("Respuesta", ""+registro.get("respuesta"));
         Log.d("Respuesta", ""+registro.get("correcta"));
-
-        int radioButtonID = rGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = (RadioButton) rGroup.findViewById(radioButtonID);
-        Log.d("Respuesta", radioButton.getText().toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
