@@ -199,47 +199,47 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
 
         if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-            if(cursor.getString(7) == "altA"){
+            if(cursor.getString(7).equalsIgnoreCase("altA")){
                 registro.put("correcta", 1);
             }else{
                 registro.put("correcta", 0);
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-            if(cursor.getString(7) == "altB"){
+            if(cursor.getString(7).equalsIgnoreCase("altB")){
                 registro.put("correcta", 1);
             }else{
                 registro.put("correcta", 0);
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-            if(cursor.getString(7) == "altC"){
+            if(cursor.getString(7).equalsIgnoreCase("altC")){
                 registro.put("correcta", 1);
             }else{
                 registro.put("correcta", 0);
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-            if(cursor.getString(7) == "altD"){
+            if(cursor.getString(7).equalsIgnoreCase("altD")){
                 registro.put("correcta", 1);
             }else{
                 registro.put("correcta", 0);
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-            if(cursor.getString(7) == "altE"){
+            if(cursor.getString(7).equalsIgnoreCase("altE")){
                 registro.put("correcta", 1);
             }else{
                 registro.put("correcta", 0);
             }
         }
 
-        Log.d("Respuesta", ""+registro.get("idPregunta"));
-        Log.d("Respuesta", ""+registro.get("respuesta"));
-        Log.d("Respuesta", ""+registro.get("correcta"));
+        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), wbd)){
+            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+        }else{
+            bd.insert("resEnsayo", null, registro);
+        }
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundlePregunta = new Bundle();
         PreguntaFragment newFragment = new PreguntaFragment();
-
-        //Cargar más preguntas en caso de que sea el último
 
         if(cursor.isLast()){
             cursor.moveToFirst();
@@ -274,6 +274,18 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         fragmentManager.popBackStack();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
+        cursor.moveToPrevious();
+    }
+
+    public static boolean exists(String TableName, String dbfield, String fieldValue, SQLiteDatabase bd) {
+        String Query = "Select * from " + TableName + " where " + dbfield + " = " + fieldValue;
+        Cursor cursor = bd.rawQuery(Query, null);
+        if(cursor.getCount() <= 0){
+            cursor.close();
+            return false;
+        }
+        cursor.close();
+        return true;
     }
 
     @Override
