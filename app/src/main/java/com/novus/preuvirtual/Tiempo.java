@@ -127,7 +127,7 @@ public class Tiempo extends ActionBarActivity {
                             int imagenAlternativa = a.getInt(TAG_A_IMAGEN);
                             registro.put("alt"+altTipo[j] , alternativa);
                             if(correcta == 1){
-                                registro.put("altCorrecta", altTipo[j]);
+                                registro.put("altCorrecta", "alt"+altTipo[j]);
                             }
                             if(imagenAlternativa == 1){
                                 registro.put("altImagen", 1);
