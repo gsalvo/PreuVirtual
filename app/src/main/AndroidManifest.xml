@@ -31,8 +31,7 @@
             android:name=".PlayTimeAttack"
             android:label="@string/title_activity_play_time_attack"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".Tiempo"
-            android:noHistory="true">
+            android:parentActivityName=".Tiempo">
         </activity>
         <activity
             android:name=".Resultados"

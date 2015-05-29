@@ -50,6 +50,9 @@ implica guardar el estado de la pregunta de dos maneras.
 
 public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
 
+    SQLiteDatabase bd;
+    Cursor cursor;
+    private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE"};
     //---------------------Inicio conexion BD----------------------------------------------
 /*
     private ProgressDialog pDialog;
@@ -88,9 +91,9 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         setContentView(R.layout.activity_play_time_attack);
 
         //new CargarPreguntas().execute();
-        SQLiteDatabase bd = admin.getReadableDatabase();
-        String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE"};
-        Cursor cursor = bd.query(
+        bd = admin.getReadableDatabase();
+
+        cursor = bd.query(
                 "pregunta", // a. table
                 COLUMNS, // b. column names
                 null, // c. selections
@@ -98,7 +101,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
                 null, // e. group by
                 null, // f. having
                 null, // g. order by
-                "1"
+                null  // h. max count
         );
 
         if (cursor != null)
@@ -184,22 +187,34 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     }
 
     public void nextPregunta(View view){
+        SQLiteDatabase wbd = admin.getWritableDatabase();
+        ContentValues registro = new ContentValues();
+        registro.put("idPregunta", cursor.getInt(cursor.getColumnIndex("idPregunta")));
+        //registro.put("respuesta");
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         Bundle bundlePregunta = new Bundle();
         PreguntaFragment newFragment = new PreguntaFragment();
-        if(nextStack.isEmpty()){
-            //TO-DO: Elegir siguiente pregunta al azar
-            //TO-DO: Obtener pregunta de la BD
-            bundlePregunta.putInt("pregunta", fragmentID+1);
-            newFragment.setArguments(bundlePregunta);
-        }else{
-            //TO-DO: Especificar que es una pregunta que ya fue vista en el ensayo
-            Bundle nextFragment = nextStack.get(nextStack.size()-1);
-            bundlePregunta.putInt("pregunta", nextFragment.getInt("pregunta"));
-            newFragment.setArguments(bundlePregunta);
 
+        //Cargar más preguntas en caso de que sea el último
+
+        if(cursor.isLast()){
+            cursor.moveToFirst();
+        }else{
+            cursor.moveToNext();
         }
+
+        bundlePregunta.putString("pregunta", cursor.getString(0));
+        bundlePregunta.putString("imagen", cursor.getString(1));
+        bundlePregunta.putString("altA", cursor.getString(2));
+        bundlePregunta.putString("altB", cursor.getString(3));
+        bundlePregunta.putString("altC", cursor.getString(4));
+        bundlePregunta.putString("altD", cursor.getString(5));
+        bundlePregunta.putString("altE", cursor.getString(6));
+
+        newFragment.setArguments(bundlePregunta);
+
         fragmentTransaction.replace(R.id.contentPregunta, newFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);
