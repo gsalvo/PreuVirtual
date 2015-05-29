@@ -51,6 +51,7 @@ implica guardar el estado de la pregunta de dos maneras.
 public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
 
     //---------------------Inicio conexion BD----------------------------------------------
+/*
     private ProgressDialog pDialog;
     JSONParser jParser = new JSONParser();
     //datos a capturar del JSON
@@ -67,9 +68,10 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     private static final String TAG_SUCCESS = "success";
     JSONArray preguntas = null;
     JSONArray alternativas = null;
-
+*/
     //Base de datos SQLite
     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
+
 
 
 
@@ -85,7 +87,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
 
-        new CargarPreguntas().execute();
+        //new CargarPreguntas().execute();
         SQLiteDatabase bd = admin.getReadableDatabase();
         String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE"};
         Cursor cursor = bd.query(
@@ -227,7 +229,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
     //---------------------Inicio conexion BD----------------------------------------------
 
-    class CargarPreguntas extends AsyncTask<String, String, String>{
+    /*class CargarPreguntas extends AsyncTask<String, String, String>{
 
         @Override
         protected void onPreExecute(){
@@ -319,6 +321,6 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
                 }
             });
         }
-    }
+    }*/
 
 }
