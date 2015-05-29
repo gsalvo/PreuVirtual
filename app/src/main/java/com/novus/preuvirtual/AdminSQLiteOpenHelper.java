@@ -17,7 +17,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     String preguntas = "CREATE TABLE pregunta(idPregunta integer primary key," +
             "pregunta text, imagen text, altA text, altB text, altC text, altD text, altE text,"+
             "altCorrecta text, altImagen integer)";
-    String resEnsayo = "CREATE TABLE resEnsayo(idResEnsayo interger primary key, idPregunta integer, respuesta text, correcta integer)";
+    String resEnsayo = "CREATE TABLE resEnsayo(_id interger primary key, idPregunta integer, respuesta text, correcta integer)";
     String bPreguntas = "drop table if exists pregunta";
     String bResEnsayo = "drop table if exists resEnsayo";
 
