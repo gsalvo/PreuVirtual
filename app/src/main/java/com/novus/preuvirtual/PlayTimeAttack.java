@@ -140,10 +140,6 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
     @Override
     public void onDestroy(){
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        bd.execSQL("delete from pregunta");
-        bd.execSQL("delete from resEnsayo");
-
         backCount.cancel();
         backCount = null;
         super.onStop();

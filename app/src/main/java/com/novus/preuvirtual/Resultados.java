@@ -1,6 +1,7 @@
 package com.novus.preuvirtual;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,11 +10,16 @@ import android.view.View;
 
 
 public class Resultados extends ActionBarActivity {
+    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"preuVirtual",null,1);
+    SQLiteDatabase bd = admin.getReadableDatabase();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados);
+
+
     }
 
     @Override
