@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +54,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
 
     SQLiteDatabase bd;
     Cursor cursor;
-    private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE"};
+    private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
     //---------------------Inicio conexion BD----------------------------------------------
 /*
     private ProgressDialog pDialog;
@@ -115,6 +117,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         bundlePregunta.putString("altC", cursor.getString(4));
         bundlePregunta.putString("altD", cursor.getString(5));
         bundlePregunta.putString("altE", cursor.getString(6));
+        bundlePregunta.putString("altCorrecta", cursor.getString(7));
 
         PreguntaFragment preguntaFragment = new PreguntaFragment();
         preguntaFragment.setArguments(bundlePregunta);
@@ -189,8 +192,49 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     public void nextPregunta(View view){
         SQLiteDatabase wbd = admin.getWritableDatabase();
         ContentValues registro = new ContentValues();
-        registro.put("idPregunta", cursor.getInt(cursor.getColumnIndex("idPregunta")));
-        //registro.put("respuesta");
+        RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+        registro.put("idPregunta", cursor.getInt(8));
+        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+
+        if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+            if(cursor.getString(7) == "altA"){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+            if(cursor.getString(7) == "altB"){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+            if(cursor.getString(7) == "altC"){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+            if(cursor.getString(7) == "altD"){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+            if(cursor.getString(7) == "altE"){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }
+
+        Log.d("Respuesta", ""+registro.get("idPregunta"));
+        Log.d("Respuesta", ""+registro.get("respuesta"));
+        Log.d("Respuesta", ""+registro.get("correcta"));
+
+        int radioButtonID = rGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = (RadioButton) rGroup.findViewById(radioButtonID);
+        Log.d("Respuesta", radioButton.getText().toString());
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -212,6 +256,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         bundlePregunta.putString("altC", cursor.getString(4));
         bundlePregunta.putString("altD", cursor.getString(5));
         bundlePregunta.putString("altE", cursor.getString(6));
+        bundlePregunta.putString("altCorrecta", cursor.getString(7));
 
         newFragment.setArguments(bundlePregunta);
 
