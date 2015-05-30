@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 
@@ -25,12 +26,11 @@ public class PreguntaFragment extends Fragment {
     private RadioButton altC;
     private RadioButton altD;
     private RadioButton altE;
-    FragmentCallback fragCB;
+    private RadioGroup rGroup;
 
     @Override
     public void onAttach(Activity a){
         super.onAttach(a);
-        fragCB = (FragmentCallback) a;
     }
 
     @Override
@@ -45,6 +45,7 @@ public class PreguntaFragment extends Fragment {
         altC = (RadioButton) RootView.findViewById(R.id.altC);
         altD = (RadioButton) RootView.findViewById(R.id.altD);
         altE = (RadioButton) RootView.findViewById(R.id.altE);
+        rGroup = (RadioGroup) RootView.findViewById(R.id.contenidoRadioButton);
 
         //TO-DO: Cargar datos de pregunta desde la base de datos
         //TO-DO: Verificar si es una nueva pregunta o una pregunta ya contestada
@@ -65,6 +66,7 @@ public class PreguntaFragment extends Fragment {
         String vAltC = getArguments().getString("altC");
         String vAltD = getArguments().getString("altD");
         String vAltE = getArguments().getString("altE");
+        int vCheck = getArguments().getInt("check");
 
         textPregunta.setText(vPregunta);
         if(vImagen != "") {
@@ -79,7 +81,9 @@ public class PreguntaFragment extends Fragment {
         altD.setText(vAltD);
         altE.setText(vAltE);
 
-        fragCB.setPreguntaNumber(1);
+        if(vCheck != 0) {
+            rGroup.check(vCheck);
+        }
 
         zoomableImage = (ImageView) RootView.findViewById(R.id.imagenAlter);
 
@@ -103,11 +107,5 @@ public class PreguntaFragment extends Fragment {
 
         return RootView;
     }
-
-
-    public interface FragmentCallback{
-        public void setPreguntaNumber(int number);
-    }
-
 
 }

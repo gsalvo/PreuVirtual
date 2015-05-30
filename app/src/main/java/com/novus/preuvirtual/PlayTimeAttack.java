@@ -50,7 +50,7 @@ de datos. Dado que la pregunta en algún momento se tiene que guardar (por motiv
 implica guardar el estado de la pregunta de dos maneras.
  */
 
-public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragment.FragmentCallback {
+public class PlayTimeAttack extends ActionBarActivity {
 
     Bundle bundleTiempo;
     SQLiteDatabase bd;
@@ -94,7 +94,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         setContentView(R.layout.activity_play_time_attack);
 
         //new CargarPreguntas().execute();
-        bd = admin.getReadableDatabase();
+        bd = admin.getWritableDatabase();
 
         cursor = bd.query(
                 "pregunta", // a. table
@@ -185,6 +185,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
             public void onFinish(){
                 Intent i = new Intent(getBaseContext(), Resultados.class);
                 i.putExtra("varTiempo", bundleTiempo.get("varTiempo").toString());
+                bd.close();
                 startActivity(i);
             }
 
@@ -192,7 +193,6 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
     }
 
     public void nextPregunta(View view){
-        SQLiteDatabase wbd = admin.getWritableDatabase();
         ContentValues registro = new ContentValues();
         RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
         registro.put("idPregunta", cursor.getInt(8));
@@ -230,7 +230,7 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
             }
         }
 
-        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), wbd)){
+        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
             bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
         }else{
             bd.insert("resEnsayo", null, registro);
@@ -256,24 +256,77 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         bundlePregunta.putString("altE", cursor.getString(6));
         bundlePregunta.putString("altCorrecta", cursor.getString(7));
 
+
+        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+            String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
+            Cursor checked = bd.rawQuery(Query, null);
+            checked.moveToFirst();
+            bundlePregunta.putInt("check", checked.getInt(0));
+        }else{
+            bundlePregunta.putInt("check", 0);
+        }
+
         newFragment.setArguments(bundlePregunta);
 
         fragmentTransaction.replace(R.id.contentPregunta, newFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
-
     }
 
     public void backPregunta(View view){
+        ContentValues registro = new ContentValues();
+        RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+        registro.put("idPregunta", cursor.getInt(8));
+        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+
+        if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+            if(cursor.getString(7).equalsIgnoreCase("altA")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+            if(cursor.getString(7).equalsIgnoreCase("altB")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+            if(cursor.getString(7).equalsIgnoreCase("altC")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+            if(cursor.getString(7).equalsIgnoreCase("altD")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+            if(cursor.getString(7).equalsIgnoreCase("altE")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }
+
+        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+        }else{
+            bd.insert("resEnsayo", null, registro);
+        }
+
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         Bundle nextFragment = new Bundle();
         nextFragment.putInt("pregunta", fragmentID);
-        nextStack.add(nextFragment);
         fragmentManager.popBackStack();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.commit();
+
         cursor.moveToPrevious();
     }
 
@@ -286,11 +339,6 @@ public class PlayTimeAttack extends ActionBarActivity implements PreguntaFragmen
         }
         cursor.close();
         return true;
-    }
-
-    @Override
-    public void setPreguntaNumber(int number){
-        fragmentID = number;
     }
 
     //---------------------Inicio conexion BD----------------------------------------------
