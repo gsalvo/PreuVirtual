@@ -76,6 +76,7 @@ public class Tiempo extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
     class CargarPreguntas extends AsyncTask<String, String, String> {
 
         @Override
@@ -152,5 +153,7 @@ public class Tiempo extends ActionBarActivity {
             startActivity(i);
             pDialog.dismiss();
         }
+
+
     }
 }

@@ -20,7 +20,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/textPuntajeObtenid"
+            android:id="@+id/textPuntajeObtenido"
             android:text="Has obtenido 600 puntos"/>
 
         <TextView
@@ -137,7 +137,8 @@
             android:layout_height="wrap_content"
             android:text="Nuevo Ensayo"
             android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012" />
+            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:onClick="goNuevoEnsayo"/>
         <Button
             android:id="@+id/bntCompartir"
             android:layout_width="300dp"
