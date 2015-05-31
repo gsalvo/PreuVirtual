@@ -168,7 +168,6 @@ public class PlayTimeAttack extends ActionBarActivity {
             TextView timer = (TextView) findViewById(R.id.textTiempo);
 
             public void onTick(long remaining) {
-                Log.d("Tiempo", String.valueOf(remaining));
                 long remainingMinutes = (long) floor((remaining / 1000) / 60);
                 long remainingSeconds = (remaining / 1000) % 60;
                 if (remainingSeconds < 10 && remainingMinutes < 10) {

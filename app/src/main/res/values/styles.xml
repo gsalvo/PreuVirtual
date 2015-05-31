@@ -60,6 +60,12 @@
         <item name="android:drawablePadding">8dp</item>
     </style>
 
+    <style name="PreuVirtualTheme" parent="AppTheme">
+        <item name="android:actionBarStyle">@style/PreuVirtualActionBar</item>
+    </style>
 
+    <style name="PreuVirtualActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">#FF5722</item>
+    </style>
 
 </resources>
