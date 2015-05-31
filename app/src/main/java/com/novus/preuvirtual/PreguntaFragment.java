@@ -15,6 +15,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 
 public class PreguntaFragment extends Fragment {
     ImageView zoomableImage;
@@ -71,9 +73,7 @@ public class PreguntaFragment extends Fragment {
         textPregunta.setText(vPregunta);
         if(vImagen != "") {
             Log.d("Img", vImagen);
-            Uri imgURI = Uri.parse(vImagen);
-            imagen.setImageURI(null);
-            imagen.setImageURI(imgURI);
+            Picasso.with(getActivity()).load(vImagen).into(imagen);
         }
         altA.setText(vAltA);
         altB.setText(vAltB);
