@@ -25,7 +25,8 @@
         <activity
             android:name=".Tiempo"
             android:label="@string/title_activity_tiempo"
-            android:parentActivityName=".TimeAttack" >
+            android:parentActivityName=".TimeAttack"
+            android:noHistory="true">
         </activity>
         <activity
             android:name=".PlayTimeAttack"
@@ -38,7 +39,7 @@
             android:name=".Resultados"
             android:label="@string/title_activity_resultados"
             android:parentActivityName=".TimeAttack"
-            android:noHistory="true">
+            >
         </activity>
         <activity
             android:name=".Revision"
