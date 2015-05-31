@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -40,6 +41,7 @@ public class PreguntaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
+        MathParser mathParser = new MathParser();
         textPregunta = (TextView) RootView.findViewById(R.id.textPregunta);
         imagen = (ImageView) RootView.findViewById(R.id.imagenAlter);
         altA = (RadioButton) RootView.findViewById(R.id.altA);
@@ -71,15 +73,18 @@ public class PreguntaFragment extends Fragment {
         int vCheck = getArguments().getInt("check");
 
         textPregunta.setText(vPregunta);
-        if(vImagen != "") {
+        if(!vImagen.isEmpty()) {
             Log.d("Img", vImagen);
             Picasso.with(getActivity()).load(vImagen).into(imagen);
+        }else{
+            imagen.setImageDrawable(null);
         }
-        altA.setText(vAltA);
-        altB.setText(vAltB);
-        altC.setText(vAltC);
-        altD.setText(vAltD);
-        altE.setText(vAltE);
+
+        altA.setText(Html.fromHtml(vAltA));
+        altB.setText(Html.fromHtml(vAltB));
+        altC.setText(Html.fromHtml(vAltC));
+        altD.setText(Html.fromHtml(vAltD));
+        altE.setText(Html.fromHtml(vAltE));
 
         if(vCheck != 0) {
             rGroup.check(vCheck);
