@@ -41,7 +41,6 @@ public class PreguntaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
-        MathParser mathParser = new MathParser();
         textPregunta = (TextView) RootView.findViewById(R.id.textPregunta);
         imagen = (ImageView) RootView.findViewById(R.id.imagenAlter);
         altA = (RadioButton) RootView.findViewById(R.id.altA);
@@ -72,7 +71,8 @@ public class PreguntaFragment extends Fragment {
         String vAltE = getArguments().getString("altE");
         int vCheck = getArguments().getInt("check");
 
-        textPregunta.setText(vPregunta);
+        textPregunta.setText(Html.fromHtml(vPregunta));
+
         if(!vImagen.isEmpty()) {
             Log.d("Img", vImagen);
             Picasso.with(getActivity()).load(vImagen).into(imagen);

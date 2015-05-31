@@ -21,26 +21,28 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imagenPregunta"
+                android:id="@+id/imagenAlter"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/captura"
-                android:visibility="gone"/>
+                android:adjustViewBounds="true"
+                android:visibility="visible"/>
 
             <TextView
                 android:id="@+id/textPregunta"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.2"
                 android:text="1.- Donec quam felis, ultrices nec, pellen teque eu, pretium quis, sem."
                 />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imagenAlter"
+                android:id="@+id/imagenPrincipal"
                 android:layout_gravity="center_horizontal"
                 android:src="@drawable/captura"
                 android:adjustViewBounds="true"
-                android:visibility="visible"/>
+                android:visibility="gone"/>
 
             <RadioGroup
                 android:layout_width="fill_parent"
