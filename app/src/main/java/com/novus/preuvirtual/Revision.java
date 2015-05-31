@@ -1,22 +1,48 @@
 package com.novus.preuvirtual;
 
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Revision extends ActionBarActivity {
 
-    TextView densidad;
+    ListView lista;
+    SQLiteDatabase bd;
+    Cursor cursor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revision);
-        DensityScreen d = new DensityScreen(this);
-        densidad = (TextView) findViewById(R.id.densidad);
-        densidad.setText(d.getDensidad()+"");
+
+        AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
+        bd = admin.getReadableDatabase();
+        cursor = bd.query("resEnsayo", new String[]{"_id","idPregunta","correcta"}, null, null, null, null, null);
+        AdapterRevision adapter = new AdapterRevision(this, cursor);
+        lista = (ListView) findViewById(R.id.lista);
+        lista.setAdapter(adapter);
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(Revision.this, PregRevision.class);
+                i.putExtra("idPregunta", id+"");
+                startActivity(i);
+            }
+        });
+
+
     }
 
     @Override

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.novus.preuvirtual" >
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +12,10 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/CustomThemeMA">
+            android:theme="@style/CustomThemeMA" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -29,21 +31,25 @@
         </activity>
         <activity
             android:name=".PlayTimeAttack"
-            android:label="@string/title_activity_play_time_attack"
             android:configChanges="orientation|screenSize"
-            android:parentActivityName=".Tiempo"
-            android:noHistory="true">
+            android:label="@string/title_activity_play_time_attack"
+            android:noHistory="true"
+            android:parentActivityName=".Tiempo" >
         </activity>
         <activity
             android:name=".Resultados"
             android:label="@string/title_activity_resultados"
-            android:parentActivityName=".TimeAttack"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:parentActivityName=".TimeAttack" >
         </activity>
         <activity
             android:name=".Revision"
             android:label="@string/title_activity_revision"
             android:parentActivityName=".Resultados" >
+        </activity>
+        <activity
+            android:name=".PregRevision"
+            android:label="@string/title_activity_preg_revision" >
         </activity>
     </application>
 

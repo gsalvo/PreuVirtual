@@ -11,4 +11,5 @@
     <string name="title_activity_play_time_attack">Ensayo</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revision</string>
+    <string name="title_activity_preg_revision">PregRevision</string>
 </resources>
