@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,7 +29,12 @@ public class Revision extends ActionBarActivity {
 
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
         bd = admin.getReadableDatabase();
-        cursor = bd.query("resEnsayo", new String[]{"_id","idPregunta","correcta"}, null, null, null, null, null);
+        cursor = bd.query("resEnsayo", new String[]{"_id", "idPregunta", "correcta"}, null, null, null, null, null);
+        Log.d("tavororo:", cursor.getCount()+"");
+        cursor.moveToFirst();
+        Log.d("tavororoid:", cursor.getString(0) + "");
+        Log.d("tavororoidPregunta:", cursor.getString(1) + "");
+        Log.d("tavororoCorrecta:", cursor.getString(2) + "");
         AdapterRevision adapter = new AdapterRevision(this, cursor);
         lista = (ListView) findViewById(R.id.lista);
         lista.setAdapter(adapter);

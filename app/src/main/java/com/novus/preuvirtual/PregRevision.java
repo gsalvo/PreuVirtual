@@ -17,7 +17,7 @@ public class PregRevision extends ActionBarActivity {
         setContentView(R.layout.activity_preg_revision);
         texto = (TextView) findViewById(R.id.texto);
         Bundle bIdPregunta = getIntent().getExtras();
-        texto.setText("holo vengo a flotar id: " + bIdPregunta.getString("idPregunta"));
+        texto.setText("holo vengo a flotar id: " + bIdPregunta.getLong("idPregunta"));
 
     }
 
