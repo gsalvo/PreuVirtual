@@ -47,7 +47,8 @@ public class AdapterRevision extends BaseAdapter{
         TextView titulo = (TextView) view.findViewById(R.id.titulo);
         ImageView icono = (ImageView) view.findViewById(R.id.icono);
         cursor.moveToPosition(position);
-        titulo.setText("Pregunta " + cursor.getString(0));
+        titulo.setText("Pregunta ");// + cursor.getString(0));
+        /*
         if(Integer.parseInt(cursor.getString(2))== 0){
             icono.setImageResource(R.drawable.ic_close_black_36dp);
 
@@ -56,7 +57,7 @@ public class AdapterRevision extends BaseAdapter{
             icono.setImageResource(R.drawable.ic_check_black_36dp);
         }else if (Integer.parseInt(cursor.getString(2))== 2){
             icono.setImageResource(R.drawable.ic_center_focus_weak_black_36dp);
-        }
+        }*/
         return view;
     }
 

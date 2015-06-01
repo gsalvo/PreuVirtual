@@ -37,7 +37,7 @@ public class Revision extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(Revision.this, PregRevision.class);
-                i.putExtra("idPregunta", id+"");
+                i.putExtra("idPregunta", id);
                 startActivity(i);
             }
         });
