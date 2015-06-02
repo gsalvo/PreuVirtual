@@ -150,6 +150,7 @@ public class Tiempo extends ActionBarActivity {
         protected void onPostExecute(String file_url){
             Intent i = new Intent(Tiempo.this, PlayTimeAttack.class);
             i.putExtra("varTiempo", editMinutos.getText().toString());
+            i.putExtra("revision", 0);
             startActivity(i);
             pDialog.dismiss();
         }

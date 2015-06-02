@@ -17,7 +17,7 @@ public class PregRevision extends ActionBarActivity {
         setContentView(R.layout.activity_preg_revision);
         texto = (TextView) findViewById(R.id.texto);
         Bundle bIdPregunta = getIntent().getExtras();
-        texto.setText("holo vengo a flotar id: " + bIdPregunta.getLong("idPregunta"));
+        bIdPregunta.getLong("idPregunta");
 
     }
 
@@ -34,11 +34,6 @@ public class PregRevision extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

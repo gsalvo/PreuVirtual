@@ -40,17 +40,18 @@
         <activity
             android:name=".Resultados"
             android:label="@string/title_activity_resultados"
-            android:noHistory="true"
             android:parentActivityName=".TimeAttack" >
         </activity>
         <activity
             android:name=".Revision"
             android:label="@string/title_activity_revision"
+            android:theme="@style/AppTheme"
             android:parentActivityName=".Resultados" >
         </activity>
         <activity
             android:name=".PregRevision"
-            android:label="@string/title_activity_preg_revision" >
+            android:label="@string/title_activity_preg_revision"
+            android:parentActivityName=".Revision">
         </activity>
     </application>
 

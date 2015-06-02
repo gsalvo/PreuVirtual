@@ -3,6 +3,7 @@ package com.novus.preuvirtual;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,8 +43,9 @@ public class Revision extends ActionBarActivity {
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Revision.this, PregRevision.class);
+                Intent i = new Intent(Revision.this, PlayTimeAttack.class);
                 i.putExtra("idPregunta", id);
+                i.putExtra("revision", 1);
                 startActivity(i);
             }
         });

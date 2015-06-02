@@ -52,90 +52,93 @@ implica guardar el estado de la pregunta de dos maneras.
 
 public class PlayTimeAttack extends ActionBarActivity {
 
-    Bundle bundleTiempo;
+    Bundle bundle;
     SQLiteDatabase bd;
-    Cursor cursor;
+    Cursor cursor, cursorResp;
     private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
-    //---------------------Inicio conexion BD----------------------------------------------
-/*
-    private ProgressDialog pDialog;
-    JSONParser jParser = new JSONParser();
-    //datos a capturar del JSON
-    private static final String urlCargarPreguntas = "http://www.botis.cl/cargarPreguntas.php";
-    private static final String TAG_P = "preguntas";
-    private static final String TAG_P_ID_PREGUNTA = "idPregunta";
-    private static final String TAG_P_ID_MATERIA = "idMateria";
-    private static final String TAG_P_PREGUNTA = "pregunta";
-    private static final String TAG_P_IMAGEN = "imagen";
-    private static final String TAG_A = "alternativas";
-    private static final String TAG_A_ALTERNATIVA = "alternativa";
-    private static final String TAG_A_CORRECTA = "correcta";
-    private static final String TAG_A_IMAGEN = "imagen";
-    private static final String TAG_SUCCESS = "success";
-    JSONArray preguntas = null;
-    JSONArray alternativas = null;
-*/
+    private final String[] COLUMNSRESP = {"idPregunta", "respuesta", "correcta"};
+
     //Base de datos SQLite
-    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
-
-
-
-
-    //---------------------FIN----------------------------------------------
+    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
 
     TextView textTiempo;
     CountDownTimer backCount;
-    List<Bundle> nextStack;
     int fragmentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
+        bundle = getIntent().getExtras();
+        //Jugar
+        if(bundle.getInt("revision") == 0){
+            //new CargarPreguntas().execute();
+            bd = admin.getWritableDatabase();
 
-        //new CargarPreguntas().execute();
-        bd = admin.getWritableDatabase();
+            cursor = bd.query(
+                    "pregunta", // a. table
+                    COLUMNS, // b. column names
+                    null, // c. selections
+                    null, // d. selections args
+                    null, // e. group by
+                    null, // f. having
+                    null, // g. order by
+                    null  // h. max count
+            );
 
-        cursor = bd.query(
-                "pregunta", // a. table
-                COLUMNS, // b. column names
-                null, // c. selections
-                null, // d. selections args
-                null, // e. group by
-                null, // f. having
-                null, // g. order by
-                null  // h. max count
-        );
+            if (cursor != null)
+                cursor.moveToFirst();
 
-        if (cursor != null)
+            Bundle bundlePregunta = new Bundle();
+            bundlePregunta.putString("pregunta", cursor.getString(0));
+            bundlePregunta.putString("imagen", cursor.getString(1));
+            bundlePregunta.putString("altA", cursor.getString(2));
+            bundlePregunta.putString("altB", cursor.getString(3));
+            bundlePregunta.putString("altC", cursor.getString(4));
+            bundlePregunta.putString("altD", cursor.getString(5));
+            bundlePregunta.putString("altE", cursor.getString(6));
+            bundlePregunta.putString("altCorrecta", cursor.getString(7));
+
+            PreguntaFragment preguntaFragment = new PreguntaFragment();
+            preguntaFragment.setArguments(bundlePregunta);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
+            fragmentTransaction.commit();
+
+            textTiempo = (TextView)findViewById(R.id.textTiempo);
+            setTimer(Integer.parseInt(bundle.getString("varTiempo")));
+        }else{
+            bd = admin.getWritableDatabase();
+            String query = "SELECT * from pregunta pr INNER JOIN resEnsayo res WHERE pr.idPregunta = res.idPregunta";
+            cursor = bd.rawQuery(query, null);
+
             cursor.moveToFirst();
 
-        Bundle bundlePregunta = new Bundle();
-        bundlePregunta.putString("pregunta", cursor.getString(0));
-        bundlePregunta.putString("imagen", cursor.getString(1));
-        bundlePregunta.putString("altA", cursor.getString(2));
-        bundlePregunta.putString("altB", cursor.getString(3));
-        bundlePregunta.putString("altC", cursor.getString(4));
-        bundlePregunta.putString("altD", cursor.getString(5));
-        bundlePregunta.putString("altE", cursor.getString(6));
-        bundlePregunta.putString("altCorrecta", cursor.getString(7));
+            Bundle bundlePregunta = new Bundle();
+            bundlePregunta.putString("pregunta", cursor.getString(1));
+            bundlePregunta.putString("imagen", cursor.getString(2));
+            bundlePregunta.putString("altA", cursor.getString(3));
+            bundlePregunta.putString("altB", cursor.getString(4));
+            bundlePregunta.putString("altC", cursor.getString(5));
+            bundlePregunta.putString("altD", cursor.getString(6));
+            bundlePregunta.putString("altE", cursor.getString(7));
+            bundlePregunta.putString("altCorrecta", cursor.getString(8));
 
-        PreguntaFragment preguntaFragment = new PreguntaFragment();
-        preguntaFragment.setArguments(bundlePregunta);
+            PreguntaFragment preguntaFragment = new PreguntaFragment();
+            preguntaFragment.setArguments(bundlePregunta);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
-        fragmentTransaction.commit();
+            fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
+            fragmentTransaction.commit();
 
-        textTiempo = (TextView)findViewById(R.id.textTiempo);
-        bundleTiempo = getIntent().getExtras();
-        setTimer(Integer.parseInt(bundleTiempo.getString("varTiempo")));
-
-        nextStack = new ArrayList<Bundle>();
-
-        Log.d("BD", cursor.getString(0) + " " + cursor.getString(1) + " " + cursor.getString(2) + " " + cursor.getString(3));
+            textTiempo = (TextView)findViewById(R.id.textTiempo);
+            textTiempo.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -163,7 +166,6 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void setTimer(int minutes) {
-
         backCount = new CountDownTimer(minutes * 1000 * 60, 1000) {
             TextView timer = (TextView) findViewById(R.id.textTiempo);
 
@@ -183,7 +185,7 @@ public class PlayTimeAttack extends ActionBarActivity {
 
             public void onFinish(){
                 Intent i = new Intent(getBaseContext(), Resultados.class);
-                i.putExtra("varTiempo", bundleTiempo.get("varTiempo").toString());
+                i.putExtra("varTiempo", bundle.get("varTiempo").toString());
                 bd.close();
                 startActivity(i);
             }
@@ -339,101 +341,4 @@ public class PlayTimeAttack extends ActionBarActivity {
         cursor.close();
         return true;
     }
-
-    //---------------------Inicio conexion BD----------------------------------------------
-
-    /*class CargarPreguntas extends AsyncTask<String, String, String>{
-
-        @Override
-        protected void onPreExecute(){
-            super.onPreExecute();
-            pDialog = new ProgressDialog(PlayTimeAttack.this);
-            pDialog.setMessage("Preparate para empezar :)");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
-            pDialog.show();
-        }
-
-        @Override
-        protected String doInBackground(String... args) {
-            List params = new ArrayList();
-            JSONObject json = jParser.makeHttpRequest(urlCargarPreguntas, "GET", params);
-            SQLiteDatabase bd = admin.getWritableDatabase();
-            bd.execSQL("delete from pregunta");
-            bd.execSQL("delete from resEnsayo");
-
-
-            Log.d("todas las preguntas", json.toString());
-
-            try{
-                int success = json.getInt(TAG_SUCCESS);
-                if(success==1){
-                    preguntas = json.getJSONArray(TAG_P);
-
-
-                    for(int i = 0; i<preguntas.length();i++){
-                        Log.d("cant", preguntas.length() +"");
-                        JSONObject c = preguntas.getJSONObject(i);
-                        String idPregunta = c.getString(TAG_P_ID_PREGUNTA);
-                        String idMateria = c.getString(TAG_P_ID_MATERIA);
-                        String pregunta = c.getString(TAG_P_PREGUNTA);
-                        String imagen = c.getString(TAG_P_IMAGEN);
-
-                        ContentValues registro = new ContentValues();
-                        registro.put("idPregunta",Integer.parseInt(idPregunta));
-                        //registro.put("idMateria", idMateria);
-                        registro.put("pregunta", pregunta);
-                        registro.put("imagen", imagen);
-
-
-                        Log.d("tavororoidpregunta "+ i, idPregunta );
-                        Log.d("tavororoidMateria "+ i, idMateria );
-                        Log.d("tavororopregunta "+ i, pregunta );
-                        Log.d("tavororoimagenPregunta "+ i, imagen );
-
-                        alternativas = c.getJSONArray(TAG_A);
-                        for (int j = 0; j < alternativas.length(); j++){
-
-                            String altTipo[] = {"A", "B", "C", "D", "E"};
-
-                            JSONObject a = alternativas.getJSONObject(j);
-                            String alternativa = a.getString(TAG_A_ALTERNATIVA);
-                            int correcta = a.getInt(TAG_A_CORRECTA);
-                            int imagenAlternativa = a.getInt(TAG_A_IMAGEN);
-
-                            registro.put("alt"+altTipo[j] , alternativa);
-                            if(correcta == 1){
-                                registro.put("altCorrecta", altTipo[j]);
-                            }
-                            if(imagenAlternativa == 1){
-                                registro.put("altImagen", 1);
-                            }
-
-                            Log.d("tavororoalternativa "+ j, alternativa );
-                            Log.d("tavororocorrecta "+ j, correcta +"" );
-                            Log.d("tavororotieneImagen "+ j, imagenAlternativa +"" );
-                        }
-                        bd.insert("pregunta", null, registro);
-
-                    }
-                    bd.close();
-
-                }
-            }catch(JSONException e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        protected void onPostExecute(String file_url){
-            pDialog.dismiss();
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-
-                }
-            });
-        }
-    }*/
-
 }
