@@ -1,6 +1,7 @@
 package com.novus.preuvirtual;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -109,6 +110,50 @@ public class PreguntaFragment extends Fragment {
                 }
             }
         });
+
+        if(getArguments().getInt("revision") == 1){
+
+            RadioGroup rGroup = (RadioGroup) RootView.findViewById(R.id.contenidoRadioButton);
+
+            for (int i = 0; i < rGroup.getChildCount(); i++)
+            {
+                rGroup.getChildAt(i).setEnabled(false);
+            }
+
+            RadioButton rButton;
+
+            String correcta = getArguments().getString("altCorrecta");
+
+            switch(correcta){
+                case "altA":
+                    rButton = (RadioButton) RootView.findViewById(R.id.altA);
+                    break;
+                case "altB":
+                    rButton = (RadioButton) RootView.findViewById(R.id.altB);
+                    break;
+                case "altC":
+                    rButton = (RadioButton) RootView.findViewById(R.id.altC);
+                    break;
+                case "altD":
+                    rButton = (RadioButton) RootView.findViewById(R.id.altD);
+                    break;
+                case "altE":
+                    rButton = (RadioButton) RootView.findViewById(R.id.altE);
+                    break;
+                default:
+                    rButton = null;
+                    break;
+            }
+
+            if(vCheck != rButton.getId()){
+                RadioButton rCorrecta = (RadioButton) RootView.findViewById(vCheck);
+                rCorrecta.setTextColor(Color.RED);
+                rButton.setTextColor(Color.GREEN);
+            }else{
+                rButton.setTextColor(Color.GREEN);
+            }
+
+        }
 
         return RootView;
     }

@@ -8,6 +8,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
@@ -110,9 +111,11 @@ public class PlayTimeAttack extends ActionBarActivity {
 
             textTiempo = (TextView)findViewById(R.id.textTiempo);
             setTimer(Integer.parseInt(bundle.getString("varTiempo")));
+        //Revisar
         }else{
             bd = admin.getWritableDatabase();
             String query = "SELECT * from pregunta pr INNER JOIN resEnsayo res WHERE pr.idPregunta = res.idPregunta";
+
             cursor = bd.rawQuery(query, null);
 
             cursor.moveToFirst();
@@ -126,6 +129,9 @@ public class PlayTimeAttack extends ActionBarActivity {
             bundlePregunta.putString("altD", cursor.getString(6));
             bundlePregunta.putString("altE", cursor.getString(7));
             bundlePregunta.putString("altCorrecta", cursor.getString(8));
+
+            bundlePregunta.putInt("revision", 1);
+            bundlePregunta.putInt("check", cursor.getInt(12));
 
             PreguntaFragment preguntaFragment = new PreguntaFragment();
             preguntaFragment.setArguments(bundlePregunta);
@@ -150,8 +156,10 @@ public class PlayTimeAttack extends ActionBarActivity {
 
     @Override
     public void onDestroy(){
-        backCount.cancel();
-        backCount = null;
+        if(backCount != null){
+            backCount.cancel();
+            backCount = null;
+        }
         super.onStop();
     }
 
@@ -194,141 +202,183 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void nextPregunta(View view){
-        ContentValues registro = new ContentValues();
-        RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
-        registro.put("idPregunta", cursor.getInt(8));
-        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+        if(bundle.getInt("revision") == 0) {
+            ContentValues registro = new ContentValues();
+            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+            registro.put("idPregunta", cursor.getInt(8));
+            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
 
-        if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-            if(cursor.getString(7).equalsIgnoreCase("altA")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
+            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+                if(cursor.getString(7).equalsIgnoreCase("altA")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+                if(cursor.getString(7).equalsIgnoreCase("altB")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+                if(cursor.getString(7).equalsIgnoreCase("altC")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+                if(cursor.getString(7).equalsIgnoreCase("altD")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+                if(cursor.getString(7).equalsIgnoreCase("altE")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
             }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-            if(cursor.getString(7).equalsIgnoreCase("altB")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-            if(cursor.getString(7).equalsIgnoreCase("altC")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-            if(cursor.getString(7).equalsIgnoreCase("altD")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-            if(cursor.getString(7).equalsIgnoreCase("altE")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }
 
-        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+            if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+            }else{
+                bd.insert("resEnsayo", null, registro);
+            }
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Bundle bundlePregunta = new Bundle();
+            PreguntaFragment newFragment = new PreguntaFragment();
+
+            if(cursor.isLast()){
+                cursor.moveToFirst();
+            }else{
+                cursor.moveToNext();
+            }
+
+            bundlePregunta.putString("pregunta", cursor.getString(0));
+            bundlePregunta.putString("imagen", cursor.getString(1));
+            bundlePregunta.putString("altA", cursor.getString(2));
+            bundlePregunta.putString("altB", cursor.getString(3));
+            bundlePregunta.putString("altC", cursor.getString(4));
+            bundlePregunta.putString("altD", cursor.getString(5));
+            bundlePregunta.putString("altE", cursor.getString(6));
+            bundlePregunta.putString("altCorrecta", cursor.getString(7));
+
+            if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+                String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
+                Cursor checked = bd.rawQuery(Query, null);
+                checked.moveToFirst();
+                bundlePregunta.putInt("check", checked.getInt(0));
+            }else{
+                bundlePregunta.putInt("check", 0);
+            }
+
+            newFragment.setArguments(bundlePregunta);
+
+            fragmentTransaction.replace(R.id.contentPregunta, newFragment);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        //Revisar
         }else{
-            bd.insert("resEnsayo", null, registro);
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            Bundle bundlePregunta = new Bundle();
+            PreguntaFragment newFragment = new PreguntaFragment();
+
+            if(cursor.isLast()){
+                cursor.moveToFirst();
+            }else{
+                cursor.moveToNext();
+            }
+
+            bundlePregunta.putString("pregunta", cursor.getString(1));
+            bundlePregunta.putString("imagen", cursor.getString(2));
+            bundlePregunta.putString("altA", cursor.getString(3));
+            bundlePregunta.putString("altB", cursor.getString(4));
+            bundlePregunta.putString("altC", cursor.getString(5));
+            bundlePregunta.putString("altD", cursor.getString(6));
+            bundlePregunta.putString("altE", cursor.getString(7));
+            bundlePregunta.putString("altCorrecta", cursor.getString(8));
+
+            bundlePregunta.putInt("revision", 1);
+            bundlePregunta.putInt("check", cursor.getInt(12));
+
+            newFragment.setArguments(bundlePregunta);
+
+            fragmentTransaction.replace(R.id.contentPregunta, newFragment);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
         }
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Bundle bundlePregunta = new Bundle();
-        PreguntaFragment newFragment = new PreguntaFragment();
-
-        if(cursor.isLast()){
-            cursor.moveToFirst();
-        }else{
-            cursor.moveToNext();
-        }
-
-        bundlePregunta.putString("pregunta", cursor.getString(0));
-        bundlePregunta.putString("imagen", cursor.getString(1));
-        bundlePregunta.putString("altA", cursor.getString(2));
-        bundlePregunta.putString("altB", cursor.getString(3));
-        bundlePregunta.putString("altC", cursor.getString(4));
-        bundlePregunta.putString("altD", cursor.getString(5));
-        bundlePregunta.putString("altE", cursor.getString(6));
-        bundlePregunta.putString("altCorrecta", cursor.getString(7));
-
-
-        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-            String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
-            Cursor checked = bd.rawQuery(Query, null);
-            checked.moveToFirst();
-            bundlePregunta.putInt("check", checked.getInt(0));
-        }else{
-            bundlePregunta.putInt("check", 0);
-        }
-
-        newFragment.setArguments(bundlePregunta);
-
-        fragmentTransaction.replace(R.id.contentPregunta, newFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
     }
 
     public void backPregunta(View view){
-        ContentValues registro = new ContentValues();
-        RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
-        registro.put("idPregunta", cursor.getInt(8));
-        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+        if(bundle.getInt("revision") == 0) {
+            ContentValues registro = new ContentValues();
+            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+            registro.put("idPregunta", cursor.getInt(8));
+            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
 
-        if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-            if(cursor.getString(7).equalsIgnoreCase("altA")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
+            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+                if(cursor.getString(7).equalsIgnoreCase("altA")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+                if(cursor.getString(7).equalsIgnoreCase("altB")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+                if(cursor.getString(7).equalsIgnoreCase("altC")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+                if(cursor.getString(7).equalsIgnoreCase("altD")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
+            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+                if(cursor.getString(7).equalsIgnoreCase("altE")){
+                    registro.put("correcta", 1);
+                }else{
+                    registro.put("correcta", 0);
+                }
             }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-            if(cursor.getString(7).equalsIgnoreCase("altB")){
-                registro.put("correcta", 1);
+
+            if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
             }else{
-                registro.put("correcta", 0);
+                bd.insert("resEnsayo", null, registro);
             }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-            if(cursor.getString(7).equalsIgnoreCase("altC")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-            if(cursor.getString(7).equalsIgnoreCase("altD")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
-        }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-            if(cursor.getString(7).equalsIgnoreCase("altE")){
-                registro.put("correcta", 1);
-            }else{
-                registro.put("correcta", 0);
-            }
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentManager.popBackStack();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
+
+            cursor.moveToPrevious();
+        }else {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            fragmentManager.popBackStack();
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.commit();
+
+            cursor.moveToPrevious();
         }
-
-        if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-        }else{
-            bd.insert("resEnsayo", null, registro);
-        }
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        Bundle nextFragment = new Bundle();
-        nextFragment.putInt("pregunta", fragmentID);
-        fragmentManager.popBackStack();
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.commit();
-
-        cursor.moveToPrevious();
     }
 
     public static boolean exists(String TableName, String dbfield, String fieldValue, SQLiteDatabase bd) {
