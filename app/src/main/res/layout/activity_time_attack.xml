@@ -19,44 +19,44 @@
             android:id="@+id/btnMatematicas"
             style="@style/CustomButton"
             android:text="Matemáticas"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:drawableLeft="@drawable/ic_mat_24dp"
             android:onClick="goTiempo"
             />
         <Button
             android:id="@+id/btnLenguaje"
             style="@style/CustomButton"
             android:text="Lenguaje"
-            android:drawableLeft="@drawable/abc_ic_menu_cut_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_len_24dp"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnHistoria"
             style="@style/CustomButton"
             android:text="Historia"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_his_24dp"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnCiencias"
             style="@style/CustomButton"
             android:text="Ciencias"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_cien_24dp"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnBiologia"
             style="@style/CustomButton"
             android:text="Biología"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_bio_24dp"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnQuimica"
             style="@style/CustomButton"
             android:text="Química"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_quim_24dp"
             android:enabled="false"/>
         <Button
             android:id="@+id/btnFisica"
             style="@style/CustomButton"
             android:text="Física"
-            android:drawableLeft="@drawable/abc_ic_voice_search_api_mtrl_alpha"
+            android:drawableLeft="@drawable/ic_fis_24dp"
             android:enabled="false"/>
 
     </LinearLayout>

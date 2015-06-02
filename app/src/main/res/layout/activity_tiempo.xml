@@ -27,19 +27,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Minutos"
-            />
+            android:text="Minutos"/>
 
         <Button
-            android:layout_width="fill_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Comenzar"
+            android:drawableLeft="@drawable/ic_play_24dp"
+            android:drawablePadding="5dp"
             android:id="@+id/btnComenzar"
-            android:onClick="goPlayTimeAttack"
-            />
-
-
-
+            android:onClick="goPlayTimeAttack"/>
     </LinearLayout>
 
 </RelativeLayout>
