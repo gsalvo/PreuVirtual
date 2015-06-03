@@ -8,7 +8,7 @@
     <color name="textButton">#FFFFFF</color>
     <color name="textTime">#00cbcf</color>
     <color name="list_preguntas">#b0b0b0</color>
-    <color name="disabled">#ffeaeaea</color>
+    <color name="disabled">#909090</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
@@ -33,9 +33,8 @@
         <item name="colorButtonNormal">@color/background_button</item>
     </style>
 
-
     <style name="CustomButton">
-        <item name="android:textColor">@color/textButton</item>
+        <item name="android:textColor">@drawable/text_color</item>
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">55dp</item>
         <item name="android:gravity">center_vertical</item>
