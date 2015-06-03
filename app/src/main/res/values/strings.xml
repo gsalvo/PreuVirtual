@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">PreuVirtual</string>
-
+    <string name="close_title">¿Estás seguro que quieres cerrar el ensayo?</string>
+    <string name="close_message">Se perderán los datos del ensayo actual</string>
+    <string name="aceptar">Si</string>
+    <string name="cancelar">No</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_time_attack">TimeAttack</string>

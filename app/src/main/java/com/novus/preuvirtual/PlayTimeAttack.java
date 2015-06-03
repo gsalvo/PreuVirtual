@@ -1,12 +1,15 @@
 package com.novus.preuvirtual;
 
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.CountDownTimer;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -144,8 +147,36 @@ public class PlayTimeAttack extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        switch(id){
+            case android.R.id.home:
+                AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+                AlertDialog dialog;
+                builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
+                builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        PlayTimeAttack.this.finish();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancelar, null);
+                dialog = builder.create();
+                dialog.show();
+        }
+        return true;
+    }
 
-        return super.onOptionsItemSelected(item);
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+        AlertDialog dialog;
+        builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
+        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                PlayTimeAttack.this.finish();
+            }
+        });
+        builder.setNegativeButton(R.string.cancelar, null);
+        dialog = builder.create();
+        dialog.show();
     }
 
     public void setTiempo(int minutos) {
