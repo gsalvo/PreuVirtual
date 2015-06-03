@@ -7,7 +7,7 @@
     <color name="background_action_bar">#fe7a65</color>
     <color name="textButton">#FFFFFF</color>
     <color name="textTime">#00cbcf</color>
-
+    <color name="list_preguntas">#b0b0b0</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
