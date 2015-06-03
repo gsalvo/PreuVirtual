@@ -3,12 +3,7 @@ package com.novus.preuvirtual;
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
-import android.view.View;
-import android.view.WindowManager;
 
-/**
- * Created by Gustavo Salvo Lara on 27-05-2015.
- */
 public class DensityScreen {
     private String directorio;
     private String densidad;

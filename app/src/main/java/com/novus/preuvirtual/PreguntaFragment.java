@@ -2,7 +2,6 @@ package com.novus.preuvirtual;
 
 import android.app.Activity;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Html;
@@ -40,9 +39,9 @@ public class PreguntaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
-        textPregunta = (TextView) RootView.findViewById(R.id.textPregunta);
+        textPregunta = (TextView) RootView.findViewById(R.id.textoPregunta);
         imagen = (ImageView) RootView.findViewById(R.id.imagenAlter);
         altA = (RadioButton) RootView.findViewById(R.id.altA);
         altB = (RadioButton) RootView.findViewById(R.id.altB);
@@ -51,18 +50,6 @@ public class PreguntaFragment extends Fragment {
         altE = (RadioButton) RootView.findViewById(R.id.altE);
         rGroup = (RadioGroup) RootView.findViewById(R.id.contenidoRadioButton);
 
-        //TO-DO: Cargar datos de pregunta desde la base de datos
-        //TO-DO: Verificar si es una nueva pregunta o una pregunta ya contestada
-        /*int Pregunta = getArguments().getInt("pregunta");
-        if(Pregunta == 2){
-            textPregunta.setText("2.- Alea iacta est.");
-        }else if(Pregunta == 3){
-            textPregunta.setText("3.- Ave cesar morituri te salutant");
-        }else if(Pregunta == 4){
-            textPregunta.setText("4.- Et toi Brutus");
-        }
-        */
-
         String vPregunta = getArguments().getString("pregunta");
         String vImagen = getArguments().getString("imagen");
         String vAltA = getArguments().getString("altA");
@@ -70,12 +57,11 @@ public class PreguntaFragment extends Fragment {
         String vAltC = getArguments().getString("altC");
         String vAltD = getArguments().getString("altD");
         String vAltE = getArguments().getString("altE");
-        int vCheck = getArguments().getInt("check");
+        int respuesta = getArguments().getInt("respuesta");
 
         textPregunta.setText(Html.fromHtml(vPregunta));
 
         if(!vImagen.isEmpty()) {
-            Log.d("Img", vImagen);
             Picasso.with(getActivity()).load(vImagen).into(imagen);
         }else{
             imagen.setImageDrawable(null);
@@ -87,8 +73,8 @@ public class PreguntaFragment extends Fragment {
         altD.setText(Html.fromHtml(vAltD));
         altE.setText(Html.fromHtml(vAltE));
 
-        if(vCheck != 0) {
-            rGroup.check(vCheck);
+        if(respuesta != -1) {
+            rGroup.check(respuesta);
         }
 
         zoomableImage = (ImageView) RootView.findViewById(R.id.imagenAlter);
@@ -120,37 +106,38 @@ public class PreguntaFragment extends Fragment {
                 rGroup.getChildAt(i).setEnabled(false);
             }
 
-            RadioButton rButton;
+            RadioButton rCorrecta;
 
             String correcta = getArguments().getString("altCorrecta");
 
             switch(correcta){
                 case "altA":
-                    rButton = (RadioButton) RootView.findViewById(R.id.altA);
+                    rCorrecta = (RadioButton) RootView.findViewById(R.id.altA);
                     break;
                 case "altB":
-                    rButton = (RadioButton) RootView.findViewById(R.id.altB);
+                    rCorrecta = (RadioButton) RootView.findViewById(R.id.altB);
                     break;
                 case "altC":
-                    rButton = (RadioButton) RootView.findViewById(R.id.altC);
+                    rCorrecta = (RadioButton) RootView.findViewById(R.id.altC);
                     break;
                 case "altD":
-                    rButton = (RadioButton) RootView.findViewById(R.id.altD);
+                    rCorrecta = (RadioButton) RootView.findViewById(R.id.altD);
                     break;
                 case "altE":
-                    rButton = (RadioButton) RootView.findViewById(R.id.altE);
+                    rCorrecta = (RadioButton) RootView.findViewById(R.id.altE);
                     break;
                 default:
-                    rButton = null;
+                    rCorrecta = null;
                     break;
             }
 
-            if(vCheck != rButton.getId() && vCheck != 0){
-                RadioButton rCorrecta = (RadioButton) RootView.findViewById(vCheck);
-                rCorrecta.setTextColor(Color.RED);
-                rButton.setTextColor(Color.GREEN);
+            Log.d("Check", ""+respuesta);
+            if(respuesta != rCorrecta.getId() && respuesta != -1){
+                RadioButton rSeleccionada = (RadioButton) RootView.findViewById(respuesta);
+                rSeleccionada.setTextColor(Color.RED);
+                rCorrecta.setTextColor(Color.GREEN);
             }else{
-                rButton.setTextColor(Color.GREEN);
+                rCorrecta.setTextColor(Color.GREEN);
             }
 
         }

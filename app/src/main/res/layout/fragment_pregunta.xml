@@ -15,8 +15,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical"
-            android:id="@+id/contentPreguntaFragment">
-
+            android:id="@+id/contenidoPreguntaFragment">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -28,7 +27,7 @@
                 android:visibility="visible"/>
 
             <TextView
-                android:id="@+id/textPregunta"
+                android:id="@+id/textoPregunta"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:lineSpacingMultiplier="1.2"

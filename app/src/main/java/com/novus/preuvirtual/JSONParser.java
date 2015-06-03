@@ -19,10 +19,6 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
-/**
- * Created by Gustavo Salvo Lara on 24-05-2015.
- * A futuro se debe actualizar  esta clase. :(
- */
 public class JSONParser {
 
     //Lectura desde una fuente de bytes.
@@ -82,7 +78,6 @@ public class JSONParser {
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
-
 
         return jObj;
 

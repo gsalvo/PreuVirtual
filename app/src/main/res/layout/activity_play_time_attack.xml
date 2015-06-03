@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/contentTime"
+        android:id="@+id/contenidoTiempo"
         android:orientation="vertical"
         android:gravity="center">
         <TextView
@@ -15,21 +15,21 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="01:00"
-            android:id="@+id/textTiempo"
+            android:id="@+id/textoTiempo"
             android:layout_alignParentTop="true"/>
     </LinearLayout>
     <LinearLayout
-        android:id="@+id/contentPregunta"
+        android:id="@+id/contenidoPregunta"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/contentTime"
-        android:layout_above="@+id/contentBntNavegación"
+        android:layout_below="@id/contenidoTiempo"
+        android:layout_above="@+id/contenidoBtnNavegación"
         android:orientation="vertical" >
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:id="@+id/contentBntNavegación"
+        android:id="@+id/contenidoBtnNavegación"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -37,29 +37,30 @@
         android:gravity="center"
         android:background="@color/background_action_bar">
         <ImageView
-            android:id="@+id/btnBackPregunta"
+            android:id="@+id/btnAtrasPregunta"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="fill_parent"
             android:src="@drawable/ic_back_24dp"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:onClick="backPregunta"/>
+            android:onClick="preguntaAnterior"/>
         <ImageView
             android:id="@+id/btnOmitirPregunta"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="fill_parent"
             android:src="@drawable/ic_omitida_24dp"
+            android:onClick="omitirPregunta"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"/>
         <ImageView
-            android:id="@+id/btnNextPregunta"
+            android:id="@+id/btnSiguientePregunta"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="fill_parent"
             android:src="@drawable/ic_next_24dp"
-            android:onClick="nextPregunta"
+            android:onClick="preguntaSiguiente"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"/>
     </LinearLayout>

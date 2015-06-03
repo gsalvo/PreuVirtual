@@ -12,11 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,24 +51,17 @@ public class Tiempo extends ActionBarActivity {
     }
 
     public void goPlayTimeAttack(View view){
-        //Intent i = new Intent(this, PlayTimeAttack.class);
-        //i.putExtra("varTiempo", editMinutos.getText().toString());
         new CargarPreguntas().execute();
-        //startActivity(i);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_tiempo, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);
@@ -104,20 +95,13 @@ public class Tiempo extends ActionBarActivity {
                         Log.d("cant", preguntas.length() +"");
                         JSONObject c = preguntas.getJSONObject(i);
                         String idPregunta = c.getString(TAG_P_ID_PREGUNTA);
-                        String idMateria = c.getString(TAG_P_ID_MATERIA);
                         String pregunta = c.getString(TAG_P_PREGUNTA);
                         String imagen = c.getString(TAG_P_IMAGEN);
 
                         ContentValues registro = new ContentValues();
                         registro.put("idPregunta",Integer.parseInt(idPregunta));
-                        //registro.put("idMateria", idMateria);
                         registro.put("pregunta", pregunta);
                         registro.put("imagen", imagen);
-
-                        /*Log.d("tavororoidpregunta "+ i, idPregunta );
-                        Log.d("tavororoidMateria "+ i, idMateria );
-                        Log.d("tavororopregunta "+ i, pregunta );
-                        Log.d("tavororoimagenPregunta "+ i, imagen );*/
 
                         alternativas = c.getJSONArray(TAG_A);
                         for (int j = 0; j < alternativas.length(); j++){
@@ -133,9 +117,6 @@ public class Tiempo extends ActionBarActivity {
                             if(imagenAlternativa == 1){
                                 registro.put("altImagen", 1);
                             }
-                            /*Log.d("tavororoalternativa "+ j, alternativa );
-                            Log.d("tavororocorrecta "+ j, correcta +"" );
-                            Log.d("tavororotieneImagen "+ j, imagenAlternativa +"" );*/
                         }
                         bd.insert("pregunta", null, registro);
                     }

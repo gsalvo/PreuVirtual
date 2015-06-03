@@ -48,11 +48,6 @@
             android:theme="@style/AppTheme"
             android:parentActivityName=".Resultados" >
         </activity>
-        <activity
-            android:name=".PregRevision"
-            android:label="@string/title_activity_preg_revision"
-            android:parentActivityName=".Revision">
-        </activity>
     </application>
 
 </manifest>

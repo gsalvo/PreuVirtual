@@ -1,17 +1,14 @@
 package com.novus.preuvirtual;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class Resultados extends ActionBarActivity {
@@ -46,29 +43,6 @@ public class Resultados extends ActionBarActivity {
 
         SQLiteDatabase bd = admin.getReadableDatabase();
 
-       /* SQLiteDatabase bd = admin.getWritableDatabase();
-        ContentValues registro = new ContentValues();
-        registro.put("idPregunta", 1);
-        registro.put("respuesta", "holo vengo a flotar");
-        registro.put("correcta", 0);
-        bd.insert("resEnsayo", null,registro);
-        registro = new ContentValues();
-        registro.put("idPregunta", 2);
-        registro.put("respuesta", "holo vengo a flotar");
-        registro.put("correcta", 1);
-        bd.insert("resEnsayo", null,registro);
-        registro = new ContentValues();
-        registro.put("idPregunta", 3);
-        registro.put("respuesta", "holo vengo a flotar");
-        registro.put("correcta", 2);
-        bd.insert("resEnsayo", null,registro);
-        registro = new ContentValues();
-        registro.put("idPregunta", 4);
-        registro.put("respuesta", "holo vengo a flotar");
-        registro.put("correcta", 2);
-        bd.insert("resEnsayo", null,registro);*/
-
-
         String sqlPIncorrectas = "select idPregunta from resEnsayo where correcta = 0";
         String sqlPCorrectas = "select idPregunta from resEnsayo where correcta = 1";
         String sqlPOmitidas = "select idPregunta from resEnsayo where correcta = 2";
@@ -101,16 +75,12 @@ public class Resultados extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_resultados, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         return super.onOptionsItemSelected(item);

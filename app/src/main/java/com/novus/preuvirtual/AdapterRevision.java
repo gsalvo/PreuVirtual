@@ -10,9 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by Gustavo Salvo Lara on 31-05-2015.
- */
 public class AdapterRevision extends BaseAdapter{
     private final Activity actividad;
     private final Cursor cursor;
