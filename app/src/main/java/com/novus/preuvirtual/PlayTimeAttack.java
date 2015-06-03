@@ -330,6 +330,8 @@ public class PlayTimeAttack extends ActionBarActivity {
                 }else{
                     registro.put("correcta", 0);
                 }
+            }else{
+                registro.put("correcta", 2);
             }
 
             if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
@@ -400,6 +402,8 @@ public class PlayTimeAttack extends ActionBarActivity {
             Cursor checked = bd.rawQuery(Query, null);
             checked.moveToFirst();
             bundlePregunta.putInt("respuesta", checked.getInt(0));
+        }else{
+            bundlePregunta.putInt("respuesta", -1);
         }
 
         newFragment.setArguments(bundlePregunta);
