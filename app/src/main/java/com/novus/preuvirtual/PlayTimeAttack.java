@@ -24,24 +24,26 @@ import static java.lang.Math.floor;
 public class PlayTimeAttack extends ActionBarActivity {
 
     Bundle bundle;
-    SQLiteDatabase bd;
-    Cursor cursor, cursorResp;
-    private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
-
-    //Base de datos SQLite
-    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
-
     TextView textoTiempo;
     CountDownTimer backCount;
+
+    SQLiteDatabase bd;
+    Cursor cursor, cursorResp;
+    //Base de datos SQLite
+    AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
+    private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
+
+    int revision;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_time_attack);
         bundle = getIntent().getExtras();
+        revision = bundle.getInt("revision");
 
         //Jugar
-        if(bundle.getInt("revision") == 0){
+        if(revision == 0){
             
             bd = admin.getWritableDatabase();
 
@@ -147,36 +149,44 @@ public class PlayTimeAttack extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch(id){
-            case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
-                AlertDialog dialog;
-                builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
-                builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        PlayTimeAttack.this.finish();
-                    }
-                });
-                builder.setNegativeButton(R.string.cancelar, null);
-                dialog = builder.create();
-                dialog.show();
+        if(revision == 0) {
+            switch (id) {
+                case android.R.id.home:
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+                    AlertDialog dialog;
+                    builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
+                    builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            PlayTimeAttack.this.finish();
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancelar, null);
+                    dialog = builder.create();
+                    dialog.show();
+            }
+            return true;
+        }else{
+            return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 
     @Override
     public void onBackPressed(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
-        AlertDialog dialog;
-        builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
-        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                PlayTimeAttack.this.finish();
-            }
-        });
-        builder.setNegativeButton(R.string.cancelar, null);
-        dialog = builder.create();
-        dialog.show();
+        if(revision == 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+            AlertDialog dialog;
+            builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
+            builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    PlayTimeAttack.this.finish();
+                }
+            });
+            builder.setNegativeButton(R.string.cancelar, null);
+            dialog = builder.create();
+            dialog.show();
+        }else{
+            super.onBackPressed();
+        }
     }
 
     public void setTiempo(int minutos) {
@@ -198,6 +208,52 @@ public class PlayTimeAttack extends ActionBarActivity {
             }
 
             public void onFinish(){
+                ContentValues registro = new ContentValues();
+                RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+
+                registro.put("idPregunta", cursor.getInt(8));
+                registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+
+                if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+                    if(cursor.getString(7).equalsIgnoreCase("altA")){
+                        registro.put("correcta", 1);
+                    }else{
+                        registro.put("correcta", 0);
+                    }
+                }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+                    if(cursor.getString(7).equalsIgnoreCase("altB")){
+                        registro.put("correcta", 1);
+                    }else{
+                        registro.put("correcta", 0);
+                    }
+                }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+                    if(cursor.getString(7).equalsIgnoreCase("altC")){
+                        registro.put("correcta", 1);
+                    }else{
+                        registro.put("correcta", 0);
+                    }
+                }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+                    if(cursor.getString(7).equalsIgnoreCase("altD")){
+                        registro.put("correcta", 1);
+                    }else{
+                        registro.put("correcta", 0);
+                    }
+                }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+                    if(cursor.getString(7).equalsIgnoreCase("altE")){
+                        registro.put("correcta", 1);
+                    }else{
+                        registro.put("correcta", 0);
+                    }
+                }else{
+                    registro.put("correcta", 2);
+                }
+
+                if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+                    bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+                }else{
+                    bd.insert("resEnsayo", null, registro);
+                }
+
                 Intent i = new Intent(getBaseContext(), Resultados.class);
                 i.putExtra("varTiempo", bundle.get("varTiempo").toString());
                 bd.close();
@@ -208,7 +264,7 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void preguntaSiguiente(View view){
-        if(bundle.getInt("revision") == 0) {
+        if(revision == 0) {
             ContentValues registro = new ContentValues();
             RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
 
@@ -325,7 +381,7 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void preguntaAnterior(View view){
-        if(bundle.getInt("revision") == 0) {
+        if(revision == 0) {
             ContentValues registro = new ContentValues();
             RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
             registro.put("idPregunta", cursor.getInt(8));
