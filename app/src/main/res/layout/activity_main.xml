@@ -13,22 +13,15 @@
         android:layout_height="fill_parent"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:weightSum="1">
 
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:text="PreuVirtual"
-            android:textSize="50dp"
-            android:textColor="#1E88E5"
-            android:textStyle="bold"
-            android:typeface="sans"
-            />
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Survival Edition"
-            />
+            android:src="@drawable/titulo"
+            android:paddingBottom="10dp"/>
+
         <Button
             android:id="@+id/btnTimeAttack"
             style="@style/CustomButton"
