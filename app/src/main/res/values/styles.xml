@@ -3,23 +3,23 @@
 
     <!-- BackgroundColor -->
     <color name="background_app">#FFFFFF</color>
-    <color name="background_button">#FF5722</color>
-    <color name="background_action_bar">#FF5722</color>
-    <color name="background__start_button">#FF5722</color>
-    <color name="background__end_button">#F4511E</color>
+    <color name="background_button">#fe7a65</color>
+    <color name="background_action_bar">#fe7a65</color>
     <color name="textButton">#FFFFFF</color>
-    <color name="color_white">#FFFFFF</color>
+    <color name="textTime">#00cbcf</color>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
         <item name="android:windowBackground">@color/background_app</item>
         <item name="android:colorBackground">@color/background_app</item>
         <!--Button-->
         <item name="colorButtonNormal">@color/background_button</item>
+        <!-- Action Bar-->
+        <item name="colorPrimary">@color/background_action_bar</item>
     </style>
 
-    
+
     <!--MainActivity style-->
     <style name="CustomThemeMA" parent="Theme.AppCompat.Light">
         <!--ActionBar-->
@@ -29,9 +29,9 @@
         <item name="android:windowBackground">@color/background_app</item>
         <item name="android:colorBackground">@color/background_app</item>
         <!--Button-->
-        <item name="colorButtonNormal">@color/background_button </item>
-
+        <item name="colorButtonNormal">@color/background_button</item>
     </style>
+
 
     <style name="CustomButton">
         <item name="android:textColor">@color/textButton</item>
@@ -40,22 +40,17 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:drawablePadding">8dp</item>
-
     </style>
 
-    <style name="CustomButtonPlay">
-
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-
+    <style name="CustomButtonResultados">
+        <item name="android:textColor">@color/textButton</item>
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">55dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:drawablePadding">8dp</item>
     </style>
 
-    <style name="PreuVirtualTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/PreuVirtualActionBar</item>
-    </style>
 
-    <style name="PreuVirtualActionBar" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">#FF5722</item>
-    </style>
 
 </resources>

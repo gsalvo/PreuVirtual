@@ -13,10 +13,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="01:00"
             android:id="@+id/textoTiempo"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            android:textColor="@color/textTime"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/contenidoPregunta"

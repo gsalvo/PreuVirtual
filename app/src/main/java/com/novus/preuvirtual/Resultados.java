@@ -60,8 +60,8 @@ public class Resultados extends ActionBarActivity {
         if(bundle != null) {
             tiempoEnsayo = Integer.parseInt(bundle.getString("varTiempo"));
         }
-        tRespuesta.setText(cantTotal / tiempoEnsayo + " preguntas x minutos");
-        tiempo.setText("en un tiempo de " + tiempoEnsayo + "minutos");
+        tRespuesta.setText(cantTotal / tiempoEnsayo + " p/m");
+        tiempo.setText("en un tiempo de " + tiempoEnsayo + " minutos");
 
         bd.close();
 
