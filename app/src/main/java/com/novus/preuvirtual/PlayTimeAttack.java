@@ -190,7 +190,7 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void setTiempo(int minutos) {
-        backCount = new CountDownTimer(minutes * 1000 * 60, 1000) {
+        backCount = new CountDownTimer(minutos * 1000 * 60, 1000) {
             TextView timer = (TextView) findViewById(R.id.textoTiempo);
 
             public void onTick(long restante) {
