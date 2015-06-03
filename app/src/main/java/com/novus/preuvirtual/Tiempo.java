@@ -54,6 +54,8 @@ public class Tiempo extends ActionBarActivity {
     public void goPlayTimeAttack(View view){
         if(editMinutos.getText().toString().equals("")){
             Toast.makeText(this, "Ups, no has ingresado cantidad de minutos"+editMinutos.getText(), Toast.LENGTH_SHORT).show();
+        }else if(Integer.parseInt(editMinutos.getText().toString()) > 150) {
+            Toast.makeText(this, "Wow, tranquilo. ¡No es posible hacer un Time Attack mas largo que la PSU! Necesitas descansar de vez en cuando.", Toast.LENGTH_LONG).show();
         }else{
             new CargarPreguntas().execute();
         }
