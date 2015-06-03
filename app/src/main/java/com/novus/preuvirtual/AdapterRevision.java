@@ -54,11 +54,11 @@ public class AdapterRevision extends BaseAdapter{
         titulo.setText("Pregunta " + cursor.getString(0));
 
         if(Integer.parseInt(cursor.getString(2))== 0){
-            icono.setImageResource(R.drawable.ic_close_black_36dp);
+            icono.setImageResource(R.drawable.ic_incorrecta_36dp);
         }else if (Integer.parseInt(cursor.getString(2))== 1){
-            icono.setImageResource(R.drawable.ic_check_black_36dp);
+            icono.setImageResource(R.drawable.ic_check_36dp);
         }else if (Integer.parseInt(cursor.getString(2))== 2){
-            icono.setImageResource(R.drawable.ic_center_focus_weak_black_36dp);
+            icono.setImageResource(R.drawable.ic_omitir_b_36dp);
         }
         return convertView;
     }

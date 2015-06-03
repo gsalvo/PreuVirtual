@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <!-- BackgroundColor -->
@@ -47,7 +47,8 @@
         <item name="android:windowBackground">@color/background_app</item>
         <item name="android:colorBackground">@color/background_app</item>
         <!--Button-->
-        <item name="colorButtonNormal">@color/background_button</item>
+        <item name="colorButtonNormal">@color/background_button </item>
+
     </style>
 
     <style name="CustomButton">
@@ -57,6 +58,14 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:drawablePadding">8dp</item>
+
+    </style>
+
+    <style name="CustomButtonPlay">
+
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+
     </style>
 
     <style name="PreuVirtualTheme" parent="AppTheme">

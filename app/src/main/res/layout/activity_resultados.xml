@@ -129,7 +129,7 @@
             android:layout_height="wrap_content"
             android:text="Revisar"
             android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:drawableLeft="@drawable/ic_revisar_24dp"
             android:onClick="goRevision" />
         <Button
             android:id="@+id/btnNuevoEnsayo"
@@ -137,7 +137,7 @@
             android:layout_height="wrap_content"
             android:text="Nuevo Ensayo"
             android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:drawableLeft="@drawable/ic_add_24dp"
             android:onClick="goNuevoEnsayo"/>
         <Button
             android:id="@+id/bntCompartir"
@@ -145,7 +145,7 @@
             android:layout_height="wrap_content"
             android:text="Compartir"
             android:gravity="center_vertical"
-            android:drawableLeft="@drawable/abc_btn_switch_to_on_mtrl_00012"
+            android:drawableLeft="@drawable/ic_share_24dp"
             android:enabled="false"/>
     </LinearLayout>
 </RelativeLayout>

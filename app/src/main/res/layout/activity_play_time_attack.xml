@@ -37,24 +37,25 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/background_action_bar">
 
         <Button
             android:id="@+id/btnBackPregunta"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:drawableBottom="@drawable/ic_back_24dp"
             android:onClick="backPregunta"/>
         <Button
             android:id="@+id/btnOmitirPregunta"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text=":("/>
+            android:drawableBottom="@drawable/ic_omitida_24dp"/>
         <Button
             android:id="@+id/btnNextPregunta"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Next"
+            android:drawableBottom="@drawable/ic_next_24dp"
             android:onClick="nextPregunta"/>
 
     </LinearLayout>

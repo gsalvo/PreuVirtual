@@ -34,19 +34,19 @@
             style="@style/CustomButton"
             android:text="Time Attack"
             android:drawableLeft="@drawable/ic_alarm_white_24dp"
-            android:onClick="goTimeAttack" />
+            android:onClick="goTimeAttack"/>
         <Button
             android:id="@+id/btnGoals"
             style="@style/CustomButton"
             android:text="Goals"
             android:drawableLeft="@drawable/ic_goal_24dp"
-            android:enabled="false" />
+            android:enabled="false"/>
         <Button
             android:id="@+id/btnEndlees"
             style="@style/CustomButton"
             android:text="Endless"
             android:drawableLeft="@drawable/ic_endless_24dp"
-            android:enabled="false" />
+            android:enabled="false"/>
 
     </LinearLayout>
 
