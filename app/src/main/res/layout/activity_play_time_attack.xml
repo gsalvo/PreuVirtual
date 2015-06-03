@@ -30,7 +30,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="60dp"
+        android:layout_height="45dp"
         android:id="@+id/contenidoBtnNavegación"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"

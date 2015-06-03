@@ -7,146 +7,171 @@
     android:id="@+id/layoutResultados"
     tools:context="com.novus.preuvirtual.Resultados">
 
-    <LinearLayout
-        android:id="@+id/contentResultados"
-        android:layout_width="300dp"
+    <ScrollView
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/textPuntajeObtenido"
-            android:text="Has obtenido 600 puntos"
-            android:textColor="@color/textTime"
-            android:textStyle="bold"
-            android:textSize="25dp"/>
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/textTiempoEnsayo"
-            android:text="En ensayo de 25 minutos"
-            android:layout_marginBottom="25dp"
-            android:textColor="@color/textTime"
-            android:textStyle="bold"
-            android:textSize="15dp"/>
+        android:layout_width="300dp"
+        android:paddingTop="12dp"
+        android:layout_centerHorizontal="true">
 
         <LinearLayout
-            android:layout_width="fill_parent"
+            android:id="@+id/contentResultados"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:gravity="center">
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textTiempoRespuesta"
-                android:text="Tiempo de respuesta:  "/>
+                android:gravity="center"
+                android:id="@+id/textPuntajeObtenido"
+                android:text="Has obtenido 600 puntos"
+                android:textColor="@color/textTime"
+                android:textStyle="bold"
+                android:textSize="25dp"/>
+
             <TextView
-                android:id="@+id/textTiempoRespuestaNum"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="75"/>
+                android:gravity="center"
+                android:id="@+id/textTiempoEnsayo"
+                android:text="En ensayo de 25 minutos"
+                android:layout_marginBottom="25dp"
+                android:textColor="@color/textTime"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerHorizontal="true">
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textTiempoRespuesta"
+                            android:text="Tiempo de respuesta:  "/>
+                        <TextView
+                            android:id="@+id/textTiempoRespuestaNum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:textColor="@color/textTime"
+                            android:textStyle="bold"
+                            android:text="75"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textTotalPreguntas"
+                            android:text="Total de preguntas:  "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textTotalPreguntasNum"
+                            android:textColor="@color/textTime"
+                            android:textStyle="bold"
+                            android:text="18"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasCorrectas"
+                            android:text="Respuestas correctas:  "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasCorrectasNum"
+                            android:textColor="@color/textTime"
+                            android:textStyle="bold"
+                            android:text="15"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp">
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasOmitidas"
+                            android:text="Respuestas Omitidas:  "/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasOmitidasNum"
+                            android:textColor="@color/textTime"
+                            android:textStyle="bold"
+                            android:text="2"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingBottom="10dp"
+                        >
+                        <TextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasIncorrectas"
+                            android:text="Respuestas incorrectas:  "
+                            android:layout_marginBottom="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left"
+                            android:id="@+id/textRespuestasIncorrectasNum"
+                            android:textColor="@color/textTime"
+                            android:textStyle="bold"
+                            android:text="1"
+                            android:layout_marginBottom="10dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+            <Button
+                android:id="@+id/btnRevisar"
+                android:text="Revisar"
+                android:drawableLeft="@drawable/ic_revisar_24dp"
+                style="@style/CustomButtonResultados"
+                android:onClick="goRevision" />
+            <Button
+                android:id="@+id/btnNuevoEnsayo"
+                android:text="Nuevo Ensayo"
+                android:drawableLeft="@drawable/ic_add_24dp"
+                style="@style/CustomButtonResultados"
+                android:onClick="goNuevoEnsayo"/>
+            <Button
+                android:id="@+id/bntCompartir"
+                android:text="Compartir"
+                android:drawableLeft="@drawable/ic_share_24dp"
+                style="@style/CustomButtonResultados"
+                android:enabled="false"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textTotalPreguntas"
-                android:text="Total de preguntas:  "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textTotalPreguntasNum"
-                android:text="18"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasCorrectas"
-                android:text="Respuestas correctas:  "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasCorrectasNum"
-                android:text="15"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasOmitidas"
-                android:text="Respuestas Omitidas:  "/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasOmitidasNum"
-                android:text="2"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="10dp"
-            >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasIncorrectas"
-                android:text="Respuestas incorrectas:  "
-                android:layout_marginBottom="10dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:id="@+id/textRespuestasIncorrectasNum"
-                android:text="1"
-                android:layout_marginBottom="10dp"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/btnRevisar"
-            android:text="Revisar"
-            android:drawableLeft="@drawable/ic_revisar_24dp"
-            style="@style/CustomButtonResultados"
-            android:onClick="goRevision" />
-        <Button
-            android:id="@+id/btnNuevoEnsayo"
-            android:text="Nuevo Ensayo"
-            android:drawableLeft="@drawable/ic_add_24dp"
-            style="@style/CustomButtonResultados"
-            android:onClick="goNuevoEnsayo"/>
-        <Button
-            android:id="@+id/bntCompartir"
-            android:text="Compartir"
-            android:drawableLeft="@drawable/ic_share_24dp"
-            style="@style/CustomButtonResultados"
-            android:enabled="false"/>
-    </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

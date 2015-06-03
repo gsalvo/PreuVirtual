@@ -21,9 +21,11 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="hola amigos asdfasdfsafasdasdfasd"
+            android:text="¿Cuánto tiempo tienes para practicar?"
+            android:textColor="@color/textTime"
             android:textStyle="bold"
-            android:paddingBottom="5dp"/>
+            android:textSize="20sp"
+            android:paddingBottom="30dp"/>
 
         <EditText
             android:layout_width="300dp"

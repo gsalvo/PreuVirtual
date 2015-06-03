@@ -2,6 +2,7 @@ package com.novus.preuvirtual;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Html;
@@ -132,10 +133,13 @@ public class PreguntaFragment extends Fragment {
 
             if(respuesta != rCorrecta.getId() && respuesta != -1){
                 RadioButton rSeleccionada = (RadioButton) RootView.findViewById(respuesta);
-                rSeleccionada.setTextColor(Color.RED);
-                rCorrecta.setTextColor(Color.GREEN);
+                rSeleccionada.setTextColor(Color.parseColor("#C02400"));
+                rSeleccionada.setTypeface(null, Typeface.BOLD);
+                rCorrecta.setTextColor(Color.parseColor("#00a700"));
+                rCorrecta.setTypeface(null, Typeface.BOLD);
             }else{
-                rCorrecta.setTextColor(Color.GREEN);
+                rCorrecta.setTextColor(Color.parseColor("#00a700"));
+                rCorrecta.setTypeface(null, Typeface.BOLD);
             }
 
         }
