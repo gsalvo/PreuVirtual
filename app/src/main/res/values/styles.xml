@@ -8,6 +8,7 @@
     <color name="textButton">#FFFFFF</color>
     <color name="textTime">#00cbcf</color>
     <color name="list_preguntas">#b0b0b0</color>
+    <color name="disabled">#ffeaeaea</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
@@ -50,6 +51,7 @@
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:drawablePadding">8dp</item>
     </style>
+
 
 
 
