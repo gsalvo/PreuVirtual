@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,11 +49,14 @@ public class Tiempo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiempo);
         editMinutos = (EditText) findViewById(R.id.editMinutos);
-
     }
 
     public void goPlayTimeAttack(View view){
-        new CargarPreguntas().execute();
+        if(editMinutos.getText().toString().equals("")){
+            Toast.makeText(this, "Ups, no has ingresado cantidad de minutos"+editMinutos.getText(), Toast.LENGTH_SHORT).show();
+        }else{
+            new CargarPreguntas().execute();
+        }
     }
 
     @Override
@@ -92,7 +97,6 @@ public class Tiempo extends ActionBarActivity {
                 if(success==1){
                     preguntas = json.getJSONArray(TAG_P);
                     for(int i = 0; i<preguntas.length();i++){
-                        Log.d("cant", preguntas.length() +"");
                         JSONObject c = preguntas.getJSONObject(i);
                         String idPregunta = c.getString(TAG_P_ID_PREGUNTA);
                         String pregunta = c.getString(TAG_P_PREGUNTA);

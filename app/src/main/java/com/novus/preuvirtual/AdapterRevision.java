@@ -2,7 +2,6 @@ package com.novus.preuvirtual;
 
 import android.app.Activity;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,6 @@ public class AdapterRevision extends BaseAdapter{
 
     @Override
     public int getCount() {
-        Log.d("tavororo", "desde el cursor" + cursor.getCount());
         return cursor.getCount();
 
     }

@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.text.Html;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,7 +130,6 @@ public class PreguntaFragment extends Fragment {
                     break;
             }
 
-            Log.d("Check", ""+respuesta);
             if(respuesta != rCorrecta.getId() && respuesta != -1){
                 RadioButton rSeleccionada = (RadioButton) RootView.findViewById(respuesta);
                 rSeleccionada.setTextColor(Color.RED);

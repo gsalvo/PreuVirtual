@@ -111,8 +111,10 @@ public class PlayTimeAttack extends ActionBarActivity {
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                 fragmentTransaction.replace(R.id.contenidoPregunta, preguntaFragment);
-                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                fragmentTransaction.addToBackStack(null);
+                if(!cursor.isFirst()) {
+                    fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                    fragmentTransaction.addToBackStack(null);
+                }
                 fragmentTransaction.commit();
             }while(cursor.getInt(0) != bundle.getLong("idPregunta"));
 
@@ -335,24 +337,25 @@ public class PlayTimeAttack extends ActionBarActivity {
             }else{
                 bd.insert("resEnsayo", null, registro);
             }
-
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if(fragmentManager.getBackStackEntryCount() > 0) {
+                fragmentManager.popBackStack();
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commit();
 
-            fragmentManager.popBackStack();
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            fragmentTransaction.commit();
-
-            cursor.moveToPrevious();
+                cursor.moveToPrevious();
+            }
         }else {
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            if(fragmentManager.getBackStackEntryCount() > 0) {
+                fragmentManager.popBackStack();
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.commit();
 
-            fragmentManager.popBackStack();
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            fragmentTransaction.commit();
-
-            cursor.moveToPrevious();
+                cursor.moveToPrevious();
+            }
         }
     }
 
