@@ -17,6 +17,14 @@
         android:orientation="vertical"
         android:id="@+id/linearLayout">
 
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="hola amigos asdfasdfsafasdasdfasd"
+            android:textStyle="bold"
+            android:paddingBottom="5dp"/>
+
         <EditText
             android:layout_width="300dp"
             android:layout_height="wrap_content"
