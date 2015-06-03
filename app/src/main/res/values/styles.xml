@@ -5,7 +5,6 @@
     <color name="background_app">#FFFFFF</color>
     <color name="background_button">#FF5722</color>
     <color name="background_action_bar">#FF5722</color>
-
     <color name="background__start_button">#FF5722</color>
     <color name="background__end_button">#F4511E</color>
     <color name="textButton">#FFFFFF</color>
@@ -18,26 +17,9 @@
         <item name="android:colorBackground">@color/background_app</item>
         <!--Button-->
         <item name="colorButtonNormal">@color/background_button</item>
-        <!--ActionBar-->
-        <!--<item name="android:actionBarStyle">@style/CustomActionBar</item>-->
-        <!--<item name="actionBarStyle">@style/CustomActionBar</item>-->
-        <item name="android:actionBarStyle">@style/CustomActionBar</item>
-
-        <!--<item name="android:actionBarTabTextStyle">@style/ActionBarTitleText</item>-->
-        <!--<item name="android:actionMenuTextColor">@color/color_white</item>-->
     </style>
 
-    <!--CustomActionBar-->
-    <style name="CustomActionBar">
-        <item name="android:background">@color/background_action_bar</item>
-    </style>
-
-    <!--ActionBarTitle-->
-    <style name="ActionBarTitleText" parent="Base.Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:textColor">@color/color_white</item>
-    </style>
-
-
+    
     <!--MainActivity style-->
     <style name="CustomThemeMA" parent="Theme.AppCompat.Light">
         <!--ActionBar-->
