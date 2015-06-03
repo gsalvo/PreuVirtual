@@ -8,7 +8,7 @@
     <color name="textButton">#FFFFFF</color>
     <color name="textTime">#00cbcf</color>
     <color name="list_preguntas">#b0b0b0</color>
-    <color name="disabled">#909090</color>
+    <color name="disabled">#ff7e3212</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
