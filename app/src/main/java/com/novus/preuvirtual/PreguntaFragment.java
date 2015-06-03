@@ -145,7 +145,7 @@ public class PreguntaFragment extends Fragment {
                     break;
             }
 
-            if(vCheck != rButton.getId()){
+            if(vCheck != rButton.getId() && vCheck != 0){
                 RadioButton rCorrecta = (RadioButton) RootView.findViewById(vCheck);
                 rCorrecta.setTextColor(Color.RED);
                 rButton.setTextColor(Color.GREEN);

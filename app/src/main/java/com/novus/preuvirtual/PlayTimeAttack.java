@@ -118,29 +118,35 @@ public class PlayTimeAttack extends ActionBarActivity {
 
             cursor = bd.rawQuery(query, null);
 
-            cursor.moveToFirst();
+            cursor.moveToPosition(-1);
 
-            Bundle bundlePregunta = new Bundle();
-            bundlePregunta.putString("pregunta", cursor.getString(1));
-            bundlePregunta.putString("imagen", cursor.getString(2));
-            bundlePregunta.putString("altA", cursor.getString(3));
-            bundlePregunta.putString("altB", cursor.getString(4));
-            bundlePregunta.putString("altC", cursor.getString(5));
-            bundlePregunta.putString("altD", cursor.getString(6));
-            bundlePregunta.putString("altE", cursor.getString(7));
-            bundlePregunta.putString("altCorrecta", cursor.getString(8));
+            do{
+                cursor.moveToNext();
 
-            bundlePregunta.putInt("revision", 1);
-            bundlePregunta.putInt("check", cursor.getInt(12));
+                Bundle bundlePregunta = new Bundle();
+                bundlePregunta.putString("pregunta", cursor.getString(1));
+                bundlePregunta.putString("imagen", cursor.getString(2));
+                bundlePregunta.putString("altA", cursor.getString(3));
+                bundlePregunta.putString("altB", cursor.getString(4));
+                bundlePregunta.putString("altC", cursor.getString(5));
+                bundlePregunta.putString("altD", cursor.getString(6));
+                bundlePregunta.putString("altE", cursor.getString(7));
+                bundlePregunta.putString("altCorrecta", cursor.getString(8));
 
-            PreguntaFragment preguntaFragment = new PreguntaFragment();
-            preguntaFragment.setArguments(bundlePregunta);
+                bundlePregunta.putInt("revision", 1);
+                bundlePregunta.putInt("check", cursor.getInt(12));
 
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                PreguntaFragment preguntaFragment = new PreguntaFragment();
+                preguntaFragment.setArguments(bundlePregunta);
 
-            fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
-            fragmentTransaction.commit();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                fragmentTransaction.replace(R.id.contentPregunta, preguntaFragment);
+                fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+            }while(cursor.getInt(0) != bundle.getLong("idPregunta"));
 
             textTiempo = (TextView)findViewById(R.id.textTiempo);
             textTiempo.setVisibility(View.GONE);
@@ -174,7 +180,7 @@ public class PlayTimeAttack extends ActionBarActivity {
     }
 
     public void setTimer(int minutes) {
-        backCount = new CountDownTimer(minutes * 1000 * 60, 1000) {
+        backCount = new CountDownTimer(minutes * 1000, 1000) {//new CountDownTimer(minutes * 1000 * 60, 1000) {
             TextView timer = (TextView) findViewById(R.id.textTiempo);
 
             public void onTick(long remaining) {
@@ -205,6 +211,7 @@ public class PlayTimeAttack extends ActionBarActivity {
         if(bundle.getInt("revision") == 0) {
             ContentValues registro = new ContentValues();
             RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+
             registro.put("idPregunta", cursor.getInt(8));
             registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
 
@@ -238,6 +245,8 @@ public class PlayTimeAttack extends ActionBarActivity {
                 }else{
                     registro.put("correcta", 0);
                 }
+            }else{
+                registro.put("correcta", 2);
             }
 
             if(exists("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
@@ -312,7 +321,6 @@ public class PlayTimeAttack extends ActionBarActivity {
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
-
         }
     }
 

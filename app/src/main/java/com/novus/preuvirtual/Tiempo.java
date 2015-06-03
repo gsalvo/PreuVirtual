@@ -85,7 +85,7 @@ public class Tiempo extends ActionBarActivity {
             pDialog = new ProgressDialog(Tiempo.this);
             pDialog.setMessage("Preparate para empezar :)");
             pDialog.setIndeterminate(false);
-            pDialog.setCancelable(false);
+            pDialog.setCancelable(true);
             pDialog.show();
         }
 

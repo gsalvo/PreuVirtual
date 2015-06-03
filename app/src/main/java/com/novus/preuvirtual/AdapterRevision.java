@@ -45,7 +45,6 @@ public class AdapterRevision extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = actividad.getLayoutInflater();
-        //View view = inflater.inflate(R.layout.list_preg_revision,null,true); //R.layout.list_preg_revision, null, true);
         if(convertView == null){
             convertView = inflater.inflate(R.layout.list_preg_revision, null);
         }
@@ -56,9 +55,7 @@ public class AdapterRevision extends BaseAdapter{
 
         if(Integer.parseInt(cursor.getString(2))== 0){
             icono.setImageResource(R.drawable.ic_close_black_36dp);
-
         }else if (Integer.parseInt(cursor.getString(2))== 1){
-
             icono.setImageResource(R.drawable.ic_check_black_36dp);
         }else if (Integer.parseInt(cursor.getString(2))== 2){
             icono.setImageResource(R.drawable.ic_center_focus_weak_black_36dp);
