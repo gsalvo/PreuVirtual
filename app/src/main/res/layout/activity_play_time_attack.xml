@@ -10,16 +10,13 @@
         android:id="@+id/contentTime"
         android:orientation="vertical"
         android:gravity="center">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="01:00"
             android:id="@+id/textTiempo"
-            android:layout_alignParentTop="true"
-            />
-
+            android:layout_alignParentTop="true"/>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/contentPregunta"
@@ -31,7 +28,7 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:id="@+id/contentBntNavegación"
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
@@ -39,25 +36,32 @@
         android:layout_alignParentEnd="true"
         android:gravity="center"
         android:background="@color/background_action_bar">
-
-        <Button
+        <ImageView
             android:id="@+id/btnBackPregunta"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:drawableBottom="@drawable/ic_back_24dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_back_24dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:onClick="backPregunta"/>
-        <Button
+        <ImageView
             android:id="@+id/btnOmitirPregunta"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:drawableBottom="@drawable/ic_omitida_24dp"/>
-        <Button
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_omitida_24dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+        <ImageView
             android:id="@+id/btnNextPregunta"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:drawableBottom="@drawable/ic_next_24dp"
-            android:onClick="nextPregunta"/>
-
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="fill_parent"
+            android:src="@drawable/ic_next_24dp"
+            android:onClick="nextPregunta"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
     </LinearLayout>
 
 
