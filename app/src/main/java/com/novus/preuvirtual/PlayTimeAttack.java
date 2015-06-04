@@ -28,8 +28,8 @@ public class PlayTimeAttack extends ActionBarActivity {
     CountDownTimer backCount;
 
     SQLiteDatabase bd;
-    Cursor cursor, cursorResp;
-    //Base de datos SQLite
+    Cursor cursor;
+
     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
     private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
 
@@ -71,6 +71,7 @@ public class PlayTimeAttack extends ActionBarActivity {
             bundlePregunta.putString("altE", cursor.getString(6));
             bundlePregunta.putString("altCorrecta", cursor.getString(7));
             bundlePregunta.putInt("respuesta", -1);
+            bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
             PreguntaFragment preguntaFragment = new PreguntaFragment();
             preguntaFragment.setArguments(bundlePregunta);
@@ -105,9 +106,9 @@ public class PlayTimeAttack extends ActionBarActivity {
                 bundlePregunta.putString("altD", cursor.getString(6));
                 bundlePregunta.putString("altE", cursor.getString(7));
                 bundlePregunta.putString("altCorrecta", cursor.getString(8));
-
                 bundlePregunta.putInt("revision", 1);
                 bundlePregunta.putInt("respuesta", cursor.getInt(12));
+                bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
                 PreguntaFragment preguntaFragment = new PreguntaFragment();
                 preguntaFragment.setArguments(bundlePregunta);
@@ -330,6 +331,7 @@ public class PlayTimeAttack extends ActionBarActivity {
             bundlePregunta.putString("altD", cursor.getString(5));
             bundlePregunta.putString("altE", cursor.getString(6));
             bundlePregunta.putString("altCorrecta", cursor.getString(7));
+            bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
             if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
                 String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
@@ -367,9 +369,9 @@ public class PlayTimeAttack extends ActionBarActivity {
             bundlePregunta.putString("altD", cursor.getString(6));
             bundlePregunta.putString("altE", cursor.getString(7));
             bundlePregunta.putString("altCorrecta", cursor.getString(8));
-
             bundlePregunta.putInt("revision", 1);
             bundlePregunta.putInt("respuesta", cursor.getInt(12));
+            bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
             newFragment.setArguments(bundlePregunta);
 
@@ -483,6 +485,7 @@ public class PlayTimeAttack extends ActionBarActivity {
         bundlePregunta.putString("altD", cursor.getString(5));
         bundlePregunta.putString("altE", cursor.getString(6));
         bundlePregunta.putString("altCorrecta", cursor.getString(7));
+        bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
         if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
             String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);

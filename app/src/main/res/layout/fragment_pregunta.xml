@@ -18,6 +18,17 @@
             android:orientation="vertical"
             android:id="@+id/contenidoPreguntaFragment">
 
+            <TextView
+                android:id="@+id/numeroPregunta"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingMultiplier="1.2"
+                android:layout_marginBottom="16dp"
+                android:text="Pregunta 1"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:gravity="center" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

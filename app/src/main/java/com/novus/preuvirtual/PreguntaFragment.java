@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 public class PreguntaFragment extends Fragment {
     ImageView zoomableImage;
     boolean isImageFitToScreen;
+    private TextView numeroPregunta;
     private TextView textPregunta;
     private ImageView imagen;
     private RadioButton altA;
@@ -42,6 +43,7 @@ public class PreguntaFragment extends Fragment {
 
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
         textPregunta = (TextView) RootView.findViewById(R.id.textoPregunta);
+        numeroPregunta = (TextView) RootView.findViewById(R.id.numeroPregunta);
         imagen = (ImageView) RootView.findViewById(R.id.imagenAlter);
         altA = (RadioButton) RootView.findViewById(R.id.altA);
         altB = (RadioButton) RootView.findViewById(R.id.altB);
@@ -58,8 +60,10 @@ public class PreguntaFragment extends Fragment {
         String vAltD = getArguments().getString("altD");
         String vAltE = getArguments().getString("altE");
         int respuesta = getArguments().getInt("respuesta");
+        int nPregunta = getArguments().getInt("nPregunta");
 
         textPregunta.setText(Html.fromHtml(vPregunta));
+        numeroPregunta.setText("Pregunta "+(nPregunta+1));
 
         if(!vImagen.isEmpty()) {
             Picasso.with(getActivity()).load(vImagen).into(imagen);
