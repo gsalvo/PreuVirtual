@@ -22,7 +22,7 @@
 
 
     <!--MainActivity style-->
-    <style name="CustomThemeMA" parent="Theme.AppCompat.Light">
+    <style name="CustomThemeMA" parent="Theme.AppCompat.Light.NoActionBar">
         <!--ActionBar-->
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
