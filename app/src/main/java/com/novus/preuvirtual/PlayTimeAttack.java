@@ -12,6 +12,7 @@ import android.os.CountDownTimer;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -430,12 +431,16 @@ public class PlayTimeAttack extends ActionBarActivity {
             }
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
             if(fragmentManager.getBackStackEntryCount() > 0) {
                 fragmentManager.popBackStack();
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
-
-                cursor.moveToPrevious();
+                if(cursor.isFirst()) {
+                    cursor.moveToLast();
+                }else{
+                    cursor.moveToPrevious();
+                }
             }
         }else {
             FragmentManager fragmentManager = getFragmentManager();
@@ -444,7 +449,6 @@ public class PlayTimeAttack extends ActionBarActivity {
                 fragmentManager.popBackStack();
                 fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                 fragmentTransaction.commit();
-
                 cursor.moveToPrevious();
             }
         }
