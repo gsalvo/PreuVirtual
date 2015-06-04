@@ -196,16 +196,25 @@ public class PlayTimeAttack extends ActionBarActivity {
             TextView timer = (TextView) findViewById(R.id.textoTiempo);
 
             public void onTick(long restante) {
-                long minutosRestantes = (long) floor((restante / 1000) / 60);
+                long horasRestantes = (long) floor(((restante / 1000) / 60) /60);
+                long minutosRestantes = (long) floor((restante / 1000) / 60) % 60;
                 long segundosRestantes = (restante / 1000) % 60;
-                if (segundosRestantes < 10 && minutosRestantes < 10) {
-                    timer.setText("0" + minutosRestantes + ":0" + segundosRestantes);
+                if(segundosRestantes < 10 && minutosRestantes < 10 && horasRestantes >= 1){
+                    timer.setText("0" + horasRestantes + ":0" + minutosRestantes + ":0" + segundosRestantes);
+                }else if(segundosRestantes > 10 && minutosRestantes < 10 && horasRestantes >= 1){
+                    timer.setText("0" + horasRestantes + ":0" + minutosRestantes + ":" + segundosRestantes);
+                }else if(segundosRestantes < 10 && minutosRestantes > 10 && horasRestantes >= 1){
+                    timer.setText("0" + horasRestantes + ":" + minutosRestantes + ":0" + segundosRestantes);
+                }else if(segundosRestantes > 10 && minutosRestantes > 10 && horasRestantes >= 1){
+                    timer.setText("0" + horasRestantes + ":" + minutosRestantes + ":" + segundosRestantes);
+                }else if (segundosRestantes < 10 && minutosRestantes < 10) {
+                    timer.setText("00" + ":0" + minutosRestantes + ":0" + segundosRestantes);
                 } else if (segundosRestantes >= 10 && minutosRestantes < 10) {
-                    timer.setText("0" + minutosRestantes + ":" + segundosRestantes);
+                    timer.setText("00" + ":0" + minutosRestantes + ":" + segundosRestantes);
                 } else if (segundosRestantes < 10 && minutosRestantes > 10) {
-                    timer.setText("" + minutosRestantes + ":0" + segundosRestantes);
+                    timer.setText("00" + ":" + minutosRestantes + ":0" + segundosRestantes);
                 } else {
-                    timer.setText("" + minutosRestantes + ":" + segundosRestantes);
+                    timer.setText("00" + ":" + minutosRestantes + ":" + segundosRestantes);
                 }
             }
 
