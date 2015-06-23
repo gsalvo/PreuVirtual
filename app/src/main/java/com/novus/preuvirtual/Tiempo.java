@@ -26,7 +26,7 @@ public class Tiempo extends ActionBarActivity {
 
     //---------------------Inicio conexion BD----------------------------------------------
     JSONParser jParser = new JSONParser();
-    private static final String urlCargarPreguntas = "http://www.botis.cl/cargarPreguntas.php";
+    private static final String urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas.php";
     private static final String TAG_P = "preguntas";
     private static final String TAG_P_ID_PREGUNTA = "idPregunta";
     private static final String TAG_P_ID_MATERIA = "idMateria";
