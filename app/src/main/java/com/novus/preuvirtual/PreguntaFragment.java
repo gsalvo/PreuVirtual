@@ -31,6 +31,8 @@ public class PreguntaFragment extends Fragment {
     private RadioButton altD;
     private RadioButton altE;
     private RadioGroup rGroup;
+    private DensityScreen densidad;
+
 
     @Override
     public void onAttach(Activity a){
@@ -42,6 +44,7 @@ public class PreguntaFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
+        densidad = new DensityScreen(RootView.getContext());
         textPregunta = (TextView) RootView.findViewById(R.id.textoPregunta);
         numeroPregunta = (TextView) RootView.findViewById(R.id.numeroPregunta);
         imagen = (ImageView) RootView.findViewById(R.id.imagenAlter);
@@ -53,7 +56,7 @@ public class PreguntaFragment extends Fragment {
         rGroup = (RadioGroup) RootView.findViewById(R.id.contenidoRadioButton);
 
         String vPregunta = getArguments().getString("pregunta");
-        String vImagen = getArguments().getString("imagen");
+        String vImagen = "http://preuvirtual.webcindario.com/"+densidad.getDensidad()+"/"+getArguments().getString("imagen");
         String vAltA = getArguments().getString("altA");
         String vAltB = getArguments().getString("altB");
         String vAltC = getArguments().getString("altC");
@@ -61,6 +64,8 @@ public class PreguntaFragment extends Fragment {
         String vAltE = getArguments().getString("altE");
         int respuesta = getArguments().getInt("respuesta");
         int nPregunta = getArguments().getInt("nPregunta");
+
+
 
         textPregunta.setText(Html.fromHtml(vPregunta));
         numeroPregunta.setText("Pregunta "+(nPregunta+1));
