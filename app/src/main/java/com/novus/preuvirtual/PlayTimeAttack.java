@@ -135,9 +135,12 @@ public class PlayTimeAttack extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_play_time_attack, menu);
-        return true;
+        if(revision == 0) {
+            getMenuInflater().inflate(R.menu.menu_play_time_attack, menu);
+        }
+        return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
     public void onDestroy(){
@@ -152,10 +155,10 @@ public class PlayTimeAttack extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(revision == 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+            AlertDialog dialog;
             switch (id) {
                 case android.R.id.home:
-                    AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
-                    AlertDialog dialog;
                     builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
                     builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -165,11 +168,43 @@ public class PlayTimeAttack extends ActionBarActivity {
                     builder.setNegativeButton(R.string.cancelar, null);
                     dialog = builder.create();
                     dialog.show();
+                    return true;
+                case R.id.terminar:
+                    builder.setMessage(R.string.finish_message).setTitle(R.string.finish_title);
+                    builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            int tFinal = calculaMinutos(textoTiempo.getText().toString());
+                            int tInicial = Integer.parseInt(bundle.getString("varTiempo"));
+                            String tEnsayo = tInicial - tFinal + "";
+                            Intent i = new Intent(getBaseContext(), Resultados.class);
+                            i.putExtra("varTiempo", tEnsayo);
+                            startActivity(i);
+                            PlayTimeAttack.this.finish();
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancelar, null);
+                    dialog = builder.create();
+                    dialog.show();
+                    return true;
+
             }
             return true;
         }else{
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private int calculaMinutos(String hora){
+        if(hora.length()== 8){  //si el formato es HH:MM:SS
+            String aux[] = hora.split(":");
+            return Integer.parseInt(aux[0])*60 + Integer.parseInt(aux[1]) + Integer.parseInt(aux[2])/60;
+        }else{   //si el formato es MM:SS
+            String aux[] = hora.split(":");
+            return Integer.parseInt(aux[0]) + Integer.parseInt(aux[1])/60;
+        }
+
+
+
     }
 
     @Override

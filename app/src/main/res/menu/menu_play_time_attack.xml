@@ -1,5 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.novus.preuvirtual.PlayTimeAttack">
+    <item android:id="@+id/terminar"
+        android:icon="@drawable/ic_cancel_white_24dp"
+        android:title="Terminar"
+        app:showAsAction="ifRoom"/>
 </menu>
