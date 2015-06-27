@@ -1,14 +1,4 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-    <!-- BackgroundColor -->
-    <color name="background_app">#FFFFFF</color>
-    <color name="background_button">#fe7a65</color>
-    <color name="background_action_bar">#fe7a65</color>
-    <color name="textButton">#FFFFFF</color>
-    <color name="textTime">#00cbcf</color>
-    <color name="list_preguntas">#b0b0b0</color>
-    <color name="disabled">#ff7e3212</color>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!--Background App-->
@@ -19,8 +9,6 @@
         <!-- Action Bar-->
         <item name="colorPrimary">@color/background_action_bar</item>
     </style>
-
-
     <!--MainActivity style-->
     <style name="CustomThemeMA" parent="Theme.AppCompat.Light.NoActionBar">
         <!--ActionBar-->
@@ -32,7 +20,6 @@
         <!--Button-->
         <item name="colorButtonNormal">@color/background_button</item>
     </style>
-
     <style name="CustomButton">
         <item name="android:textColor">@drawable/text_color</item>
         <item name="android:layout_width">300dp</item>
@@ -41,7 +28,6 @@
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:drawablePadding">8dp</item>
     </style>
-
     <style name="CustomButtonResultados">
         <item name="android:textColor">@color/textButton</item>
         <item name="android:layout_width">300dp</item>
@@ -50,8 +36,4 @@
         <item name="android:layout_marginTop">1dp</item>
         <item name="android:drawablePadding">8dp</item>
     </style>
-
-
-
-
 </resources>
