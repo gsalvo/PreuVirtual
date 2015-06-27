@@ -1,50 +1,45 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:weightSum="1"
+    tools:context=".MainActivity">>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:src="@drawable/titulo" />
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:weightSum="1">
+    <Button
+        android:id="@+id/btnTimeAttack"
+        style="@style/CustomButton"
+        android:drawableLeft="@drawable/ic_alarm_white_24dp"
+        android:onClick="goTimeAttack"
+        android:text="Time Attack" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/titulo"
-            android:paddingBottom="10dp"/>
+    <Button
+        android:id="@+id/btnGoals"
+        style="@style/CustomButton"
+        android:backgroundTint="@color/abc_primary_text_material_light"
+        android:drawableLeft="@drawable/ic_goal_24dp"
+        android:enabled="false"
+        android:text="Goals" />
 
-        <Button
-            android:id="@+id/btnTimeAttack"
-            style="@style/CustomButton"
-            android:text="Time Attack"
-            android:drawableLeft="@drawable/ic_alarm_white_24dp"
-            android:onClick="goTimeAttack"/>
-        <Button
-            android:id="@+id/btnGoals"
-            style="@style/CustomButton"
-            android:text="Goals"
-            android:drawableLeft="@drawable/ic_goal_24dp"
-            android:enabled="false"
-            android:backgroundTint="@color/abc_primary_text_material_light" />
+    <Button
+        android:id="@+id/btnEndlees"
+        style="@style/CustomButton"
+        android:backgroundTint="@color/abc_primary_text_material_light"
+        android:drawableLeft="@drawable/ic_endless_24dp"
+        android:enabled="false"
+        android:text="Endless" />
 
-        <Button
-            android:id="@+id/btnEndlees"
-            style="@style/CustomButton"
-            android:text="Endless"
-            android:drawableLeft="@drawable/ic_endless_24dp"
-            android:enabled="false"
-            android:backgroundTint="@color/abc_primary_text_material_light" />
-
-    </LinearLayout>
-
-
-</RelativeLayout>
+</LinearLayout>

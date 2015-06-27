@@ -41,119 +41,129 @@
                 android:textColor="@color/textTime"
                 android:textStyle="bold"
                 android:textSize="15dp"/>
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_centerHorizontal="true">
-                    <LinearLayout
-                        android:layout_width="fill_parent"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textTiempoRespuesta"
+                        android:layout_width="200dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textTiempoRespuesta"
-                            android:text="Tiempo de respuesta:  "/>
-                        <TextView
-                            android:id="@+id/textTiempoRespuestaNum"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:textColor="@color/textTime"
-                            android:textStyle="bold"
-                            android:text="75"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="fill_parent"
+                        android:gravity="left"
+                        android:text="Tiempo de respuesta:  " />
+
+                    <TextView
+                        android:id="@+id/textTiempoRespuestaNum"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textTotalPreguntas"
-                            android:text="Total de preguntas:  "/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textTotalPreguntasNum"
-                            android:textColor="@color/textTime"
-                            android:textStyle="bold"
-                            android:text="18"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasCorrectas"
-                            android:text="Respuestas correctas:  "/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasCorrectasNum"
-                            android:textColor="@color/textTime"
-                            android:textStyle="bold"
-                            android:text="15"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp">
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasOmitidas"
-                            android:text="Respuestas Omitidas:  "/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasOmitidasNum"
-                            android:textColor="@color/textTime"
-                            android:textStyle="bold"
-                            android:text="2"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:paddingBottom="10dp"
-                        >
-                        <TextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasIncorrectas"
-                            android:text="Respuestas incorrectas:  "
-                            android:layout_marginBottom="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="left"
-                            android:id="@+id/textRespuestasIncorrectasNum"
-                            android:textColor="@color/textTime"
-                            android:textStyle="bold"
-                            android:text="1"
-                            android:layout_marginBottom="10dp"/>
-                    </LinearLayout>
+                        android:gravity="left"
+                        android:text="75"
+                        android:textColor="@color/textTime"
+                        android:textStyle="bold" />
                 </LinearLayout>
-            </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textTotalPreguntas"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="Total de preguntas:  " />
+
+                    <TextView
+                        android:id="@+id/textTotalPreguntasNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="18"
+                        android:textColor="@color/textTime"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textRespuestasCorrectas"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="Respuestas correctas:  " />
+
+                    <TextView
+                        android:id="@+id/textRespuestasCorrectasNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="15"
+                        android:textColor="@color/textTime"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textRespuestasOmitidas"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="Respuestas Omitidas:  " />
+
+                    <TextView
+                        android:id="@+id/textRespuestasOmitidasNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:text="2"
+                        android:textColor="@color/textTime"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <TextView
+                        android:id="@+id/textRespuestasIncorrectas"
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="left"
+                        android:text="Respuestas incorrectas:  " />
+
+                    <TextView
+                        android:id="@+id/textRespuestasIncorrectasNum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:gravity="left"
+                        android:text="1"
+                        android:textColor="@color/textTime"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
             <Button
                 android:id="@+id/btnRevisar"
                 android:text="Revisar"

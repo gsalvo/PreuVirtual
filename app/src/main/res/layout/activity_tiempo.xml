@@ -1,54 +1,48 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:layout_centerVertical="true"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.novus.preuvirtual.Tiempo">
 
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:gravity="center"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:paddingBottom="30dp"
+        android:text="¿Cuánto tiempo tienes para practicar?"
+        android:textColor="@color/textTime"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="¿Cuánto tiempo tienes para practicar?"
-            android:textColor="@color/textTime"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:paddingBottom="30dp"/>
+    <EditText
+        android:id="@+id/editMinutos"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:maxLength="3" />
 
-        <EditText
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberSigned"
-            android:maxLength="3"
-            android:id="@+id/editMinutos"/>
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingBottom="5dp"
+        android:text="Minutos"
+        android:textColor="@color/list_preguntas"
+        android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:text="Minutos"
-            android:textStyle="bold"
-            android:textColor="@color/list_preguntas"
-            android:paddingBottom="5dp"/>
-
-        <Button
-            android:text="Comenzar"
-            android:drawableLeft="@drawable/ic_play_24dp"
-            android:id="@+id/btnComenzar"
-            style="@style/CustomButton"
-            android:onClick="goPlayTimeAttack"/>
-    </LinearLayout>
-
-</RelativeLayout>
+    <Button
+        android:id="@+id/btnComenzar"
+        style="@style/CustomButton"
+        android:drawableLeft="@drawable/ic_play_24dp"
+        android:onClick="goPlayTimeAttack"
+        android:text="Comenzar" />
+</LinearLayout>
