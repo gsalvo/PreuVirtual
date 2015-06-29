@@ -24,7 +24,7 @@
         style="@style/CustomButton"
         android:drawableLeft="@drawable/ic_alarm_white_24dp"
         android:onClick="goTimeAttack"
-        android:text="Time Attack" />
+        android:text="Cuenta regresiva" />
 
     <Button
         android:id="@+id/btnGoals"
@@ -32,7 +32,7 @@
         android:backgroundTint="@color/abc_primary_text_material_light"
         android:drawableLeft="@drawable/ic_goal_24dp"
         android:enabled="false"
-        android:text="Goals" />
+        android:text="Objetivos" />
 
     <Button
         android:id="@+id/btnEndlees"
@@ -40,6 +40,6 @@
         android:backgroundTint="@color/abc_primary_text_material_light"
         android:drawableLeft="@drawable/ic_endless_24dp"
         android:enabled="false"
-        android:text="Endless" />
+        android:text="Infinito" />
 
 </LinearLayout>
