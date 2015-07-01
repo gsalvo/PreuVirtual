@@ -19,27 +19,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TimeAttackActivity"
+            android:name=".RamosActivity"
             android:label="@string/title_activity_time_attack"
             android:parentActivityName=".MainActivity" >
         </activity>
         <activity
-            android:name=".TiempoActivity"
+            android:name=".TimeAttackActivity"
             android:label="@string/title_activity_tiempo"
-            android:parentActivityName=".TimeAttackActivity"
+            android:parentActivityName=".RamosActivity"
             android:noHistory="true">
         </activity>
         <activity
             android:name=".PlayTimeAttackActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_play_time_attack"
-            android:parentActivityName=".TiempoActivity"
+            android:parentActivityName=".TimeAttackActivity"
             android:noHistory="true" >
         </activity>
         <activity
             android:name=".ResultadosActivity"
             android:label="@string/title_activity_resultados"
-            android:parentActivityName=".TimeAttackActivity" >
+            android:parentActivityName=".RamosActivity" >
         </activity>
         <activity
             android:name=".RevisionActivity"

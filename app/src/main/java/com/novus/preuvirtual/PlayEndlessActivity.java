@@ -8,9 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +20,12 @@ import android.widget.TextView;
 
 import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import static java.lang.Math.floor;
 
-public class PlayTimeAttackActivity extends ActionBarActivity {
+public class PlayEndlessActivity extends ActionBarActivity {
     Bundle bundle;
     TextView textoTiempo;
     CountDownTimer backCount;
@@ -80,7 +83,7 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
             fragmentTransaction.commit();
 
             textoTiempo = (TextView)findViewById(R.id.textoTiempo);
-            setTiempo(Integer.parseInt(bundle.getString("varTiempo")));
+            iniciarTimer();
         //Revisar
         }else{
             final String query = "SELECT * from pregunta pr INNER JOIN resEnsayo res WHERE pr.idPregunta = res.idPregunta";
@@ -147,14 +150,14 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(revision == 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttackActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayEndlessActivity.this);
             AlertDialog dialog;
             switch (id) {
                 case android.R.id.home:
                     builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
                     builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            PlayTimeAttackActivity.this.finish();
+                            PlayEndlessActivity.this.finish();
                         }
                     });
                     builder.setNegativeButton(R.string.cancel, null);
@@ -177,7 +180,7 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
                             Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
                             j.putExtra("varTiempo", tEnsayo);
                             startActivity(j);
-                            PlayTimeAttackActivity.this.finish();
+                            PlayEndlessActivity.this.finish();
                         }
                     });
                     builder.setNegativeButton(R.string.cancel, null);
@@ -204,12 +207,12 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
     @Override
     public void onBackPressed(){
         if(revision == 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttackActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayEndlessActivity.this);
             AlertDialog dialog;
             builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
             builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    PlayTimeAttackActivity.this.finish();
+                    PlayEndlessActivity.this.finish();
                 }
             });
             builder.setNegativeButton(R.string.cancel, null);
@@ -266,43 +269,47 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
         }
     }
 
-    public void setTiempo(int minutos) {
-        backCount = new CountDownTimer(minutos * 1000 * 60, 1000) {
-            TextView timer = (TextView) findViewById(R.id.textoTiempo);
+    public void iniciarTimer() {
+        Timer contador = new Timer("contador");
+        final TextView timer = (TextView) findViewById(R.id.textoTiempo);
 
-            public void onTick(long restante) {
-                long horasRestantes = (long) floor(((restante / 1000) / 60) /60);
-                long minutosRestantes = (long) floor((restante / 1000) / 60) % 60;
-                long segundosRestantes = (restante / 1000) % 60;
-                if(segundosRestantes < 10 && minutosRestantes < 10 && horasRestantes >= 1){
-                    timer.setText("0" + horasRestantes + ":0" + minutosRestantes + ":0" + segundosRestantes);
-                }else if(segundosRestantes > 10 && minutosRestantes < 10 && horasRestantes >= 1){
-                    timer.setText("0" + horasRestantes + ":0" + minutosRestantes + ":" + segundosRestantes);
-                }else if(segundosRestantes < 10 && minutosRestantes > 10 && horasRestantes >= 1){
-                    timer.setText("0" + horasRestantes + ":" + minutosRestantes + ":0" + segundosRestantes);
-                }else if(segundosRestantes > 10 && minutosRestantes > 10 && horasRestantes >= 1){
-                    timer.setText("0" + horasRestantes + ":" + minutosRestantes + ":" + segundosRestantes);
-                }else if (segundosRestantes < 10 && minutosRestantes < 10) {
-                    timer.setText("00" + ":0" + minutosRestantes + ":0" + segundosRestantes);
-                } else if (segundosRestantes >= 10 && minutosRestantes < 10) {
-                    timer.setText("00" + ":0" + minutosRestantes + ":" + segundosRestantes);
-                } else if (segundosRestantes < 10 && minutosRestantes > 10) {
-                    timer.setText("00" + ":" + minutosRestantes + ":0" + segundosRestantes);
-                } else {
-                    timer.setText("00" + ":" + minutosRestantes + ":" + segundosRestantes);
+            contador.scheduleAtFixedRate(new TimerTask() {
+                long contador = 0;
+                long segundos;
+                long minutos;
+                long horas;
+                @Override
+                public void run() {
+                    contador++;
+                    segundos = contador % 60;
+                    minutos = (long) floor(contador/60) % 60;
+                    horas = (long) floor((contador/60)/60);
+                    if(segundos < 10 && minutos < 10 && horas >= 1){
+                        timer.setText("0" + horas + ":0" + minutos + ":0" + segundos);
+                    }else if(segundos > 10 && minutos < 10 && horas >= 1){
+                        timer.setText("0" + horas + ":0" + minutos + ":" + segundos);
+                    }else if(segundos < 10 && minutos > 10 && horas >= 1){
+                        timer.setText("0" + horas + ":" + minutos + ":0" + segundos);
+                    }else if(segundos > 10 && minutos > 10 && horas >= 1){
+                        timer.setText("0" + horas + ":" + minutos + ":" + segundos);
+                    }else if (segundos < 10 && minutos < 10) {
+                        timer.setText("00" + ":0" + minutos + ":0" + segundos);
+                    } else if (segundos >= 10 && minutos < 10) {
+                        timer.setText("00" + ":0" + minutos + ":" + segundos);
+                    } else if (segundos < 10 && minutos > 10) {
+                        timer.setText("00" + ":" + minutos + ":0" + segundos);
+                    } else {
+                        timer.setText("00" + ":" + minutos + ":" + segundos);
+                    }
                 }
-            }
+            }, 1000, 1000);
 
-            public void onFinish(){
-                guardarPregunta();
+    /*            guardarPregunta();
 
                 Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
                 i.putExtra("varTiempo", bundle.get("varTiempo").toString());
                 bd.close();
-                startActivity(i);
-            }
-
-        }.start();
+                startActivity(i);*/
     }
 
     public void preguntaSiguiente(View view){

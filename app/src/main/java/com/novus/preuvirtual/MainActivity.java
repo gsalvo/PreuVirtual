@@ -15,7 +15,14 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void goTimeAttack(View view) {
-        Intent i = new Intent(this, TimeAttackActivity.class);
+        Intent i = new Intent(this, RamosActivity.class);
+        i.putExtra("modo", "timeattack");
+        startActivity(i);
+    }
+
+    public void goEndless(View view) {
+        Intent i = new Intent(this, RamosActivity.class);
+        i.putExtra("modo", "endless");
         startActivity(i);
     }
 

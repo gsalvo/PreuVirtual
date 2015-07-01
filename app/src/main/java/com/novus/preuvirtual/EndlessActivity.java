@@ -5,14 +5,12 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
 import com.novus.preuvirtual.Helpers.JSONParser;
@@ -20,12 +18,12 @@ import com.novus.preuvirtual.Helpers.JSONParser;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeAttackActivity extends ActionBarActivity {
-    private EditText editMinutos;
-    private TextView textTiempoRamo;
+public class EndlessActivity extends ActionBarActivity {
+    private TextView textDesafioRamo;
     private String ramoSeleccionado;
 
     JSONParser jParser = new JSONParser();
@@ -49,26 +47,17 @@ public class TimeAttackActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_time_attack);
-        editMinutos = (EditText) findViewById(R.id.editMinutos);
-        textTiempoRamo = (TextView) findViewById(R.id.textTiempoRamo);
+        setContentView(R.layout.activity_endless);
+        textDesafioRamo = (TextView) findViewById(R.id.textDesafioRamo);
 
         Bundle bundle = getIntent().getExtras();
         ramoSeleccionado = bundle.getString("ramo");
         urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas"+ ramoSeleccionado.substring(0,1) +".php";
-        textTiempoRamo.setText("¿Cuánto tiempo tienes para practicar "+ ramoSeleccionado + "?");
+        textDesafioRamo.setText("¿Estás listo para empezar el desafío infinito de "+ ramoSeleccionado + "?");
     }
 
-    public void goPlayTimeAttack(View view) {
-        if(editMinutos.getText().toString().equals("")){
-            Toast.makeText(this, getResources().getText(R.string.no_minutes), Toast.LENGTH_SHORT).show();
-        }else if(Integer.parseInt(editMinutos.getText().toString()) > 150) {
-            Toast.makeText(this, getResources().getText(R.string.too_long), Toast.LENGTH_LONG).show();
-        }else if(Integer.parseInt(editMinutos.getText().toString()) < 1){
-            Toast.makeText(this, getResources().getText(R.string.zero_minutes), Toast.LENGTH_LONG).show();
-        }else{
-            new CargarPreguntas().execute();
-        }
+    public void goEndless(View view) {
+        new CargarPreguntas().execute();
     }
 
     @Override
@@ -87,7 +76,7 @@ public class TimeAttackActivity extends ActionBarActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(TimeAttackActivity.this);
+            pDialog = new ProgressDialog(EndlessActivity.this);
             pDialog.setMessage(getResources().getString(R.string.wait_message));
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
@@ -142,8 +131,7 @@ public class TimeAttackActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(String file_url) {
-            Intent i = new Intent(TimeAttackActivity.this, PlayTimeAttackActivity.class);
-            i.putExtra("varTiempo", editMinutos.getText().toString());
+            Intent i = new Intent(EndlessActivity.this, PlayEndlessActivity.class);
             i.putExtra("revision", 0);
             startActivity(i);
             pDialog.dismiss();

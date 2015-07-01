@@ -39,7 +39,7 @@
         style="@style/CustomButton"
         android:backgroundTint="@color/abc_primary_text_material_light"
         android:drawableLeft="@drawable/ic_endless_24dp"
-        android:enabled="false"
+        android:onClick="goEndless"
         android:text="Infinito" />
 
 </LinearLayout>
