@@ -157,7 +157,7 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
                             PlayTimeAttackActivity.this.finish();
                         }
                     });
-                    builder.setNegativeButton(R.string.cancelar, null);
+                    builder.setNegativeButton(R.string.cancel, null);
                     dialog = builder.create();
                     dialog.show();
                     return true;
