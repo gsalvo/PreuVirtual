@@ -34,6 +34,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
     CountDownTimer backCount;
     SQLiteDatabase bd;
     Cursor cursor;
+    int puntaje;
     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
     private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
     int revision;
@@ -44,6 +45,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
         setContentView(R.layout.activity_play_endless);
         bundle = getIntent().getExtras();
         revision = bundle.getInt("revision");
+        puntaje = 0;
 
         //Jugar
         if(revision == 0){
@@ -236,7 +238,8 @@ public class PlayEndlessActivity extends ActionBarActivity {
         if(rGroup.getCheckedRadioButtonId() == R.id.altA){
             if(cursor.getString(7).equalsIgnoreCase("altA")){
                 registro.put("correcta", 1);
-                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1)+"");
+                puntaje++;
+                textoCorrectas.setText(puntaje+"");
             }else{
                 finalizarEndless();
                 return false;
@@ -244,7 +247,8 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
             if(cursor.getString(7).equalsIgnoreCase("altB")){
                 registro.put("correcta", 1);
-                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
+                puntaje++;
+                textoCorrectas.setText(puntaje+"");
             }else{
                 finalizarEndless();
                 return false;
@@ -252,7 +256,8 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
             if(cursor.getString(7).equalsIgnoreCase("altC")){
                 registro.put("correcta", 1);
-                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
+                puntaje++;
+                textoCorrectas.setText(puntaje+"");
             }else{
                 finalizarEndless();
                 return false;
@@ -260,7 +265,8 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
             if(cursor.getString(7).equalsIgnoreCase("altD")){
                 registro.put("correcta", 1);
-                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
+                puntaje++;
+                textoCorrectas.setText(puntaje+"");
             }else{
                 finalizarEndless();
                 return false;
@@ -268,7 +274,8 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
             if(cursor.getString(7).equalsIgnoreCase("altE")){
                 registro.put("correcta", 1);
-                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
+                puntaje++;
+                textoCorrectas.setText(puntaje+"");
             }else{
                 finalizarEndless();
                 return false;

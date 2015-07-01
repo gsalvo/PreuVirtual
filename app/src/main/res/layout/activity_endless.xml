@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="30dp"
-        android:text="¿Cuánto tiempo tienes para practicar?"
+        android:text="placeholder"
         android:textColor="@color/textTime"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingBottom="30dp"
-        android:text="¡Ve cuan lejos puedes llegar sin equivocarte!"
+        android:text="¡Ve si puedes lograrlo completando todas las preguntas sin equivocarte!"
         android:textColor="@color/list_preguntas"
         android:textStyle="bold" />
 

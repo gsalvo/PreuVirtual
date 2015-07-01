@@ -32,7 +32,7 @@
         android:backgroundTint="@color/abc_primary_text_material_light"
         android:drawableLeft="@drawable/ic_endless_24dp"
         android:onClick="goEndless"
-        android:text="Infinito" />
+        android:text="Puntaje Nacional" />
 
     <Button
         android:id="@+id/btnGoals"

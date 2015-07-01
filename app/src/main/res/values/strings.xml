@@ -13,8 +13,8 @@
     <string name="title_activity_ramos">Placeholder</string>
     <string name="title_activity_time_attack">Cuenta Regresiva</string>
     <string name="title_activity_play_time_attack">Cuenta Regresiva</string>
-    <string name="title_activity_endless">Infinito</string>
-    <string name="title_activity_play_endless">Infinito</string>
+    <string name="title_activity_endless">Puntaje Nacional</string>
+    <string name="title_activity_play_endless">Puntaje Nacional</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revisión</string>
 </resources>

@@ -53,7 +53,7 @@ public class EndlessActivity extends ActionBarActivity {
         Bundle bundle = getIntent().getExtras();
         ramoSeleccionado = bundle.getString("ramo");
         urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas"+ ramoSeleccionado.substring(0,1) +".php";
-        textDesafioRamo.setText("¿Estás listo para empezar el desafío infinito de "+ ramoSeleccionado + "?");
+        textDesafioRamo.setText("¿Quieres ser puntaje nacional en "+ ramoSeleccionado + "?");
     }
 
     public void goEndless(View view) {
