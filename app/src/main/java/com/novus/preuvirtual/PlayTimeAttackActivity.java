@@ -166,9 +166,7 @@ public class PlayTimeAttackActivity extends ActionBarActivity {
                     builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             guardarPregunta();
-
-                            Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
-                            i.putExtra("varTiempo", bundle.get("varTiempo").toString());
+                            
                             bd.close();
 
                             int tFinal = calculaMinutos(textoTiempo.getText().toString());

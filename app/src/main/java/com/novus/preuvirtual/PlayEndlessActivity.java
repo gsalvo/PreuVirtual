@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import static java.lang.Math.floor;
 
 public class PlayEndlessActivity extends ActionBarActivity {
     Bundle bundle;
+    Timer contador;
     TextView textoTiempo;
     CountDownTimer backCount;
     SQLiteDatabase bd;
@@ -233,31 +235,31 @@ public class PlayEndlessActivity extends ActionBarActivity {
             if(cursor.getString(7).equalsIgnoreCase("altA")){
                 registro.put("correcta", 1);
             }else{
-                registro.put("correcta", 0);
+                finalizarEndless();
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
             if(cursor.getString(7).equalsIgnoreCase("altB")){
                 registro.put("correcta", 1);
             }else{
-                registro.put("correcta", 0);
+                finalizarEndless();
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
             if(cursor.getString(7).equalsIgnoreCase("altC")){
                 registro.put("correcta", 1);
             }else{
-                registro.put("correcta", 0);
+                finalizarEndless();
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
             if(cursor.getString(7).equalsIgnoreCase("altD")){
                 registro.put("correcta", 1);
             }else{
-                registro.put("correcta", 0);
+                finalizarEndless();
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
             if(cursor.getString(7).equalsIgnoreCase("altE")){
                 registro.put("correcta", 1);
             }else{
-                registro.put("correcta", 0);
+                finalizarEndless();
             }
         }else{
             registro.put("correcta", 2);
@@ -269,40 +271,54 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }
     }
 
+    public void finalizarEndless() {
+        bd.close();
+        Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
+        j.putExtra("varTiempo", "0");
+        startActivity(j);
+        PlayEndlessActivity.this.finish();
+    }
+
     public void iniciarTimer() {
-        Timer contador = new Timer("contador");
+        contador = new Timer(true);
         final TextView timer = (TextView) findViewById(R.id.textoTiempo);
 
-            contador.scheduleAtFixedRate(new TimerTask() {
-                long contador = 0;
-                long segundos;
-                long minutos;
-                long horas;
-                @Override
-                public void run() {
-                    contador++;
-                    segundos = contador % 60;
-                    minutos = (long) floor(contador/60) % 60;
-                    horas = (long) floor((contador/60)/60);
-                    if(segundos < 10 && minutos < 10 && horas >= 1){
-                        timer.setText("0" + horas + ":0" + minutos + ":0" + segundos);
-                    }else if(segundos > 10 && minutos < 10 && horas >= 1){
-                        timer.setText("0" + horas + ":0" + minutos + ":" + segundos);
-                    }else if(segundos < 10 && minutos > 10 && horas >= 1){
-                        timer.setText("0" + horas + ":" + minutos + ":0" + segundos);
-                    }else if(segundos > 10 && minutos > 10 && horas >= 1){
-                        timer.setText("0" + horas + ":" + minutos + ":" + segundos);
-                    }else if (segundos < 10 && minutos < 10) {
-                        timer.setText("00" + ":0" + minutos + ":0" + segundos);
-                    } else if (segundos >= 10 && minutos < 10) {
-                        timer.setText("00" + ":0" + minutos + ":" + segundos);
-                    } else if (segundos < 10 && minutos > 10) {
-                        timer.setText("00" + ":" + minutos + ":0" + segundos);
-                    } else {
-                        timer.setText("00" + ":" + minutos + ":" + segundos);
+        contador.scheduleAtFixedRate(new TimerTask() {
+            long contador = 0;
+            long segundos;
+            long minutos;
+            long horas;
+
+            @Override
+            public void run() {
+                contador++;
+                segundos = contador % 60;
+                minutos = (long) floor(contador/60) % 60;
+                horas = (long) floor((contador/60)/60);
+                runOnUiThread(new Runnable(){
+                    @Override
+                    public void run() {
+                        if(segundos < 10 && minutos < 10 && horas >= 1){
+                            timer.setText("0" + horas + ":0" + minutos + ":0" + segundos);
+                        }else if(segundos > 10 && minutos < 10 && horas >= 1){
+                            timer.setText("0" + horas + ":0" + minutos + ":" + segundos);
+                        }else if(segundos < 10 && minutos > 10 && horas >= 1){
+                            timer.setText("0" + horas + ":" + minutos + ":0" + segundos);
+                        }else if(segundos > 10 && minutos > 10 && horas >= 1){
+                            timer.setText("0" + horas + ":" + minutos + ":" + segundos);
+                        }else if (segundos < 10 && minutos < 10) {
+                            timer.setText("00" + ":0" + minutos + ":0" + segundos);
+                        } else if (segundos >= 10 && minutos < 10) {
+                            timer.setText("00" + ":0" + minutos + ":" + segundos);
+                        } else if (segundos < 10 && minutos > 10) {
+                            timer.setText("00" + ":" + minutos + ":0" + segundos);
+                        } else {
+                            timer.setText("00" + ":" + minutos + ":" + segundos);
+                        }
                     }
-                }
-            }, 1000, 1000);
+                });
+            }
+        }, 1000, 1000);
 
     /*            guardarPregunta();
 

@@ -3,28 +3,36 @@ package com.novus.preuvirtual;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 public class RamosActivity extends ActionBarActivity {
-    String modo;
+    static String modo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ramos);
-        modo = getIntent().getStringExtra("modo");
+        if(getIntent().getStringExtra("modo") != null) {
+            modo = getIntent().getStringExtra("modo");
+        }
+        if(modo.equals("timeattack")){
+            getSupportActionBar().setTitle("Cuenta Regresiva");
+        }else if(modo.equals("endless")){
+            getSupportActionBar().setTitle("Infinito");
+        }
     }
 
     public void buttonPress (View v){
         Intent i;
-        if(modo == "timeattack") {
+        if(modo.equals("timeattack")) {
             i = new Intent(this, TimeAttackActivity.class);
-        }else if(modo == "endless"){
+        }else if(modo.equals("endless")){
             i = new Intent(this, EndlessActivity.class);
         }else {
-            i = new Intent(this, TimeAttackActivity.class); // TO-DO: GoalsActivity.class
+            i = new Intent(this, EndlessActivity.class); // TO-DO: GoalsActivity.class
         }
 
         switch (v.getId()){

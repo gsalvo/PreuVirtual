@@ -35,7 +35,7 @@
         android:text="Objetivos" />
 
     <Button
-        android:id="@+id/btnEndlees"
+        android:id="@+id/btnEndless"
         style="@style/CustomButton"
         android:backgroundTint="@color/abc_primary_text_material_light"
         android:drawableLeft="@drawable/ic_endless_24dp"

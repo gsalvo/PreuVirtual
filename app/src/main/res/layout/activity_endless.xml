@@ -11,7 +11,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.novus.preuvirtual.TimeAttackActivity">
+    tools:context="com.novus.preuvirtual.EndlessActivity">
 
     <TextView
         android:id="@+id/textDesafioRamo"
@@ -24,20 +24,11 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:paddingBottom="5dp"
-        android:text="Minutos"
-        android:textColor="@color/list_preguntas"
-        android:textStyle="bold" />
-
     <Button
         android:id="@+id/btnComenzar"
         style="@style/CustomButton"
         android:drawableLeft="@drawable/ic_play_24dp"
-        android:onClick="goPlayTimeAttack"
+        android:onClick="goEndless"
         android:text="Comenzar" />
 
 </LinearLayout>

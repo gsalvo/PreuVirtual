@@ -10,9 +10,11 @@
     <string name="wait_message">Preparate para empezar :)</string>
     <string name="accept">Si</string>
     <string name="cancel">No</string>
+    <string name="title_activity_ramos">Placeholder</string>
     <string name="title_activity_time_attack">Cuenta Regresiva</string>
-    <string name="title_activity_tiempo">Cuenta Regresiva</string>
     <string name="title_activity_play_time_attack">Cuenta Regresiva</string>
+    <string name="title_activity_endless">Infinito</string>
+    <string name="title_activity_play_endless">Infinito</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revisión</string>
 </resources>
