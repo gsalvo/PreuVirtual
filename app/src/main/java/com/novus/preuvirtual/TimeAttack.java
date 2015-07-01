@@ -21,7 +21,7 @@ public class TimeAttack extends ActionBarActivity {
         Intent i = new Intent(this, Tiempo.class);
         switch (v.getId()){
             case R.id.btnMatematicas:
-                i.putExtra("ramo", "matemáticas");
+                i.putExtra("ramo", "matem\u00e1ticas");
                 startActivity(i);
                 break;
             case R.id.btnLenguaje:
@@ -37,15 +37,15 @@ public class TimeAttack extends ActionBarActivity {
                 startActivity(i);
                 break;
             case R.id.btnBiologia:
-                i.putExtra("ramo", "biología");
+                i.putExtra("ramo", "biolog\u00eda");
                 startActivity(i);
                 break;
             case R.id.btnQuimica:
-                i.putExtra("ramo", "química");
+                i.putExtra("ramo", "qu\u00edmica");
                 startActivity(i);
                 break;
             case R.id.btnFisica:
-                i.putExtra("ramo", "física");
+                i.putExtra("ramo", "f\u00edsica");
                 startActivity(i);
                 break;
         }
