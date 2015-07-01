@@ -64,7 +64,6 @@ public class PreguntaFragment extends Fragment {
         int nPregunta = getArguments().getInt("nPregunta");
 
         textPregunta.setText(Html.fromHtml(vPregunta));
-        textPregunta.setText(textPregunta.getText().toString().replace("\\n", "\n"));
         numeroPregunta.setText("Pregunta "+(nPregunta+1));
 
         if(!vImagen.isEmpty()) {
