@@ -17,4 +17,8 @@
     <string name="title_activity_play_endless">Infinito</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revisión</string>
+    <string name="title_activity_resultados_endless">ResultadosEndless</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 </resources>
