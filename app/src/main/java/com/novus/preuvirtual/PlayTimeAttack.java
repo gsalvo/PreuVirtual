@@ -9,10 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.CountDownTimer;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -551,7 +549,7 @@ public class PlayTimeAttack extends ActionBarActivity {
 
         rGroup.clearCheck();
 
-        registro.put("idPregunta", cursor.getInt(8));
+        /*registro.put("idPregunta", cursor.getInt(8));
         registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
         registro.put("correcta", 2);
 
@@ -596,7 +594,7 @@ public class PlayTimeAttack extends ActionBarActivity {
         fragmentTransaction.replace(R.id.contenidoPregunta, newFragment);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
     }
 
     public static boolean existe(String TableName, String dbfield, String fieldValue, SQLiteDatabase bd) {
