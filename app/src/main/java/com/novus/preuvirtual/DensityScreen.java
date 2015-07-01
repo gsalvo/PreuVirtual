@@ -5,9 +5,9 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 
 public class DensityScreen {
+
     private String densidad;
     private int densidadEntero;
-
 
     public DensityScreen (Context c){
         DisplayMetrics metrics = new DisplayMetrics();
@@ -31,9 +31,5 @@ public class DensityScreen {
 
     public String getDensidad() {
         return densidad;
-    }
-
-    public int getDensidadEntero() {
-        return densidadEntero;
     }
 }

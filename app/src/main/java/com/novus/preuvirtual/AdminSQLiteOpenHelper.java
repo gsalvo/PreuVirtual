@@ -29,5 +29,4 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(bPreguntas);
         db.execSQL(bResEnsayo);
     }
-
 }

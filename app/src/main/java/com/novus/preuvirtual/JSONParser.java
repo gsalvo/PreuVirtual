@@ -40,7 +40,6 @@ public class JSONParser {
                 //Entidad que puede enviar o recibir un mensaje HTTP.
                 HttpEntity httpEntity = httpResponse.getEntity();
                 is = httpEntity.getContent();
-
             }else if(method == "GET"){
                 DefaultHttpClient httpClient = new DefaultHttpClient();
                 String paramString = URLEncodedUtils.format(params, "utf-8");
@@ -71,15 +70,11 @@ public class JSONParser {
         } catch (Exception e) {
             Log.e("Error", "Error convirtiendo el resultado " + e.toString());
         }
-
-
         try {
             jObj = new JSONObject(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error en el parseo de datos " + e.toString());
         }
-
         return jObj;
-
     }
 }

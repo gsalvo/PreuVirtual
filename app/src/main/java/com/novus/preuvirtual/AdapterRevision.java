@@ -13,7 +13,7 @@ public class AdapterRevision extends BaseAdapter{
     private final Activity actividad;
     private final Cursor cursor;
 
-    public AdapterRevision(Activity actividad, Cursor cursor){
+    public AdapterRevision(Activity actividad, Cursor cursor) {
         super();
         this.actividad = actividad;
         this.cursor = cursor;
