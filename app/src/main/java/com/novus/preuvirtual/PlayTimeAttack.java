@@ -173,12 +173,62 @@ public class PlayTimeAttack extends ActionBarActivity {
                     builder.setMessage(R.string.finish_message).setTitle(R.string.finish_title);
                     builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            ContentValues registro = new ContentValues();
+                            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+
+                            registro.put("idPregunta", cursor.getInt(8));
+                            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+
+                            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+                                if(cursor.getString(7).equalsIgnoreCase("altA")){
+                                    registro.put("correcta", 1);
+                                }else{
+                                    registro.put("correcta", 0);
+                                }
+                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+                                if(cursor.getString(7).equalsIgnoreCase("altB")){
+                                    registro.put("correcta", 1);
+                                }else{
+                                    registro.put("correcta", 0);
+                                }
+                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+                                if(cursor.getString(7).equalsIgnoreCase("altC")){
+                                    registro.put("correcta", 1);
+                                }else{
+                                    registro.put("correcta", 0);
+                                }
+                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+                                if(cursor.getString(7).equalsIgnoreCase("altD")){
+                                    registro.put("correcta", 1);
+                                }else{
+                                    registro.put("correcta", 0);
+                                }
+                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+                                if(cursor.getString(7).equalsIgnoreCase("altE")){
+                                    registro.put("correcta", 1);
+                                }else{
+                                    registro.put("correcta", 0);
+                                }
+                            }else{
+                                registro.put("correcta", 2);
+                            }
+
+                            if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+                                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+                            }else{
+                                bd.insert("resEnsayo", null, registro);
+                            }
+
+                            Intent i = new Intent(getBaseContext(), Resultados.class);
+                            i.putExtra("varTiempo", bundle.get("varTiempo").toString());
+                            bd.close();
+
                             int tFinal = calculaMinutos(textoTiempo.getText().toString());
                             int tInicial = Integer.parseInt(bundle.getString("varTiempo"));
                             String tEnsayo = tInicial - tFinal + "";
-                            Intent i = new Intent(getBaseContext(), Resultados.class);
-                            i.putExtra("varTiempo", tEnsayo);
-                            startActivity(i);
+                            Intent j = new Intent(getBaseContext(), Resultados.class);
+                            j.putExtra("varTiempo", tEnsayo);
+                            startActivity(j);
                             PlayTimeAttack.this.finish();
                         }
                     });
@@ -202,9 +252,6 @@ public class PlayTimeAttack extends ActionBarActivity {
             String aux[] = hora.split(":");
             return Integer.parseInt(aux[0]) + Integer.parseInt(aux[1])/60;
         }
-
-
-
     }
 
     @Override
