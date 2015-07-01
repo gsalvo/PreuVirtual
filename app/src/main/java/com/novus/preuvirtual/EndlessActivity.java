@@ -101,7 +101,7 @@ public class EndlessActivity extends ActionBarActivity {
                         String imagen = c.getString(TAG_P_IMAGEN);
 
                         ContentValues registro = new ContentValues();
-                        registro.put("idPregunta",Integer.parseInt(idPregunta));
+                        registro.put("idPregunta", Integer.parseInt(idPregunta));
                         registro.put("pregunta", pregunta);
                         registro.put("imagen", imagen);
 

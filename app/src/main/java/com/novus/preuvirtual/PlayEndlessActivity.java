@@ -175,7 +175,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
                             guardarPregunta();
 
                             Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
-                            i.putExtra("varTiempo", bundle.get("varTiempo").toString());
+                            i.putExtra("varTiempo", "1");
                             bd.close();
 
                             int tFinal = calculaMinutos(textoTiempo.getText().toString());
