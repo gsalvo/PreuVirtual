@@ -38,31 +38,31 @@
                 style="@style/CustomButton"
                 android:text="Historia"
                 android:drawableLeft="@drawable/ic_his_24dp"
-                android:enabled="false"/>
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnCiencias"
                 style="@style/CustomButton"
                 android:text="Ciencias"
                 android:drawableLeft="@drawable/ic_cien_24dp"
-                android:enabled="false"/>
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnBiologia"
                 style="@style/CustomButton"
                 android:text="Biología"
                 android:drawableLeft="@drawable/ic_bio_24dp"
-                android:enabled="false"/>
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnQuimica"
                 style="@style/CustomButton"
                 android:text="Química"
                 android:drawableLeft="@drawable/ic_quim_24dp"
-                android:enabled="false"/>
+                android:visibility="gone"/>
             <Button
                 android:id="@+id/btnFisica"
                 style="@style/CustomButton"
                 android:text="Física"
                 android:drawableLeft="@drawable/ic_fis_24dp"
-                android:enabled="false"/>
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

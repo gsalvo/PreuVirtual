@@ -15,6 +15,7 @@
             android:theme="@style/CustomThemeMA" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -26,28 +27,28 @@
         <activity
             android:name=".TimeAttackActivity"
             android:label="@string/title_activity_time_attack"
-            android:parentActivityName=".RamosActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:parentActivityName=".RamosActivity" >
         </activity>
         <activity
             android:name=".EndlessActivity"
             android:label="@string/title_activity_endless"
-            android:parentActivityName=".RamosActivity"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:parentActivityName=".RamosActivity" >
         </activity>
         <activity
             android:name=".PlayTimeAttackActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_play_time_attack"
-            android:parentActivityName=".TimeAttackActivity"
-            android:noHistory="true" >
+            android:noHistory="true"
+            android:parentActivityName=".TimeAttackActivity" >
         </activity>
         <activity
             android:name=".PlayEndlessActivity"
             android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_play_endless"
-            android:parentActivityName=".EndlessActivity"
-            android:noHistory="true" >
+            android:noHistory="true"
+            android:parentActivityName=".EndlessActivity" >
         </activity>
         <activity
             android:name=".ResultadosActivity"
@@ -55,10 +56,15 @@
             android:parentActivityName=".RamosActivity" >
         </activity>
         <activity
+            android:name=".ResultadosEndlessActivity"
+            android:label="@string/title_activity_resultados_endless"
+            android:parentActivityName=".RamosActivity" >
+        </activity>
+        <activity
             android:name=".RevisionActivity"
             android:label="@string/title_activity_revision"
-            android:theme="@style/AppTheme"
-            android:parentActivityName=".ResultadosActivity" >
+            android:parentActivityName=".ResultadosActivity"
+            android:theme="@style/AppTheme" >
         </activity>
     </application>
 

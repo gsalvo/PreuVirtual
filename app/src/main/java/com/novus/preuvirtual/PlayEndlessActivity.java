@@ -11,7 +11,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -175,16 +174,9 @@ public class PlayEndlessActivity extends ActionBarActivity {
                     builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             guardarPregunta();
-
-                            Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
-                            i.putExtra("varTiempo", "1");
                             bd.close();
-
-                            int tFinal = calculaMinutos(textoTiempo.getText().toString());
-                            int tInicial = Integer.parseInt(bundle.getString("varTiempo"));
-                            String tEnsayo = tInicial - tFinal + "";
-                            Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
-                            j.putExtra("varTiempo", tEnsayo);
+                            Intent j = new Intent(getBaseContext(), ResultadosEndlessActivity.class);
+                            j.putExtra("varTiempo", textoTiempo.getText().toString());
                             startActivity(j);
                             PlayEndlessActivity.this.finish();
                         }
@@ -197,16 +189,6 @@ public class PlayEndlessActivity extends ActionBarActivity {
             return true;
         }else{
             return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private int calculaMinutos(String hora){
-        if(hora.length()== 8){  //si el formato es HH:MM:SS
-            String aux[] = hora.split(":");
-            return Integer.parseInt(aux[0])*60 + Integer.parseInt(aux[1]) + Integer.parseInt(aux[2])/60;
-        }else{   //si el formato es MM:SS
-            String aux[] = hora.split(":");
-            return Integer.parseInt(aux[0]) + Integer.parseInt(aux[1])/60;
         }
     }
 
@@ -239,7 +221,10 @@ public class PlayEndlessActivity extends ActionBarActivity {
             if(cursor.getString(7).equalsIgnoreCase("altA")){
                 registro.put("correcta", 1);
                 puntaje++;
-                textoCorrectas.setText(puntaje+"");
+                textoCorrectas.setText(puntaje + "");
+                if(puntaje == 75){
+                    ganarEndless();
+                }
             }else{
                 finalizarEndless();
                 return false;
@@ -249,6 +234,9 @@ public class PlayEndlessActivity extends ActionBarActivity {
                 registro.put("correcta", 1);
                 puntaje++;
                 textoCorrectas.setText(puntaje+"");
+                if(puntaje == 75){
+                    ganarEndless();
+                }
             }else{
                 finalizarEndless();
                 return false;
@@ -258,6 +246,9 @@ public class PlayEndlessActivity extends ActionBarActivity {
                 registro.put("correcta", 1);
                 puntaje++;
                 textoCorrectas.setText(puntaje+"");
+                if(puntaje == 75){
+                    ganarEndless();
+                }
             }else{
                 finalizarEndless();
                 return false;
@@ -267,6 +258,9 @@ public class PlayEndlessActivity extends ActionBarActivity {
                 registro.put("correcta", 1);
                 puntaje++;
                 textoCorrectas.setText(puntaje+"");
+                if(puntaje == 75){
+                    ganarEndless();
+                }
             }else{
                 finalizarEndless();
                 return false;
@@ -276,6 +270,9 @@ public class PlayEndlessActivity extends ActionBarActivity {
                 registro.put("correcta", 1);
                 puntaje++;
                 textoCorrectas.setText(puntaje+"");
+                if(puntaje == 75){
+                    ganarEndless();
+                }
             }else{
                 finalizarEndless();
                 return false;
@@ -293,8 +290,18 @@ public class PlayEndlessActivity extends ActionBarActivity {
 
     public void finalizarEndless() {
         bd.close();
-        Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
-        j.putExtra("varTiempo", "1");
+        Intent j = new Intent(getBaseContext(), ResultadosEndlessActivity.class);
+        j.putExtra("varTiempo", textoTiempo.getText().toString());
+        j.putExtra("ganaroperder", 0);
+        startActivity(j);
+        PlayEndlessActivity.this.finish();
+    }
+
+    public void ganarEndless(){
+        bd.close();
+        Intent j = new Intent(getBaseContext(), ResultadosEndlessActivity.class);
+        j.putExtra("varTiempo", textoTiempo.getText().toString());
+        j.putExtra("ganaroperder", 1);
         startActivity(j);
         PlayEndlessActivity.this.finish();
     }

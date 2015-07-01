@@ -4,8 +4,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:id="@+id/layoutResultados"
-    tools:context="com.novus.preuvirtual.ResultadosActivity">
+    android:id="@+id/layoutResultadosEndless"
+    tools:context="com.novus.preuvirtual.ResultadosEndlessActivity">
 
     <ScrollView
         android:layout_height="wrap_content"
@@ -24,6 +24,18 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:id="@+id/textResultado"
+                android:text="Has perdido :("
+                android:textColor="@color/incorrecta"
+                android:textStyle="bold"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
                 android:id="@+id/textPuntajeObtenido"
                 android:text="Has obtenido 600 puntos"
@@ -35,8 +47,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:id="@+id/textAnimo"
+                android:text="No te desanimes, ¡la práctica hace al maestro!"
+                android:textColor="@color/textTime"
+                android:textStyle="bold"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_marginTop="25dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:id="@+id/textTiempoEnsayo"
-                android:text="En ensayo de 25 minutos"
+                android:text=" En un tiempo de: "
                 android:layout_marginBottom="25dp"
                 android:textColor="@color/textTime"
                 android:textStyle="bold"
@@ -48,28 +71,6 @@
                 android:layout_centerHorizontal="true"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp">
-
-                    <TextView
-                        android:id="@+id/textTiempoRespuesta"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="Tiempo de respuesta:  " />
-
-                    <TextView
-                        android:id="@+id/textTiempoRespuestaNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="left"
-                        android:text="75"
-                        android:textColor="@color/textTime"
-                        android:textStyle="bold" />
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
@@ -139,42 +140,14 @@
                         android:textStyle="bold" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingBottom="10dp">
-
-                    <TextView
-                        android:id="@+id/textRespuestasIncorrectas"
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="left"
-                        android:text="Respuestas incorrectas:  " />
-
-                    <TextView
-                        android:id="@+id/textRespuestasIncorrectasNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:gravity="left"
-                        android:text="1"
-                        android:textColor="@color/textTime"
-                        android:textStyle="bold" />
-                </LinearLayout>
             </LinearLayout>
-            <Button
-                android:id="@+id/btnRevisar"
-                android:text="Revisar"
-                android:drawableLeft="@drawable/ic_revisar_24dp"
-                style="@style/CustomButtonResultados"
-                android:onClick="goRevision" />
+
             <Button
                 android:id="@+id/btnNuevoEnsayo"
                 android:text="Nuevo Ensayo"
                 android:drawableLeft="@drawable/ic_add_24dp"
                 style="@style/CustomButtonResultados"
+                android:layout_marginTop="15dp"
                 android:onClick="goNuevoEnsayo"/>
             <Button
                 android:id="@+id/bntCompartir"

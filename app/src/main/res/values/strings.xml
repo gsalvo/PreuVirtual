@@ -17,4 +17,5 @@
     <string name="title_activity_play_endless">Puntaje Nacional</string>
     <string name="title_activity_resultados">Resultados</string>
     <string name="title_activity_revision">Revisión</string>
+    <string name="title_activity_resultados_endless">Resultados</string>
 </resources>

@@ -21,7 +21,7 @@ public class RamosActivity extends ActionBarActivity {
         if(modo.equals("timeattack")){
             getSupportActionBar().setTitle("Cuenta Regresiva");
         }else if(modo.equals("endless")){
-            getSupportActionBar().setTitle("Infinito");
+            getSupportActionBar().setTitle("Puntaje Nacional");
         }
     }
 
