@@ -37,17 +37,6 @@ public class TimeAttack extends ActionBarActivity {
                 startActivity(i);
                 break;
             case R.id.btnBiologia:
-<<<<<<< HEAD
-                i.putExtra("ramo", "biolog�a");
-                startActivity(i);
-                break;
-            case R.id.btnQuimica:
-                i.putExtra("ramo", "qu�mica");
-                startActivity(i);
-                break;
-            case R.id.btnFisica:
-                i.putExtra("ramo", "f�sica");
-=======
                 i.putExtra("ramo", "biolog\u00eda");
                 startActivity(i);
                 break;
@@ -57,7 +46,6 @@ public class TimeAttack extends ActionBarActivity {
                 break;
             case R.id.btnFisica:
                 i.putExtra("ramo", "f\u00edsica");
->>>>>>> 8081ac0489d08c59f06f690f785e7d3293820b8f
                 startActivity(i);
                 break;
         }
