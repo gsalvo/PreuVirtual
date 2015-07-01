@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -23,10 +24,11 @@ import java.util.List;
 
 public class Tiempo extends ActionBarActivity {
     private EditText editMinutos;
-
+    private TextView textTiempoRamo;
+    private String ramoSeleccionado;
     //---------------------Inicio conexion BD----------------------------------------------
     JSONParser jParser = new JSONParser();
-    private static final String urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas.php";
+    private static String urlCargarPreguntas;
     private static final String TAG_P = "preguntas";
     private static final String TAG_P_ID_PREGUNTA = "idPregunta";
     private static final String TAG_P_ID_MATERIA = "idMateria";
@@ -49,6 +51,12 @@ public class Tiempo extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tiempo);
         editMinutos = (EditText) findViewById(R.id.editMinutos);
+        textTiempoRamo = (TextView) findViewById(R.id.textTiempoRamo);
+
+        Bundle bundle = getIntent().getExtras();
+        ramoSeleccionado = bundle.getString("ramo");
+        urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas"+ ramoSeleccionado.substring(0,1) +".php";
+        textTiempoRamo.setText("¿Cuánto tiempo tienes para practicar "+ramoSeleccionado + "?");
     }
 
     public void goPlayTimeAttack(View view){
@@ -72,13 +80,10 @@ public class Tiempo extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
         return super.onOptionsItemSelected(item);
     }
 
-
     class CargarPreguntas extends AsyncTask<String, String, String> {
-
         @Override
         protected void onPreExecute(){
             super.onPreExecute();

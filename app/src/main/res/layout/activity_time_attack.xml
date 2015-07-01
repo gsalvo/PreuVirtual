@@ -25,14 +25,14 @@
                 style="@style/CustomButton"
                 android:text="Matemáticas"
                 android:drawableLeft="@drawable/ic_mat_24dp"
-                android:onClick="goTiempo"
+                android:onClick="buttonPress"
                 />
             <Button
                 android:id="@+id/btnLenguaje"
                 style="@style/CustomButton"
                 android:text="Lenguaje"
                 android:drawableLeft="@drawable/ic_len_24dp"
-                android:enabled="false"/>
+                android:onClick="buttonPress"/>
             <Button
                 android:id="@+id/btnHistoria"
                 style="@style/CustomButton"
