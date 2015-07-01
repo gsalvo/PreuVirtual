@@ -1,11 +1,10 @@
-package com.novus.preuvirtual;
+package com.novus.preuvirtual.Helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
-
     String preguntas = "CREATE TABLE pregunta(idPregunta integer primary key," +
             "pregunta text, imagen text, altA text, altB text, altC text, altD text, altE text,"+
             "altCorrecta text, altImagen integer)";

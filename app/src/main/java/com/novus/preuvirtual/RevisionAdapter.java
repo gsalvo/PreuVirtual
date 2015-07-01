@@ -9,11 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AdapterRevision extends BaseAdapter{
+public class RevisionAdapter extends BaseAdapter{
     private final Activity actividad;
     private final Cursor cursor;
 
-    public AdapterRevision(Activity actividad, Cursor cursor) {
+    public RevisionAdapter(Activity actividad, Cursor cursor) {
         super();
         this.actividad = actividad;
         this.cursor = cursor;
@@ -28,7 +28,6 @@ public class AdapterRevision extends BaseAdapter{
     @Override
     public Object getItem(int position) {
         return  cursor.moveToPosition(position);
-
     }
 
     @Override
@@ -57,6 +56,4 @@ public class AdapterRevision extends BaseAdapter{
         }
         return convertView;
     }
-
-
 }

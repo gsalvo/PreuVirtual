@@ -18,20 +18,18 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
+
 import static java.lang.Math.floor;
 
-public class PlayTimeAttack extends ActionBarActivity {
-
+public class PlayTimeAttackActivity extends ActionBarActivity {
     Bundle bundle;
     TextView textoTiempo;
     CountDownTimer backCount;
-
     SQLiteDatabase bd;
     Cursor cursor;
-
     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null, 1);
     private final String[] COLUMNS = {"pregunta", "imagen", "altA", "altB", "altC", "altD", "altE", "altCorrecta", "idPregunta"};
-
     int revision;
 
     @Override
@@ -83,11 +81,10 @@ public class PlayTimeAttack extends ActionBarActivity {
 
             textoTiempo = (TextView)findViewById(R.id.textoTiempo);
             setTiempo(Integer.parseInt(bundle.getString("varTiempo")));
-
         //Revisar
         }else{
             final String query = "SELECT * from pregunta pr INNER JOIN resEnsayo res WHERE pr.idPregunta = res.idPregunta";
-            ImageView passPregunta = (ImageView) findViewById(R.id.btnOmitirPregunta);
+            ImageView passPregunta = (ImageView) findViewById(R.id.btnBorrarPregunta);
             bd = admin.getWritableDatabase();
 
             cursor = bd.rawQuery(query, null);
@@ -126,8 +123,6 @@ public class PlayTimeAttack extends ActionBarActivity {
             textoTiempo = (TextView)findViewById(R.id.textoTiempo);
             textoTiempo.setVisibility(View.GONE);
             passPregunta.setEnabled(false);
-
-
         }
     }
 
@@ -138,7 +133,6 @@ public class PlayTimeAttack extends ActionBarActivity {
         }
         return super.onCreateOptionsMenu(menu);
     }
-
 
     @Override
     public void onDestroy(){
@@ -153,14 +147,14 @@ public class PlayTimeAttack extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(revision == 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttackActivity.this);
             AlertDialog dialog;
             switch (id) {
                 case android.R.id.home:
                     builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
-                    builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            PlayTimeAttack.this.finish();
+                            PlayTimeAttackActivity.this.finish();
                         }
                     });
                     builder.setNegativeButton(R.string.cancelar, null);
@@ -169,72 +163,27 @@ public class PlayTimeAttack extends ActionBarActivity {
                     return true;
                 case R.id.terminar:
                     builder.setMessage(R.string.finish_message).setTitle(R.string.finish_title);
-                    builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            ContentValues registro = new ContentValues();
-                            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+                            guardarPregunta();
 
-                            registro.put("idPregunta", cursor.getInt(8));
-                            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
-
-                            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-                                if(cursor.getString(7).equalsIgnoreCase("altA")){
-                                    registro.put("correcta", 1);
-                                }else{
-                                    registro.put("correcta", 0);
-                                }
-                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-                                if(cursor.getString(7).equalsIgnoreCase("altB")){
-                                    registro.put("correcta", 1);
-                                }else{
-                                    registro.put("correcta", 0);
-                                }
-                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-                                if(cursor.getString(7).equalsIgnoreCase("altC")){
-                                    registro.put("correcta", 1);
-                                }else{
-                                    registro.put("correcta", 0);
-                                }
-                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-                                if(cursor.getString(7).equalsIgnoreCase("altD")){
-                                    registro.put("correcta", 1);
-                                }else{
-                                    registro.put("correcta", 0);
-                                }
-                            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-                                if(cursor.getString(7).equalsIgnoreCase("altE")){
-                                    registro.put("correcta", 1);
-                                }else{
-                                    registro.put("correcta", 0);
-                                }
-                            }else{
-                                registro.put("correcta", 2);
-                            }
-
-                            if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-                                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-                            }else{
-                                bd.insert("resEnsayo", null, registro);
-                            }
-
-                            Intent i = new Intent(getBaseContext(), Resultados.class);
+                            Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
                             i.putExtra("varTiempo", bundle.get("varTiempo").toString());
                             bd.close();
 
                             int tFinal = calculaMinutos(textoTiempo.getText().toString());
                             int tInicial = Integer.parseInt(bundle.getString("varTiempo"));
                             String tEnsayo = tInicial - tFinal + "";
-                            Intent j = new Intent(getBaseContext(), Resultados.class);
+                            Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
                             j.putExtra("varTiempo", tEnsayo);
                             startActivity(j);
-                            PlayTimeAttack.this.finish();
+                            PlayTimeAttackActivity.this.finish();
                         }
                     });
-                    builder.setNegativeButton(R.string.cancelar, null);
+                    builder.setNegativeButton(R.string.cancel, null);
                     dialog = builder.create();
                     dialog.show();
                     return true;
-
             }
             return true;
         }else{
@@ -255,19 +204,66 @@ public class PlayTimeAttack extends ActionBarActivity {
     @Override
     public void onBackPressed(){
         if(revision == 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttack.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(PlayTimeAttackActivity.this);
             AlertDialog dialog;
             builder.setMessage(R.string.close_message).setTitle(R.string.close_title);
-            builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            builder.setPositiveButton(R.string.accept, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
-                    PlayTimeAttack.this.finish();
+                    PlayTimeAttackActivity.this.finish();
                 }
             });
-            builder.setNegativeButton(R.string.cancelar, null);
+            builder.setNegativeButton(R.string.cancel, null);
             dialog = builder.create();
             dialog.show();
         }else{
             super.onBackPressed();
+        }
+    }
+
+    public void guardarPregunta(){
+        ContentValues registro = new ContentValues();
+        RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+        registro.put("idPregunta", cursor.getInt(8));
+        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+
+        if(rGroup.getCheckedRadioButtonId() == R.id.altA){
+            if(cursor.getString(7).equalsIgnoreCase("altA")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
+            if(cursor.getString(7).equalsIgnoreCase("altB")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
+            if(cursor.getString(7).equalsIgnoreCase("altC")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
+            if(cursor.getString(7).equalsIgnoreCase("altD")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
+            if(cursor.getString(7).equalsIgnoreCase("altE")){
+                registro.put("correcta", 1);
+            }else{
+                registro.put("correcta", 0);
+            }
+        }else{
+            registro.put("correcta", 2);
+        }
+
+        if(hayRespuesta("resEnsayo", "idPregunta", "" + cursor.getInt(8), bd)){
+            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
+        }else{
+            bd.insert("resEnsayo", null, registro);
         }
     }
 
@@ -299,53 +295,9 @@ public class PlayTimeAttack extends ActionBarActivity {
             }
 
             public void onFinish(){
-                ContentValues registro = new ContentValues();
-                RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
+                guardarPregunta();
 
-                registro.put("idPregunta", cursor.getInt(8));
-                registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
-
-                if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-                    if(cursor.getString(7).equalsIgnoreCase("altA")){
-                        registro.put("correcta", 1);
-                    }else{
-                        registro.put("correcta", 0);
-                    }
-                }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-                    if(cursor.getString(7).equalsIgnoreCase("altB")){
-                        registro.put("correcta", 1);
-                    }else{
-                        registro.put("correcta", 0);
-                    }
-                }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-                    if(cursor.getString(7).equalsIgnoreCase("altC")){
-                        registro.put("correcta", 1);
-                    }else{
-                        registro.put("correcta", 0);
-                    }
-                }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-                    if(cursor.getString(7).equalsIgnoreCase("altD")){
-                        registro.put("correcta", 1);
-                    }else{
-                        registro.put("correcta", 0);
-                    }
-                }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-                    if(cursor.getString(7).equalsIgnoreCase("altE")){
-                        registro.put("correcta", 1);
-                    }else{
-                        registro.put("correcta", 0);
-                    }
-                }else{
-                    registro.put("correcta", 2);
-                }
-
-                if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-                    bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-                }else{
-                    bd.insert("resEnsayo", null, registro);
-                }
-
-                Intent i = new Intent(getBaseContext(), Resultados.class);
+                Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
                 i.putExtra("varTiempo", bundle.get("varTiempo").toString());
                 bd.close();
                 startActivity(i);
@@ -356,51 +308,7 @@ public class PlayTimeAttack extends ActionBarActivity {
 
     public void preguntaSiguiente(View view){
         if(revision == 0) {
-            ContentValues registro = new ContentValues();
-            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
-
-            registro.put("idPregunta", cursor.getInt(8));
-            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
-
-            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-                if(cursor.getString(7).equalsIgnoreCase("altA")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-                if(cursor.getString(7).equalsIgnoreCase("altB")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-                if(cursor.getString(7).equalsIgnoreCase("altC")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-                if(cursor.getString(7).equalsIgnoreCase("altD")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-                if(cursor.getString(7).equalsIgnoreCase("altE")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else{
-                registro.put("correcta", 2);
-            }
-
-            if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-            }else{
-                bd.insert("resEnsayo", null, registro);
-            }
+            guardarPregunta();
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -423,7 +331,7 @@ public class PlayTimeAttack extends ActionBarActivity {
             bundlePregunta.putString("altCorrecta", cursor.getString(7));
             bundlePregunta.putInt("nPregunta", cursor.getPosition());
 
-            if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
+            if(hayRespuesta("resEnsayo", "idPregunta", "" + cursor.getInt(8), bd)){
                 String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
                 Cursor checked = bd.rawQuery(Query, null);
                 checked.moveToFirst();
@@ -474,50 +382,8 @@ public class PlayTimeAttack extends ActionBarActivity {
 
     public void preguntaAnterior(View view){
         if(revision == 0) {
-            ContentValues registro = new ContentValues();
-            RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
-            registro.put("idPregunta", cursor.getInt(8));
-            registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
+            guardarPregunta();
 
-            if(rGroup.getCheckedRadioButtonId() == R.id.altA){
-                if(cursor.getString(7).equalsIgnoreCase("altA")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
-                if(cursor.getString(7).equalsIgnoreCase("altB")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
-                if(cursor.getString(7).equalsIgnoreCase("altC")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
-                if(cursor.getString(7).equalsIgnoreCase("altD")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
-                if(cursor.getString(7).equalsIgnoreCase("altE")){
-                    registro.put("correcta", 1);
-                }else{
-                    registro.put("correcta", 0);
-                }
-            }else{
-                registro.put("correcta", 2);
-            }
-
-            if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-                bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-            }else{
-                bd.insert("resEnsayo", null, registro);
-            }
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -543,61 +409,12 @@ public class PlayTimeAttack extends ActionBarActivity {
         }
     }
 
-    public void omitirPregunta(View view){
-        ContentValues registro = new ContentValues();
+    public void borrarPregunta(View view){
         RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
-
         rGroup.clearCheck();
-
-        /*registro.put("idPregunta", cursor.getInt(8));
-        registro.put("respuesta", (rGroup.getCheckedRadioButtonId()));
-        registro.put("correcta", 2);
-
-        if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-            bd.update("resEnsayo", registro, "idPregunta = " + cursor.getInt(8), null);
-        }else{
-            bd.insert("resEnsayo", null, registro);
-        }
-
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        Bundle bundlePregunta = new Bundle();
-        PreguntaFragment newFragment = new PreguntaFragment();
-
-        if(cursor.isLast()){
-            cursor.moveToFirst();
-        }else{
-            cursor.moveToNext();
-        }
-
-        bundlePregunta.putString("pregunta", cursor.getString(0));
-        bundlePregunta.putString("imagen", cursor.getString(1));
-        bundlePregunta.putString("altA", cursor.getString(2));
-        bundlePregunta.putString("altB", cursor.getString(3));
-        bundlePregunta.putString("altC", cursor.getString(4));
-        bundlePregunta.putString("altD", cursor.getString(5));
-        bundlePregunta.putString("altE", cursor.getString(6));
-        bundlePregunta.putString("altCorrecta", cursor.getString(7));
-        bundlePregunta.putInt("nPregunta", cursor.getPosition());
-
-        if(existe("resEnsayo", "idPregunta", ""+cursor.getInt(8), bd)){
-            String Query = "Select respuesta from resEnsayo where idPregunta = " + cursor.getInt(8);
-            Cursor checked = bd.rawQuery(Query, null);
-            checked.moveToFirst();
-            bundlePregunta.putInt("respuesta", checked.getInt(0));
-        }else{
-            bundlePregunta.putInt("respuesta", -1);
-        }
-
-        newFragment.setArguments(bundlePregunta);
-
-        fragmentTransaction.replace(R.id.contenidoPregunta, newFragment);
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();*/
     }
 
-    public static boolean existe(String TableName, String dbfield, String fieldValue, SQLiteDatabase bd) {
+    public static boolean hayRespuesta(String TableName, String dbfield, String fieldValue, SQLiteDatabase bd) {
         String Query = "Select * from " + TableName + " where " + dbfield + " = " + fieldValue;
         Cursor cursor = bd.rawQuery(Query, null);
         if(cursor.getCount() <= 0){

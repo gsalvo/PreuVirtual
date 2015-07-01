@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.novus.preuvirtual.PlayTimeAttack">
+    tools:context="com.novus.preuvirtual.PlayTimeAttackActivity">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -48,12 +48,12 @@
             android:paddingBottom="6dp"
             android:onClick="preguntaAnterior"/>
         <ImageView
-            android:id="@+id/btnOmitirPregunta"
+            android:id="@+id/btnBorrarPregunta"
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="fill_parent"
             android:src="@drawable/ic_remove_circle_outline_white_24dp"
-            android:onClick="omitirPregunta"
+            android:onClick="borrarPregunta"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"/>
         <ImageView

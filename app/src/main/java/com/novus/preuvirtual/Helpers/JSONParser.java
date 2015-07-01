@@ -1,4 +1,4 @@
-package com.novus.preuvirtual;
+package com.novus.preuvirtual.Helpers;
 
 import android.util.Log;
 import org.apache.http.HttpEntity;
@@ -20,7 +20,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class JSONParser {
-
     //Lectura desde una fuente de bytes.
     static InputStream is = null;
     static JSONObject jObj = null;

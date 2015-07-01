@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,18 +14,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
+import com.novus.preuvirtual.Helpers.JSONParser;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Tiempo extends ActionBarActivity {
+public class TiempoActivity extends ActionBarActivity {
     private EditText editMinutos;
     private TextView textTiempoRamo;
     private String ramoSeleccionado;
-    //---------------------Inicio conexion BD----------------------------------------------
+
     JSONParser jParser = new JSONParser();
     private static String urlCargarPreguntas;
     private static final String TAG_P = "preguntas";
@@ -41,10 +42,9 @@ public class Tiempo extends ActionBarActivity {
     private static final String TAG_SUCCESS = "success";
     JSONArray preguntas = null;
     JSONArray alternativas = null;
-    //Base de datos SQLite
+
     private ProgressDialog pDialog;
     AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this, "preuVirtual", null,1);
-    //---------------------FIN----------------------------------------------
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +59,13 @@ public class Tiempo extends ActionBarActivity {
         textTiempoRamo.setText("¿Cuánto tiempo tienes para practicar "+ ramoSeleccionado + "?");
     }
 
-    public void goPlayTimeAttack(View view){
+    public void goPlayTimeAttack(View view) {
         if(editMinutos.getText().toString().equals("")){
-            Toast.makeText(this, "Ups, no has ingresado cantidad de minutos"+editMinutos.getText(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getText(R.string.no_minutes), Toast.LENGTH_SHORT).show();
         }else if(Integer.parseInt(editMinutos.getText().toString()) > 150) {
-            Toast.makeText(this, "Wow, tranquilo. ¡No es posible hacer un Time Attack mas largo que la PSU! Necesitas descansar de vez en cuando.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getText(R.string.too_long), Toast.LENGTH_LONG).show();
         }else if(Integer.parseInt(editMinutos.getText().toString()) < 1){
-            Toast.makeText(this, "Veo que no tienes muchas ganas de practicar en este momento...", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getResources().getText(R.string.zero_minutes), Toast.LENGTH_LONG).show();
         }else{
             new CargarPreguntas().execute();
         }
@@ -85,10 +85,10 @@ public class Tiempo extends ActionBarActivity {
 
     class CargarPreguntas extends AsyncTask<String, String, String> {
         @Override
-        protected void onPreExecute(){
+        protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(Tiempo.this);
-            pDialog.setMessage("Preparate para empezar :)");
+            pDialog = new ProgressDialog(TiempoActivity.this);
+            pDialog.setMessage(getResources().getString(R.string.wait_message));
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -101,7 +101,7 @@ public class Tiempo extends ActionBarActivity {
             SQLiteDatabase bd = admin.getWritableDatabase();
             bd.execSQL("delete from pregunta");
             bd.execSQL("delete from resEnsayo");
-            try{
+            try {
                 int success = json.getInt(TAG_SUCCESS);
                 if(success==1){
                     preguntas = json.getJSONArray(TAG_P);
@@ -117,7 +117,7 @@ public class Tiempo extends ActionBarActivity {
                         registro.put("imagen", imagen);
 
                         alternativas = c.getJSONArray(TAG_A);
-                        for (int j = 0; j < alternativas.length(); j++){
+                        for (int j = 0; j < alternativas.length(); j++) {
                             String altTipo[] = {"A", "B", "C", "D", "E"};
                             JSONObject a = alternativas.getJSONObject(j);
                             String alternativa = a.getString(TAG_A_ALTERNATIVA);
@@ -135,20 +135,18 @@ public class Tiempo extends ActionBarActivity {
                     }
                     bd.close();
                 }
-            }catch(JSONException e){
+            }catch(JSONException e) {
                 e.printStackTrace();
             }
             return null;
         }
 
-        protected void onPostExecute(String file_url){
-            Intent i = new Intent(Tiempo.this, PlayTimeAttack.class);
+        protected void onPostExecute(String file_url) {
+            Intent i = new Intent(TiempoActivity.this, PlayTimeAttackActivity.class);
             i.putExtra("varTiempo", editMinutos.getText().toString());
             i.putExtra("revision", 0);
             startActivity(i);
             pDialog.dismiss();
         }
-
-
     }
 }

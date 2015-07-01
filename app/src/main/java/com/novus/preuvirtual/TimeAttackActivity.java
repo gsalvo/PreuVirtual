@@ -1,16 +1,13 @@
 package com.novus.preuvirtual;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 
-
-public class TimeAttack extends ActionBarActivity {
+public class TimeAttackActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +15,7 @@ public class TimeAttack extends ActionBarActivity {
     }
 
     public void buttonPress (View v){
-        Intent i = new Intent(this, Tiempo.class);
+        Intent i = new Intent(this, TiempoActivity.class);
         switch (v.getId()){
             case R.id.btnMatematicas:
                 i.putExtra("ramo", "matem\u00e1ticas");
@@ -50,7 +47,6 @@ public class TimeAttack extends ActionBarActivity {
                 break;
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

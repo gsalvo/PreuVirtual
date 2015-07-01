@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.novus.preuvirtual.PlayTimeAttack">
+    tools:context="com.novus.preuvirtual.PlayTimeAttackActivity">
     <item android:id="@+id/terminar"
         android:icon="@drawable/ic_cancel_white_24dp"
         android:title="Terminar"

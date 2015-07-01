@@ -1,7 +1,6 @@
 package com.novus.preuvirtual;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -16,6 +15,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.novus.preuvirtual.Helpers.DensityScreen;
 import com.squareup.picasso.Picasso;
 
 
@@ -33,7 +33,6 @@ public class PreguntaFragment extends Fragment {
     private RadioGroup rGroup;
     private DensityScreen densidad;
 
-
     @Override
     public void onAttach(Activity a){
         super.onAttach(a);
@@ -42,7 +41,6 @@ public class PreguntaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View RootView = inflater.inflate(R.layout.fragment_pregunta, container, false);
         densidad = new DensityScreen(RootView.getContext());
         textPregunta = (TextView) RootView.findViewById(R.id.textoPregunta);
@@ -65,14 +63,12 @@ public class PreguntaFragment extends Fragment {
         int respuesta = getArguments().getInt("respuesta");
         int nPregunta = getArguments().getInt("nPregunta");
 
-
-
         textPregunta.setText(Html.fromHtml(vPregunta));
         numeroPregunta.setText("Pregunta "+(nPregunta+1));
 
         if(!vImagen.isEmpty()) {
             Picasso.with(getActivity()).load(vImagen).into(imagen);
-        }else{
+        } else {
             imagen.setImageDrawable(null);
         }
 
@@ -106,20 +102,16 @@ public class PreguntaFragment extends Fragment {
             }
         });
 
-        if(getArguments().getInt("revision") == 1){
-
+        if(getArguments().getInt("revision") == 1) {
             RadioGroup rGroup = (RadioGroup) RootView.findViewById(R.id.contenidoRadioButton);
+            RadioButton rCorrecta;
+            String correcta = getArguments().getString("altCorrecta");
 
-            for (int i = 0; i < rGroup.getChildCount(); i++)
-            {
+            for (int i = 0; i < rGroup.getChildCount(); i++) {
                 rGroup.getChildAt(i).setEnabled(false);
             }
 
-            RadioButton rCorrecta;
-
-            String correcta = getArguments().getString("altCorrecta");
-
-            switch(correcta){
+            switch(correcta) {
                 case "altA":
                     rCorrecta = (RadioButton) RootView.findViewById(R.id.altA);
                     break;
@@ -140,20 +132,18 @@ public class PreguntaFragment extends Fragment {
                     break;
             }
 
-            if(respuesta != rCorrecta.getId() && respuesta != -1){
+            if(respuesta != rCorrecta.getId() && respuesta != -1) {
                 RadioButton rSeleccionada = (RadioButton) RootView.findViewById(respuesta);
-                rSeleccionada.setTextColor(Color.parseColor("#C02400"));
+                rSeleccionada.setTextColor(getResources().getColor(R.color.incorrecta));
                 rSeleccionada.setTypeface(null, Typeface.BOLD);
-                rCorrecta.setTextColor(Color.parseColor("#00a700"));
+                rCorrecta.setTextColor(getResources().getColor(R.color.correcta));
                 rCorrecta.setTypeface(null, Typeface.BOLD);
-            }else{
-                rCorrecta.setTextColor(Color.parseColor("#00a700"));
+            } else {
+                rCorrecta.setTextColor(getResources().getColor(R.color.correcta));
                 rCorrecta.setTypeface(null, Typeface.BOLD);
             }
-
         }
 
         return RootView;
     }
-
 }

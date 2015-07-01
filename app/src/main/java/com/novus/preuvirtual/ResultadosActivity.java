@@ -10,10 +10,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
 
-public class Resultados extends ActionBarActivity {
-
-    int resultado[] = {150,163,176,190,203,237,268,296,322,346,367,387,405,422,437,451,464,475,485,
+public class ResultadosActivity extends ActionBarActivity {
+    int puntajes[] = {150,163,176,190,203,237,268,296,322,346,367,387,405,422,437,451,464,475,485,
             495,503,511,518,524,530,536,541,546,551,555,559,564,568,572,575,579,583,587,590,594,597,
             601,605,608,612,615,619,622,626,630,634,638,641,645,650,654,658,663,667,672,677,683,688,
             694,700,707,715,722,731,740,751,771,791,811,830,850};
@@ -22,7 +22,7 @@ public class Resultados extends ActionBarActivity {
 
     Bundle bundle;
 
-    TextView tRespuesta, tPreguntas, rCorrectas, rIncorrectas,rOmitidas, puntaje, tiempo;
+    TextView tRespuesta, tPreguntas, rCorrectas, rIncorrectas, rOmitidas, puntaje, tiempo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,6 @@ public class Resultados extends ActionBarActivity {
 
         int cantIncorrectas, cantCorrectas, cantOmitidas, cantTotal;
         AdminSQLiteOpenHelper admin = new AdminSQLiteOpenHelper(this,"preuVirtual",null,1);
-
 
         SQLiteDatabase bd = admin.getReadableDatabase();
 
@@ -60,6 +59,7 @@ public class Resultados extends ActionBarActivity {
         if(bundle != null) {
             tiempoEnsayo = Integer.parseInt(bundle.getString("varTiempo"));
         }
+
         tRespuesta.setText(cantTotal / tiempoEnsayo + " p/m");
         tiempo.setText("en un tiempo de " + tiempoEnsayo + " minutos");
 
@@ -69,8 +69,7 @@ public class Resultados extends ActionBarActivity {
         rCorrectas.setText(cantCorrectas+"");
         rIncorrectas.setText(cantIncorrectas+"");
         rOmitidas.setText(cantOmitidas+"");
-        puntaje.setText("Has obtenido "+ resultado[cantCorrectas] + " puntos");
-
+        puntaje.setText("Has obtenido "+ puntajes[cantCorrectas] + " puntos");
     }
 
     @Override
@@ -86,14 +85,12 @@ public class Resultados extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goRevision(View view){
-        Intent i = new Intent(this, Revision.class);
+    public void goRevision(View view) {
+        Intent i = new Intent(this, RevisionActivity.class);
         startActivity(i);
     }
 
     public void goNuevoEnsayo(View view){
         finish();
     }
-
-
 }

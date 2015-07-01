@@ -1,11 +1,10 @@
-package com.novus.preuvirtual;
+package com.novus.preuvirtual.Helpers;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.DisplayMetrics;
 
 public class DensityScreen {
-
     private String densidad;
     private int densidadEntero;
 

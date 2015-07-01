@@ -4,8 +4,12 @@
     <string name="close_message">Se perderán los datos del ensayo actual</string>
     <string name="finish_title">¿Ya terminaste?</string>
     <string name="finish_message">Si ya terminaste, veamos tus resultados :)</string>
-    <string name="aceptar">Si</string>
-    <string name="cancelar">No</string>
+    <string name="no_minutes">Ups, no has ingresado cantidad de minutos</string>
+    <string name="too_long">Wow, tranquilo. ¡No es posible hacer un Time Attack mas largo que la PSU! Necesitas descansar de vez en cuando.</string>
+    <string name="zero_minutes">Veo que no tienes muchas ganas de practicar en este momento :(</string>
+    <string name="wait_message">Preparate para empezar :)</string>
+    <string name="accept">Si</string>
+    <string name="cancel">No</string>
     <string name="title_activity_time_attack">Cuenta Regresiva</string>
     <string name="title_activity_tiempo">Cuenta Regresiva</string>
     <string name="title_activity_play_time_attack">Cuenta Regresiva</string>

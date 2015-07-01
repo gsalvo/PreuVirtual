@@ -11,12 +11,12 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-public class Revision extends ActionBarActivity {
+import com.novus.preuvirtual.Helpers.AdminSQLiteOpenHelper;
 
+public class RevisionActivity extends ActionBarActivity {
     ListView lista;
     SQLiteDatabase bd;
     Cursor cursor;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +27,19 @@ public class Revision extends ActionBarActivity {
         bd = admin.getReadableDatabase();
         cursor = bd.query("resEnsayo", new String[]{"_id", "idPregunta", "correcta"}, null, null, null, null, null);
         cursor.moveToFirst();
-        AdapterRevision adapter = new AdapterRevision(this, cursor);
+        RevisionAdapter adapter = new RevisionAdapter(this, cursor);
         lista = (ListView) findViewById(R.id.lista);
         lista.setAdapter(adapter);
 
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Revision.this, PlayTimeAttack.class);
+                Intent i = new Intent(RevisionActivity.this, PlayTimeAttackActivity.class);
                 i.putExtra("idPregunta", id);
                 i.putExtra("revision", 1);
                 startActivity(i);
             }
         });
-
-
     }
 
     @Override

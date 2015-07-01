@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="background_app" type="color">#FFFFFF</item>
-    <item name="background_button" type="color">#fe7a65</item>
-    <item name="background_action_bar" type="color">#fe7a65</item>
+    <item name="background_button" type="color">#FE7A65</item>
+    <item name="background_action_bar" type="color">#FE7A65</item>
     <item name="textButton" type="color">#FFFFFF</item>
-    <item name="textTime" type="color">#00cbcf</item>
-    <item name="list_preguntas" type="color">#b0b0b0</item>
-    <item name="disabled" type="color">#ff7e3212</item>
+    <item name="textTime" type="color">#00CBCF</item>
+    <item name="list_preguntas" type="color">#B0B0B0</item>
+    <item name="disabled" type="color">#FF7E3212</item>
+    <item name="correcta" type="color">#00A700</item>
+    <item name="incorrecta" type="color">#C02400</item>
 </resources>

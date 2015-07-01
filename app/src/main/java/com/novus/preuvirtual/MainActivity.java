@@ -8,7 +8,6 @@ import android.view.View;
 import android.support.v7.app.ActionBarActivity;
 
 public class MainActivity extends ActionBarActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +15,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void goTimeAttack(View view) {
-        Intent i = new Intent(this, TimeAttack.class);
+        Intent i = new Intent(this, TimeAttackActivity.class);
         startActivity(i);
     }
 
