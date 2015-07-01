@@ -24,6 +24,15 @@
         android:textSize="20sp"
         android:textStyle="bold" />
 
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="30dp"
+        android:text="¡Ve cuan lejos puedes llegar sin equivocarte!"
+        android:textColor="@color/list_preguntas"
+        android:textStyle="bold" />
+
     <Button
         android:id="@+id/btnComenzar"
         style="@style/CustomButton"

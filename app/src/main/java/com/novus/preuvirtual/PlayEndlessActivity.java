@@ -30,6 +30,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
     Bundle bundle;
     Timer contador;
     TextView textoTiempo;
+    TextView textoCorrectas;
     CountDownTimer backCount;
     SQLiteDatabase bd;
     Cursor cursor;
@@ -40,7 +41,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play_time_attack);
+        setContentView(R.layout.activity_play_endless);
         bundle = getIntent().getExtras();
         revision = bundle.getInt("revision");
 
@@ -85,6 +86,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
             fragmentTransaction.commit();
 
             textoTiempo = (TextView)findViewById(R.id.textoTiempo);
+            textoCorrectas = (TextView)findViewById(R.id.textoCorrectas);
             iniciarTimer();
         //Revisar
         }else{
@@ -225,7 +227,7 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }
     }
 
-    public void guardarPregunta(){
+    public boolean guardarPregunta(){
         ContentValues registro = new ContentValues();
         RadioGroup rGroup = (RadioGroup) findViewById(R.id.contenidoRadioButton);
         registro.put("idPregunta", cursor.getInt(8));
@@ -234,32 +236,42 @@ public class PlayEndlessActivity extends ActionBarActivity {
         if(rGroup.getCheckedRadioButtonId() == R.id.altA){
             if(cursor.getString(7).equalsIgnoreCase("altA")){
                 registro.put("correcta", 1);
+                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1)+"");
             }else{
                 finalizarEndless();
+                return false;
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altB){
             if(cursor.getString(7).equalsIgnoreCase("altB")){
                 registro.put("correcta", 1);
+                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
             }else{
                 finalizarEndless();
+                return false;
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altC){
             if(cursor.getString(7).equalsIgnoreCase("altC")){
                 registro.put("correcta", 1);
+                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
             }else{
                 finalizarEndless();
+                return false;
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altD){
             if(cursor.getString(7).equalsIgnoreCase("altD")){
                 registro.put("correcta", 1);
+                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
             }else{
                 finalizarEndless();
+                return false;
             }
         }else if(rGroup.getCheckedRadioButtonId() == R.id.altE){
             if(cursor.getString(7).equalsIgnoreCase("altE")){
                 registro.put("correcta", 1);
+                textoCorrectas.setText(Integer.parseInt(textoCorrectas.getText().toString() + 1) + "");
             }else{
                 finalizarEndless();
+                return false;
             }
         }else{
             registro.put("correcta", 2);
@@ -269,12 +281,13 @@ public class PlayEndlessActivity extends ActionBarActivity {
         }else{
             bd.insert("resEnsayo", null, registro);
         }
+        return true;
     }
 
     public void finalizarEndless() {
         bd.close();
         Intent j = new Intent(getBaseContext(), ResultadosActivity.class);
-        j.putExtra("varTiempo", "0");
+        j.putExtra("varTiempo", "1");
         startActivity(j);
         PlayEndlessActivity.this.finish();
     }
@@ -319,18 +332,13 @@ public class PlayEndlessActivity extends ActionBarActivity {
                 });
             }
         }, 1000, 1000);
-
-    /*            guardarPregunta();
-
-                Intent i = new Intent(getBaseContext(), ResultadosActivity.class);
-                i.putExtra("varTiempo", bundle.get("varTiempo").toString());
-                bd.close();
-                startActivity(i);*/
     }
 
     public void preguntaSiguiente(View view){
         if(revision == 0) {
-            guardarPregunta();
+            if(!guardarPregunta()){
+                return;
+            }
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
