@@ -127,7 +127,7 @@
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:gravity="left"
-                        android:text="Respuestas Omitidas:  " />
+                        android:text="Respuestas omitidas:  " />
 
                     <TextView
                         android:id="@+id/textRespuestasOmitidasNum"

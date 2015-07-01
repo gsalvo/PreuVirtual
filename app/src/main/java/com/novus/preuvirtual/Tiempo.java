@@ -57,7 +57,7 @@ public class Tiempo extends ActionBarActivity {
         }else if(Integer.parseInt(editMinutos.getText().toString()) > 150) {
             Toast.makeText(this, "Wow, tranquilo. ¡No es posible hacer un Time Attack mas largo que la PSU! Necesitas descansar de vez en cuando.", Toast.LENGTH_LONG).show();
         }else if(Integer.parseInt(editMinutos.getText().toString()) < 1){
-            Toast.makeText(this, "Wow, tranquilo. Nadie es tan rápido para realizar un ensayo en menos de un minuto. Tómate tu tiempo", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Veo que no tienes muchas ganas de practicar en este momento...", Toast.LENGTH_LONG).show();
         }else{
             new CargarPreguntas().execute();
         }

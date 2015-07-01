@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PreuVirtual</string>
-    <string name="close_title">¿Estás seguro que quieres cerrar el ensayo?</string>
+    <string name="close_title">¿Estás seguro que quieres volver atrás?</string>
     <string name="close_message">Se perderán los datos del ensayo actual</string>
     <string name="finish_title">¿Ya terminaste?</string>
     <string name="finish_message">Si ya terminaste, veamos tus resultados :)</string>
