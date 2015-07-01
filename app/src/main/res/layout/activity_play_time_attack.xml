@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="fill_parent"
-            android:src="@drawable/ic_omitida_24dp"
+            android:src="@drawable/ic_remove_circle_outline_white_24dp"
             android:onClick="omitirPregunta"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"/>
