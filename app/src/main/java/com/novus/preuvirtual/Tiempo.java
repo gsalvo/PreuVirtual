@@ -56,7 +56,7 @@ public class Tiempo extends ActionBarActivity {
         Bundle bundle = getIntent().getExtras();
         ramoSeleccionado = bundle.getString("ramo");
         urlCargarPreguntas = "http://preuvirtual.webcindario.com/cargarPreguntas"+ ramoSeleccionado.substring(0,1) +".php";
-        textTiempoRamo.setText("¿Cuánto tiempo tienes para practicar "+ramoSeleccionado + "?");
+        textTiempoRamo.setText("¿Cuánto tiempo tienes para practicar "+ ramoSeleccionado + "?");
     }
 
     public void goPlayTimeAttack(View view){
